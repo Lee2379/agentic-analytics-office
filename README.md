@@ -74,7 +74,11 @@ The read-only command executes inside `hermes-docker` and reports configuration 
 
 ![Read-only metadata evidence for profile-specific SOUL.md files](assets/evidence/07-soul-policy-files-sanitized.png)
 
-Each live profile has a `SOUL.md` file, and all seven files have distinct SHA-256 prefixes. No policy body is published. The digests support separate policy artifacts; the public behavioral contracts are documented in [`config/agents.json`](config/agents.json), and enforcement remains a runtime claim rather than something the hashes alone can prove.
+Each live profile has a `SOUL.md` file, and all seven files have distinct SHA-256 prefixes. The digests support separate policy artifacts; the public behavioral contracts are documented in [`config/agents.json`](config/agents.json), and enforcement remains a runtime claim rather than something the hashes alone can prove.
+
+![Selected public excerpt from Oliver's SOUL.md role policy](assets/evidence/11-oliver-soul-policy-excerpt-sanitized.png)
+
+The selected Oliver excerpt shows how a profile was given a concrete organizational role: head of strategic planning and researcher, with primary-source market reading and evidence-based decision support. This excerpt is intentionally public and contains no credentials. The complete policy, hidden instructions, and other profiles' policy bodies remain private.
 
 ### Skills and MCP integration
 
@@ -85,6 +89,16 @@ The Skills workflow quarantines a third-party package, records source provenance
 ![Hermes MCP configuration with the credential value fully redacted](assets/evidence/04-mcp-integration-token-redacted.png)
 
 The MCP screen shows the data-access integration surface used by the research workflow. The original credential value is completely covered by an opaque white mask. The live Slack report below is the separate evidence that a public-source research task produced a business result.
+
+### Google Workspace capability and briefing delivery
+
+![Sanitized GWS Gmail capability discovery in the configured environment](assets/evidence/09-gws-gmail-capability-sanitized.png)
+
+The configured environment exposes the Google Workspace Gmail command surface for sending, triaging, replying, reading, and watching messages, together with an optional Model Armor sanitization parameter. The capture is a validation/help response because no Gmail subcommand was supplied. It confirms capability discovery, not successful OAuth authorization or mailbox retrieval; no message content or account identifier is displayed.
+
+![Sanitized Slack workflow returning a structured AI development briefing](assets/evidence/10-slack-ai-briefing-sanitized.png)
+
+The Slack capture records two connected behaviors: a reusable `morning-brief` bundle grouping Gmail, Calendar, Tasks, a custom mail router, and daily-brief logic; and a separate request for a current AI-development briefing that returned a structured response in the thread. The screenshot supports bundle availability, request execution, and Slack delivery. It does not independently verify every news claim, so production briefings should retain source URLs, collection timestamps, and reviewer checks.
 
 ### Slack execution
 
@@ -103,7 +117,7 @@ The MCP screen shows the data-access integration surface used by the research wo
 
 The two work captures show different specialists used for different assignments: Oliver for public-source market research and Mia for presentation generation with role-specific Skills and tools. They demonstrate multi-profile use in real Slack work; they do not establish autonomous agent-to-agent delegation.
 
-Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
+Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [AI-development briefing](docs/evidence/ai-development-briefing.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
 
 ## Architecture
 
@@ -185,7 +199,7 @@ The live prototype does not claim autonomous agent-to-agent delegation. Direct p
 | Primitive | Function in the live system | Public representation |
 |---|---|---|
 | Profile | Maintains one specialist identity and profile-scoped configuration/state within the shared runtime | Agent name, role, inputs, outputs, and reviewer in [`config/agents.json`](config/agents.json) |
-| `SOUL.md` | Defines private persona, mission, decision boundaries, and response policy | Distinct file digests plus non-sensitive behavioral contracts; policy bodies are not published |
+| `SOUL.md` | Defines private persona, mission, decision boundaries, and response policy | Distinct file digests, one selected public excerpt, and non-sensitive behavioral contracts; complete policies are not published |
 | Skill | Packages a reusable procedure and its tool instructions | Sanitized installation evidence and documented supply-chain boundary |
 | MCP integration | Exposes an external data/tool adapter to an approved profile | Token-redacted configuration evidence and a separate Slack result capture |
 | Slack gateway | Receives requests and returns profile responses in the work interface | Sanitized multi-profile and workload screenshots |
@@ -307,7 +321,7 @@ These values are regression fixtures for the public harness, not production perf
 
 ## Privacy-preserving evidence policy
 
-Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only eight reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
+Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only eleven reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
 
 One supplied screenshot exposed an authentication token in a URL. The committed derivative covers the full credential value with an opaque white mask; the original is excluded from the repository and evidence chain. Redaction does not invalidate a leaked credential, so revocation and reissuance remain required.
 

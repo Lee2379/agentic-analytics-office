@@ -49,6 +49,24 @@
       "bytes": 1324338,
       "sha256": "b1368e37b2138c09f9784db478555933a20e14035b9b293ba541df936f839dcb",
       "treatment": "Requester identity and personal local path fragments masked."
+    },
+    {
+      "path": "assets/evidence/09-gws-gmail-capability-sanitized.png",
+      "bytes": 244770,
+      "sha256": "0b622a915fdd50425d536ec11f1545f219c10b2f3ec0355ac2b595d4b864d0fc",
+      "treatment": "Personal shell prompt covered; Gmail capability and validation/help output preserved."
+    },
+    {
+      "path": "assets/evidence/10-slack-ai-briefing-sanitized.png",
+      "bytes": 392539,
+      "sha256": "47fcec6cc90ef21cf9bdfb7d08c74b78a304ce8371bf02c03040b6d2d346e140",
+      "treatment": "Workspace and requester identity masked; composer and lower unreviewed content cropped."
+    },
+    {
+      "path": "assets/evidence/11-oliver-soul-policy-excerpt-sanitized.png",
+      "bytes": 139189,
+      "sha256": "ead7ad39ee156a572bd474f87cb7997fd838f3757f3d8618fbba704425fde278",
+      "treatment": "Selected non-secret Oliver role-policy excerpt approved for publication; original pixels preserved."
     }
   ]
 }

@@ -39,10 +39,11 @@ The public repository mirrors only the non-sensitive portion of that design in [
 
 ### `SOUL.md`
 
-Each profile has a private `SOUL.md` policy artifact that defines its mission, behavior, and boundaries. Publishing those files would disclose operational instructions, so the repository provides two narrower forms of evidence:
+Each profile has a private `SOUL.md` policy artifact that defines its mission, behavior, and boundaries. Publishing the complete files would disclose operational instructions, so the repository provides three narrower forms of evidence:
 
 1. read-only metadata and distinct SHA-256 prefixes showing separate policy files existed; and
-2. public behavioral contracts that describe the expected role without reproducing the private prompt.
+2. a selected, non-secret Oliver excerpt showing the strategic-planning and research persona; and
+3. public behavioral contracts that describe the expected role without reproducing complete private prompts.
 
 The digest evidence establishes file distinction, not behavioral enforcement. Runtime behavior must be evaluated separately through traces, outputs, and controlled tests.
 
@@ -64,6 +65,12 @@ Model Context Protocol integrations provide adapters to external data and tools.
 
 This avoids treating configuration alone as proof of successful business execution.
 
+### Google Workspace integration
+
+The configured environment exposed a Google Workspace Gmail command surface with operations for sending, triaging, replying, reading, and watching messages. The command also displayed an optional Model Armor sanitization parameter. These capabilities were grouped with Calendar, Tasks, a custom mail-routing Skill, and daily-brief logic in the reusable `morning-brief` bundle.
+
+The public terminal capture is deliberately narrow: it shows the command's validation/help response without reading a mailbox or printing an account identifier. It therefore establishes capability discovery, not completed OAuth authorization, successful mailbox access, or permission scope. Stronger integration verification would require a separate, non-sensitive health check that records authorization status without exposing email data.
+
 ## Slack request and delivery flow
 
 The live interaction model is specialist-directed:
@@ -81,8 +88,9 @@ Two captured assignments document different operational paths:
 
 - Oliver produced a public-source men's-clothing ranking snapshot with price, discount, rating, and review aggregates.
 - Mia used role-specific Skills and tools to generate presentation material from a design-system specification.
+- A Slack request for recent AI-development news returned a structured briefing after the interface exposed the reusable morning-brief bundle.
 
-The captures establish multi-profile use through one work interface. They do not establish autonomous delegation between profiles, continuous unattended operation, or population-level validity of the market sample.
+The captures establish multi-profile use, Skill-bundle availability, and work delivery through one interface. They do not establish autonomous delegation between profiles, continuous unattended operation, population-level validity of the market sample, or independent factual verification of every generated briefing statement.
 
 ## Public analytical reference
 
@@ -149,7 +157,7 @@ The following materials are intentionally unavailable in the public project:
 - MCP authentication material;
 - raw Slack workspace screenshots and message history;
 - profile `.env` files and session state;
-- private `SOUL.md` contents;
+- complete private `SOUL.md` contents beyond the selected public Oliver excerpt;
 - personal filesystem paths, workspace identifiers, email/calendar data, and private network addresses; and
 - original unredacted evidence files.
 
