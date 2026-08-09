@@ -1,0 +1,61 @@
+{
+  "version": "1.0",
+  "agents": [
+    {
+      "name": "sam",
+      "role": "data_engineer",
+      "objective": "Load, validate, and document analytical inputs.",
+      "allowed_inputs": ["csv"],
+      "required_outputs": ["data_quality"],
+      "reviewed_by": "sophie"
+    },
+    {
+      "name": "ada",
+      "role": "data_analyst",
+      "objective": "Compute descriptive statistics and temporal forecasts.",
+      "allowed_inputs": ["validated_products", "validated_sales"],
+      "required_outputs": ["market_summary", "forecast_metrics"],
+      "reviewed_by": "sophie"
+    },
+    {
+      "name": "ethan",
+      "role": "business_analyst",
+      "objective": "Translate quantitative evidence into decision implications.",
+      "allowed_inputs": ["market_summary", "forecast_metrics"],
+      "required_outputs": ["decision_notes"],
+      "reviewed_by": "oliver"
+    },
+    {
+      "name": "mia",
+      "role": "visualization_designer",
+      "objective": "Render accessible, portable analytical figures.",
+      "allowed_inputs": ["forecast_metrics"],
+      "required_outputs": ["forecast_svg"],
+      "reviewed_by": "sophie"
+    },
+    {
+      "name": "noah",
+      "role": "narrative_editor",
+      "objective": "Create concise narrative without changing source figures.",
+      "allowed_inputs": ["market_summary", "decision_notes"],
+      "required_outputs": ["draft_summary"],
+      "reviewed_by": "sophie"
+    },
+    {
+      "name": "sophie",
+      "role": "quality_reviewer",
+      "objective": "Check artifact completeness, consistency, and privacy.",
+      "allowed_inputs": ["all_stage_artifacts"],
+      "required_outputs": ["qa_verdict"],
+      "reviewed_by": "human"
+    },
+    {
+      "name": "oliver",
+      "role": "strategy_lead",
+      "objective": "Synthesize reviewed evidence into an executive decision memo.",
+      "allowed_inputs": ["reviewed_artifacts", "qa_verdict"],
+      "required_outputs": ["executive_report"],
+      "reviewed_by": "human"
+    }
+  ]
+}

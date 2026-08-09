@@ -1,0 +1,12 @@
+{
+  "channel": "portfolio-demo",
+  "text": "Synthetic analytics workflow completed",
+  "summary": "The synthetic portfolio contains 15 products with a median price of KRW 21,900. The chronological baseline achieved holdout MAE 2.38 units and projects 274 units over seven days.",
+  "metrics": {
+    "median_price_krw": 21900,
+    "forecast_mae_units": 2.3831,
+    "seven_day_forecast_units": 274,
+    "qa_passed": true
+  },
+  "notice": "Synthetic data only; no message was sent by the offline harness."
+}

@@ -1,0 +1,101 @@
+{
+  "data_quality": {
+    "products_valid": 15,
+    "sales_days_valid": 35,
+    "duplicate_skus": 0,
+    "duplicate_dates": 0,
+    "chronological_sales": true,
+    "status": "passed"
+  },
+  "market_summary": {
+    "product_count": 15,
+    "average_price_krw": 22766.67,
+    "median_price_krw": 21900,
+    "min_price_krw": 7900,
+    "max_price_krw": 45900,
+    "discounted_share_pct": 93.33,
+    "average_discount_pct": 17.94,
+    "total_reviews": 1457,
+    "review_weighted_rating": 4.233,
+    "total_stock": 486,
+    "category_counts": {
+      "accessories": 2,
+      "knitwear": 3,
+      "outerwear": 3,
+      "shirts": 4,
+      "trousers": 3
+    },
+    "brand_counts": {
+      "Atlas": 3,
+      "Harbor": 4,
+      "Juniper": 4,
+      "Northstar": 4
+    },
+    "top_reviewed_skus": [
+      "SYN-003",
+      "SYN-010",
+      "SYN-007"
+    ]
+  },
+  "forecast": {
+    "train_size": 28,
+    "holdout_size": 7,
+    "train_end_date": "2026-06-28",
+    "holdout_start_date": "2026-06-29",
+    "slope_units_per_day": 0.4745,
+    "intercept": 21.665,
+    "mae": 2.3831,
+    "rmse": 2.767,
+    "mape_pct": 6.9532,
+    "holdout_actual": [
+      31,
+      33,
+      32,
+      35,
+      37,
+      41,
+      39
+    ],
+    "holdout_predicted": [
+      34.952,
+      35.427,
+      35.901,
+      36.376,
+      36.851,
+      37.325,
+      37.8
+    ],
+    "future_dates": [
+      "2026-07-06",
+      "2026-07-07",
+      "2026-07-08",
+      "2026-07-09",
+      "2026-07-10",
+      "2026-07-11",
+      "2026-07-12"
+    ],
+    "future_predicted": [
+      37.776,
+      38.234,
+      38.691,
+      39.149,
+      39.606,
+      40.064,
+      40.521
+    ]
+  },
+  "qa": {
+    "passed": true,
+    "checks": {
+      "data_quality": true,
+      "forecast_holdout": true,
+      "forecast_chart": true,
+      "decision_notes": true,
+      "narrative": true
+    }
+  },
+  "workflow": {
+    "stages_completed": 7,
+    "stages_expected": 7
+  }
+}

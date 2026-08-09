@@ -1,0 +1,133 @@
+[
+  {
+    "sequence": 1,
+    "agent": "sam",
+    "role": "data_engineer",
+    "stage": "validate_inputs",
+    "status": "completed",
+    "input_artifacts": [
+      "products.csv",
+      "sales.csv"
+    ],
+    "output_artifacts": [
+      "data_quality"
+    ],
+    "checks": [
+      "schema_valid",
+      "no_duplicates",
+      "chronological_order"
+    ]
+  },
+  {
+    "sequence": 2,
+    "agent": "ada",
+    "role": "data_analyst",
+    "stage": "analyze_and_forecast",
+    "status": "completed",
+    "input_artifacts": [
+      "validated_products",
+      "validated_sales"
+    ],
+    "output_artifacts": [
+      "market_summary",
+      "forecast_metrics"
+    ],
+    "checks": [
+      "descriptive_metrics_computed",
+      "holdout_not_used_for_fit"
+    ]
+  },
+  {
+    "sequence": 3,
+    "agent": "ethan",
+    "role": "business_analyst",
+    "stage": "interpret_metrics",
+    "status": "completed",
+    "input_artifacts": [
+      "market_summary",
+      "forecast_metrics"
+    ],
+    "output_artifacts": [
+      "decision_notes"
+    ],
+    "checks": [
+      "claims_linked_to_metrics",
+      "observation_separated_from_recommendation"
+    ]
+  },
+  {
+    "sequence": 4,
+    "agent": "mia",
+    "role": "visualization_designer",
+    "stage": "render_forecast",
+    "status": "completed",
+    "input_artifacts": [
+      "forecast_metrics"
+    ],
+    "output_artifacts": [
+      "forecast.svg"
+    ],
+    "checks": [
+      "portable_svg",
+      "accessible_description"
+    ]
+  },
+  {
+    "sequence": 5,
+    "agent": "noah",
+    "role": "narrative_editor",
+    "stage": "draft_summary",
+    "status": "completed",
+    "input_artifacts": [
+      "market_summary",
+      "decision_notes"
+    ],
+    "output_artifacts": [
+      "draft_summary"
+    ],
+    "checks": [
+      "figures_preserved",
+      "uncertainty_stated"
+    ]
+  },
+  {
+    "sequence": 6,
+    "agent": "sophie",
+    "role": "quality_reviewer",
+    "stage": "review_artifacts",
+    "status": "completed",
+    "input_artifacts": [
+      "all_stage_artifacts"
+    ],
+    "output_artifacts": [
+      "qa_verdict"
+    ],
+    "checks": [
+      "data_quality=true",
+      "forecast_holdout=true",
+      "forecast_chart=true",
+      "decision_notes=true",
+      "narrative=true"
+    ]
+  },
+  {
+    "sequence": 7,
+    "agent": "oliver",
+    "role": "strategy_lead",
+    "stage": "finalize_report",
+    "status": "completed",
+    "input_artifacts": [
+      "reviewed_artifacts",
+      "qa_verdict"
+    ],
+    "output_artifacts": [
+      "executive_report.md",
+      "slack_payload.json"
+    ],
+    "checks": [
+      "qa_passed",
+      "limitations_included",
+      "private_data_absent"
+    ]
+  }
+]

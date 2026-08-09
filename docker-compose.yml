@@ -1,0 +1,13 @@
+services:
+  offline-evaluation:
+    build: .
+    network_mode: none
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    volumes:
+      - ./artifacts/docker_run:/output
