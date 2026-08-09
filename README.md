@@ -115,7 +115,22 @@ The configured environment exposes the Google Workspace Gmail command surface fo
 
 The two work captures show different specialists used for different assignments: Oliver for public-source market research and Mia for presentation generation with role-specific Skills and tools. They demonstrate multi-profile use in real Slack work; they do not establish autonomous agent-to-agent delegation.
 
-Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
+### Lead-agent planning for an auditable retail analysis
+
+<table>
+  <tr>
+    <td width="58%"><img src="assets/evidence/12-oliver-analysis-charter-request-sanitized.png" alt="Sanitized Slack request asking Oliver to define a retail analytics charter" /></td>
+    <td width="42%"><img src="assets/evidence/13-oliver-analysis-charter-result-sanitized.png" alt="Sanitized Oliver execution trace and analysis-charter result" /></td>
+  </tr>
+  <tr>
+    <td><strong>Bounded assignment.</strong> The requester gives Oliver one explicit management decision—reduce stockouts and excess inventory while maintaining sales—and requires scope, KPIs, assumptions, agent allocation, acceptance criteria, and a handoff. The prompt forbids invented dataset properties and requires unavailable information to be labeled <code>Not Verified</code>.</td>
+    <td><strong>Artifact-producing execution.</strong> Oliver inspects the retail input and existing project artifacts through the live tool surface, then records completion of a nine-part charter as a named Markdown artifact. The visible result establishes planning and file-backed execution; it does not by itself prove that every downstream specialist completed the proposed workflow.</td>
+  </tr>
+</table>
+
+This capture adds a substantive workload beyond profile availability: the lead agent converts a business problem into an artifact contract for Sam, Ada, Ethan, Mia, Noah, and Sophie. The public reference pipeline implements those same role boundaries deterministically; future live-stage captures can be appended without changing the distinction between observed execution and modeled orchestration.
+
+Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [retail analysis charter](docs/evidence/retail-analysis-charter.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
 
 ## Architecture
 
@@ -317,7 +332,7 @@ These values are regression fixtures for the public harness, not production perf
 
 ## Privacy-preserving evidence policy
 
-Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only ten reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
+Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only twelve reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
 
 One supplied screenshot exposed an authentication token in a URL. The committed derivative covers the full credential value with an opaque white mask; the original is excluded from the repository and evidence chain. Redaction does not invalidate a leaked credential, so revocation and reissuance remain required.
 

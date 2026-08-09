@@ -61,6 +61,18 @@
       "bytes": 139189,
       "sha256": "ead7ad39ee156a572bd474f87cb7997fd838f3757f3d8618fbba704425fde278",
       "treatment": "Selected non-secret Oliver role-policy excerpt approved for publication; original pixels preserved."
+    },
+    {
+      "path": "assets/evidence/12-oliver-analysis-charter-request-sanitized.png",
+      "bytes": 93050,
+      "sha256": "8b85e1dc8dae3d1fc7accb42ad395e5d152157bb5e85453c789d14b3314afed8",
+      "treatment": "Requester name, avatar, and timestamp covered with opaque white masks."
+    },
+    {
+      "path": "assets/evidence/13-oliver-analysis-charter-result-sanitized.png",
+      "bytes": 137642,
+      "sha256": "ca862e2a4ebfafe3689da0921922ad0559a3116740003de566332fc123b1409a",
+      "treatment": "Already-redacted private path segment re-covered with an opaque white mask."
     }
   ]
 }

@@ -15,6 +15,8 @@ Original digests allow the owner to show during a controlled interview that a pr
 | E-007 | Hermes skill quarantine, scan, and installation trace | private terminal evidence | 322,050 | `3f0a2f1866c4f1fb09aebec188fdba72117373e5f72783ae4023a3b5b4d1cfd2` |
 | E-008 | GWS Gmail capability and validation/help response | private terminal evidence | 295,366 | `b405a7298a47bad57def924897d75f7b3fa867f51622e4ff6d8c47889d85845a` |
 | E-009 | Oliver `SOUL.md` strategic-planning persona excerpt | selected policy UI | 163,040 | `c0daed16b668e1aa821fe56228621f1e1caa649df51bbbef308a65a2a7675175` |
+| E-010 | Retail-analysis charter request addressed to Oliver | private workspace evidence | 121,352 | `87d831f3809bb7122a8c15e7435c21b408425ecc1d633959f8147c1fc58cb075` |
+| E-011 | Oliver file trace and analysis-charter completion summary | private workspace evidence | 203,032 | `9c9174473636312c51a0c87a09236c4873324b5b4345840fd622886016baf3bd` |
 
 ## Published derivatives
 
@@ -30,6 +32,8 @@ Original digests allow the owner to show during a controlled interview that a pr
 | P-008 | `assets/evidence/08-slack-specialist-work-sanitized.png` | requester identity and personal paths masked | 1,324,338 | `b1368e37b2138c09f9784db478555933a20e14035b9b293ba541df936f839dcb` |
 | P-009 | `assets/evidence/09-gws-gmail-capability-sanitized.png` | personal shell prompt covered; no mailbox content displayed | 244,770 | `0b622a915fdd50425d536ec11f1545f219c10b2f3ec0355ac2b595d4b864d0fc` |
 | P-010 | `assets/evidence/11-oliver-soul-policy-excerpt-sanitized.png` | selected non-secret role-policy excerpt approved for publication; original pixels preserved | 139,189 | `ead7ad39ee156a572bd474f87cb7997fd838f3757f3d8618fbba704425fde278` |
+| P-011 | `assets/evidence/12-oliver-analysis-charter-request-sanitized.png` | requester name/avatar/timestamp covered with opaque white masks | 93,050 | `8b85e1dc8dae3d1fc7accb42ad395e5d152157bb5e85453c789d14b3314afed8` |
+| P-012 | `assets/evidence/13-oliver-analysis-charter-result-sanitized.png` | already-redacted private path segment re-covered with an opaque white mask | 137,642 | `ca862e2a4ebfafe3689da0921922ad0559a3116740003de566332fc123b1409a` |
 
 ## Explicit exclusions
 

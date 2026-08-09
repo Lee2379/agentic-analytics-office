@@ -115,6 +115,21 @@ Oliverには戦略企画責任者兼researcherとして、一次情報に基づ�
 
 Oliverは公開情報を用いた市場調査、Miaはrole-specific Skillsとtoolsを用いたpresentation作成を担当しています。これは実務で複数profileを使い分けた証拠ですが、自律的なagent-to-agent delegationを示すものではありません。
 
+### 監査可能な小売分析に向けたリードエージェントの計画
+
+<table>
+  <tr>
+    <td width="58%"><img src="assets/evidence/12-oliver-analysis-charter-request-sanitized.png" alt="Oliverに小売分析charterの作成を依頼したSlack画面" /></td>
+    <td width="42%"><img src="assets/evidence/13-oliver-analysis-charter-result-sanitized.png" alt="Oliverの実行traceとanalysis charter作成結果" /></td>
+  </tr>
+  <tr>
+    <td><strong>境界を明示した依頼。</strong> 在庫切れと過剰在庫を抑えながら販売実績を維持する、という経営判断を起点に、scope、KPI、assumption、役割分担、acceptance criteria、handoffを要求しています。datasetの性質を創作せず、不明情報を<code>Not Verified</code>とする制約も明示しました。</td>
+    <td><strong>artifactを生成する実行。</strong> Oliverはlive tool surfaceから小売inputと既存project artifactsを確認し、9項目のcharterを名前付きMarkdown artifactとして保存しています。これは計画とfile-backed executionを支持しますが、後続する全specialistの完了まではこの2枚だけでは証明しません。</td>
+  </tr>
+</table>
+
+この証跡により、単なるprofile availabilityではなく、リードエージェントがbusiness problemをSam、Ada、Ethan、Mia、Noah、Sophie向けのartifact contractへ変換した実務stageを確認できます。公開reference pipelineは同じ役割境界を決定論的に実装しており、今後のlive-stage証跡もobserved executionとmodeled orchestrationを区別したまま追加できます。詳細なclaim boundaryは[`docs/evidence/retail-analysis-charter.md`](docs/evidence/retail-analysis-charter.md)に記載しています。
+
 ## アーキテクチャ
 
 ```mermaid
@@ -253,7 +268,7 @@ CIはschema／data-quality rejection、chronological train/holdout separation、
 
 ## プライバシーを保護する証拠公開方針
 
-raw screenshotにはWorkspace label、display name、local path、application ID、非公開の運用情報が含まれ得ます。公開するのはreview済みの10派生画像のみで、blurではなくopaque maskを使用し、各画像のSHA-256 digestを[`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md)に記録しています。
+raw screenshotにはWorkspace label、display name、local path、application ID、非公開の運用情報が含まれ得ます。公開するのはreview済みの12派生画像のみで、blurではなくopaque maskを使用し、各画像のSHA-256 digestを[`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md)に記録しています。
 
 提供画像の一つではURL内にauthentication tokenが露出していました。公開版ではcredential値全体を不透明な白色maskで覆い、原本をrepositoryとevidence chainから除外しています。マスキングは漏洩credentialを無効化しないため、失効・再発行は別途必要です。
 
