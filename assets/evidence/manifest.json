@@ -57,12 +57,6 @@
       "treatment": "Personal shell prompt covered; Gmail capability and validation/help output preserved."
     },
     {
-      "path": "assets/evidence/10-slack-ai-briefing-sanitized.png",
-      "bytes": 392539,
-      "sha256": "47fcec6cc90ef21cf9bdfb7d08c74b78a304ce8371bf02c03040b6d2d346e140",
-      "treatment": "Workspace and requester identity masked; composer and lower unreviewed content cropped."
-    },
-    {
       "path": "assets/evidence/11-oliver-soul-policy-excerpt-sanitized.png",
       "bytes": 139189,
       "sha256": "ead7ad39ee156a572bd474f87cb7997fd838f3757f3d8618fbba704425fde278",

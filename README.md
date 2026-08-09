@@ -90,15 +90,11 @@ The Skills workflow quarantines a third-party package, records source provenance
 
 The MCP screen shows the data-access integration surface used by the research workflow. The original credential value is completely covered by an opaque white mask. The live Slack report below is the separate evidence that a public-source research task produced a business result.
 
-### Google Workspace capability and briefing delivery
+### Google Workspace capability discovery
 
 ![Sanitized GWS Gmail capability discovery in the configured environment](assets/evidence/09-gws-gmail-capability-sanitized.png)
 
 The configured environment exposes the Google Workspace Gmail command surface for sending, triaging, replying, reading, and watching messages, together with an optional Model Armor sanitization parameter. The capture is a validation/help response because no Gmail subcommand was supplied. It confirms capability discovery, not successful OAuth authorization or mailbox retrieval; no message content or account identifier is displayed.
-
-![Sanitized Slack workflow returning a structured AI development briefing](assets/evidence/10-slack-ai-briefing-sanitized.png)
-
-The Slack capture records two connected behaviors: a reusable `morning-brief` bundle grouping Gmail, Calendar, Tasks, a custom mail router, and daily-brief logic; and a separate request for a current AI-development briefing that returned a structured response in the thread. The screenshot supports bundle availability, request execution, and Slack delivery. It does not independently verify every news claim, so production briefings should retain source URLs, collection timestamps, and reviewer checks.
 
 ### Slack execution
 
@@ -117,7 +113,7 @@ The Slack capture records two connected behaviors: a reusable `morning-brief` bu
 
 The two work captures show different specialists used for different assignments: Oliver for public-source market research and Mia for presentation generation with role-specific Skills and tools. They demonstrate multi-profile use in real Slack work; they do not establish autonomous agent-to-agent delegation.
 
-Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [AI-development briefing](docs/evidence/ai-development-briefing.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
+Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
 
 ## Architecture
 
@@ -319,7 +315,7 @@ These values are regression fixtures for the public harness, not production perf
 
 ## Privacy-preserving evidence policy
 
-Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only eleven reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
+Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only ten reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
 
 One supplied screenshot exposed an authentication token in a URL. The committed derivative covers the full credential value with an opaque white mask; the original is excluded from the repository and evidence chain. Redaction does not invalidate a leaked credential, so revocation and reissuance remain required.
 

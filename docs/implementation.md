@@ -88,9 +88,8 @@ Two captured assignments document different operational paths:
 
 - Oliver produced a public-source men's-clothing ranking snapshot with price, discount, rating, and review aggregates.
 - Mia used role-specific Skills and tools to generate presentation material from a design-system specification.
-- A Slack request for recent AI-development news returned a structured briefing after the interface exposed the reusable morning-brief bundle.
 
-The captures establish multi-profile use, Skill-bundle availability, and work delivery through one interface. They do not establish autonomous delegation between profiles, continuous unattended operation, population-level validity of the market sample, or independent factual verification of every generated briefing statement.
+The captures establish multi-profile use, role-specific Skill execution, and work delivery through one interface. They do not establish autonomous delegation between profiles, continuous unattended operation, or population-level validity of the market sample.
 
 ## Public analytical reference
 
