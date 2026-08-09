@@ -28,5 +28,7 @@ jobs:
           --output artifacts/ci_run
       - name: Privacy and credential scan
         run: python scripts/privacy_scan.py .
+      - name: Verify reviewed evidence images
+        run: python scripts/verify_evidence_images.py
       - name: Build hardened offline image
         run: docker build -t agentic-analytics-office:ci .

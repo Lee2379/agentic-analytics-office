@@ -12,7 +12,7 @@ This portfolio case study separates two things that are often mixed together:
 1. **Operational evidence:** seven specialized Hermes profiles running in one bounded Docker deployment and serving work through Slack.
 2. **Reproducible evaluation:** a deterministic, dependency-free Python harness that exercises the same role boundaries on synthetic data, produces an auditable trace, and is tested in CI.
 
-No credentials, private messages, email/calendar data, workspace identifiers, personal filesystem paths, or raw screenshots are published.
+No credentials, private messages, email/calendar data, workspace identifiers, or personal filesystem paths are published. Selected screenshots appear only as privacy-sanitized derivatives; the original private artifacts remain outside the repository.
 
 ## Executive summary
 
@@ -27,6 +27,25 @@ The live deployment demonstrated:
 - role-specific work, including research, analysis, presentation generation, and operations support.
 
 The public repository adds the missing engineering layer: deterministic data validation, leakage-safe holdout forecasting, artifact contracts, a QA gate, privacy scanning, tests, and a hardened offline container.
+
+## Operational evidence
+
+The following images are sanitized derivatives of the live deployment. They support the operational claims, but are not presented as forensic originals. Identity fields and local paths are masked; free-form profile descriptions are normalized to concise public role labels. The underlying originals remain private and are linked to this case study by SHA-256 digest in the [evidence register](docs/evidence/evidence-register.md).
+
+![Sanitized Hermes profile registry showing the role-based deployment](assets/evidence/01-hermes-profile-registry-sanitized.png)
+
+<table>
+  <tr>
+    <td width="44%"><img src="assets/evidence/02-slack-multi-agent-sanitized.png" alt="Sanitized Slack thread showing multiple specialized agents responding" /></td>
+    <td width="56%"><img src="assets/evidence/03-live-market-research-sanitized.png" alt="Sanitized live market-research result delivered through Slack" /></td>
+  </tr>
+  <tr>
+    <td><strong>Multi-agent availability.</strong> A single request addresses the deployed specialist profiles in the shared Slack interface.</td>
+    <td><strong>Business workload.</strong> A research specialist returns sourced pricing, discount, rating, and review aggregates from a live public ranking snapshot.</td>
+  </tr>
+</table>
+
+The redacted MCP configuration view and detailed claim boundaries are documented in [docs/evidence/mcp-integration.md](docs/evidence/mcp-integration.md), [docs/evidence/multi-agent-slack.md](docs/evidence/multi-agent-slack.md), [docs/evidence/runtime-evidence.md](docs/evidence/runtime-evidence.md), and [docs/evidence/live-workload.md](docs/evidence/live-workload.md).
 
 ## Architecture
 
@@ -69,6 +88,8 @@ Machine-readable contracts are in [`config/agents.json`](config/agents.json).
 
 A sanitized production run analyzed a public men's-clothing ranking snapshot and delivered the result to Slack. The agent reported, for the visible top ten listings:
 
+![Privacy-sanitized market-research result delivered to Slack](assets/evidence/03-live-market-research-sanitized.png)
+
 - average price: **KRW 15,689**;
 - median price: **KRW 12,210**;
 - seven of ten listings at or below KRW 15,000;
@@ -76,7 +97,7 @@ A sanitized production run analyzed a public men's-clothing ranking snapshot and
 - average displayed discount: **26.1%**;
 - 1,067 combined reviews and a review-weighted rating of approximately **4.17/5**.
 
-This is evidence of live task routing and delivery, not a population-level market estimate. The source was dynamic, the sample was rank-selected, and product links were deliberately omitted from the public evidence. See [`docs/evidence/live-workload.md`](docs/evidence/live-workload.md).
+This is evidence of live task routing and delivery, not a population-level market estimate. The source was dynamic and the sample was rank-selected. The screenshot retains visible public product URLs as source context; the reproducible public dataset does not depend on them. See [`docs/evidence/live-workload.md`](docs/evidence/live-workload.md).
 
 ## Reproducible demo
 
@@ -139,9 +160,9 @@ Current deterministic benchmark results are recorded in [`docs/evaluation.md`](d
 
 ## Privacy-preserving evidence policy
 
-Raw Slack screenshots are not evidence-safe: they contain workspace labels, user display names, local paths, application IDs, or private operational context. They are therefore withheld rather than cosmetically blurred. Their SHA-256 hashes are registered in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md), allowing the owner to establish which fixed originals support the sanitized account during a private interview.
+Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only four reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
 
-One supplied screenshot exposed an authentication token in a URL. It is excluded from the register and repository and should be revoked and reissued. No token value is reproduced here.
+One supplied screenshot exposed an authentication token in a URL. The committed derivative covers the full credential value with an opaque white mask; the original is excluded from the repository and evidence chain. Redaction does not invalidate a leaked credential, so revocation and reissuance remain required.
 
 ## Contribution boundary
 
@@ -156,6 +177,7 @@ config/                  Role contracts
 data/                    Synthetic, non-identifying demo data
 deployment/hermes/       Secret-free deployment notes and templates
 docs/                     Architecture, evaluation, limitations, and evidence
+assets/evidence/          Privacy-sanitized operational screenshots
 scripts/                  Runtime evidence collector and privacy scanner
 src/                      Deterministic analytics and orchestration harness
 tests/                    Unit and integration tests
@@ -166,7 +188,7 @@ artifacts/sample_run/     Reproducible reference output
 
 - The public harness is deterministic and does not call an LLM; it evaluates orchestration boundaries without exposing private model credentials.
 - The live market scan is a single public ranking snapshot and is not statistically representative of the full market.
-- Live Slack screenshots are withheld for privacy, so public readers cannot independently inspect the private workspace evidence.
+- Public screenshots are sanitized derivatives rather than forensic originals; private originals are available only for controlled interview review.
 - The role sequence is evaluated; comparative experiments against a single-agent baseline remain future work.
 - The live image was deployed from a moving `latest` tag. A production deployment should pin an immutable image digest.
 

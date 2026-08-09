@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "notice": "Privacy-sanitized portfolio derivatives; not forensic originals.",
+  "artifacts": [
+    {
+      "path": "assets/evidence/01-hermes-profile-registry-sanitized.png",
+      "bytes": 1158418,
+      "sha256": "f0b62fcbd04c2d6788125be8f0eef555c95391609268af4bc0702921c34401ef",
+      "treatment": "Local paths and account avatar masked; free-form role descriptions normalized."
+    },
+    {
+      "path": "assets/evidence/02-slack-multi-agent-sanitized.png",
+      "bytes": 1218939,
+      "sha256": "6dfd1f2bd52572653743fc9f77887296cb9ed537bc80c2f4788c2bcc2ec3bfb9",
+      "treatment": "Requester name and avatar masked."
+    },
+    {
+      "path": "assets/evidence/03-live-market-research-sanitized.png",
+      "bytes": 1510376,
+      "sha256": "1e166cecd24b7f3f8f26060fcc1c627a6f33caf715e3d1b1e5ad73e3de6cdd23",
+      "treatment": "Workspace and requester identity masked."
+    },
+    {
+      "path": "assets/evidence/04-mcp-integration-token-redacted.png",
+      "bytes": 1126794,
+      "sha256": "24fef86b7c6fba9e3e67edd0c840ea8f8a7f7aec6b8e539377a5b74c8120ac73",
+      "treatment": "Complete credential value covered by an opaque white mask; account avatar masked."
+    }
+  ]
+}

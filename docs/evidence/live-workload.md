@@ -1,5 +1,9 @@
 # Live workload: public-source market snapshot
 
+![Privacy-sanitized market-research result in Slack](../../assets/evidence/03-live-market-research-sanitized.png)
+
+Workspace and requester identity fields are covered with opaque masks. The visible business result and public source links are retained as workload evidence.
+
 ## Business question
 
 Summarize the visible pricing, discount, rating, and review patterns in a public men's-clothing ranking so a strategy lead can decide what merits deeper research.
@@ -26,7 +30,7 @@ For the visible top ten listings in the captured snapshot, the agent reported:
 | Review-weighted rating | approximately 4.17 / 5 |
 | Listings from the two most frequent brands | 6 / 10 |
 
-Product URLs and identifiers are omitted because they are unnecessary for demonstrating the workflow and can change over time.
+The screenshot retains the visible public product URLs as source context. They can change over time and are not inputs to the deterministic public demo.
 
 ## What this evidence supports
 

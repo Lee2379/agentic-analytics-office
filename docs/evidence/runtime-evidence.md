@@ -1,5 +1,9 @@
 # Sanitized runtime evidence
 
+![Sanitized Hermes profile registry](../../assets/evidence/01-hermes-profile-registry-sanitized.png)
+
+**Image treatment:** personal local paths and the account avatar are masked. Free-form role descriptions are replaced with public English labels. Profile names, visible gateway states, model labels, and skill counts remain the relevant deployment evidence. The image is a portfolio derivative, not a forensic original.
+
 **Collection date:** 2026-08-09<br>
 **Scope:** read-only metadata from the local Hermes Docker deployment<br>
 **Credential values read:** no<br>
@@ -42,3 +46,5 @@ OpenAI SDK 2.24.0
 | Sophie | running | `gpt-5.6-sol` | 81 | present |
 
 The collector used only `hermes --version`, `id`, `hermes profile list`, `hermes profile show <name>`, and selected `docker inspect --format` fields. It did not print environment variables, Slack identifiers, profile contents, messages, or host mount sources.
+
+The UI image and command-line collector were captured at different points in the deployment lifecycle. Bundled-skill synchronization changed the reported skill totals between those snapshots; the table above is the later collector record.
