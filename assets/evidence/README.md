@@ -13,7 +13,6 @@ These files are privacy-sanitized derivatives prepared for the public portfolio.
 | `07-soul-policy-files-sanitized.png` | Profile-specific policy metadata | generated from read-only collector output; no policy body displayed |
 | `08-slack-specialist-work-sanitized.png` | Specialist presentation task in Slack | requester identity and personal paths masked |
 | `09-gws-gmail-capability-sanitized.png` | Google Workspace Gmail capability discovery | personal shell prompt covered; no mailbox data displayed |
-| `10-slack-ai-briefing-sanitized.png` | Skill bundle and AI-development briefing in Slack | workspace/requester identity masked; lower unreviewed content cropped |
 | `11-oliver-soul-policy-excerpt-sanitized.png` | Selected Oliver role-policy example | approved non-secret excerpt; original pixels preserved |
 
 Binary images require manual visual review. The repository privacy scanner does not claim OCR coverage.
