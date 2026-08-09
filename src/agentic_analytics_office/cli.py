@@ -9,7 +9,7 @@ from .orchestrator import run_workflow
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="agentic-office",
-        description="Run the deterministic Agentic Analytics Office evaluation harness.",
+        description="Run the deterministic Multi-Agent AI Analytics Office evaluation harness.",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
     run = subparsers.add_parser("run", help="run the seven-stage analytics workflow")
@@ -24,7 +24,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "run":
         metrics = run_workflow(args.products, args.sales, args.output)
         forecast = metrics["forecast"]
-        print("Agentic Analytics Office: completed")
+        print("Multi-Agent AI Analytics Office: completed")
         print(f"stages: {metrics['workflow']['stages_completed']}/7")
         print(f"holdout MAE: {forecast['mae']:.2f} units")
         print(f"QA passed: {metrics['qa']['passed']}")

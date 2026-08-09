@@ -1,6 +1,6 @@
-# Agentic Analytics Office
+# Multi-Agent AI Analytics Office
 
-[![CI](https://github.com/Lee2379/agentic-analytics-office/actions/workflows/ci.yml/badge.svg)](https://github.com/Lee2379/agentic-analytics-office/actions/workflows/ci.yml)
+[![CI](https://github.com/Lee2379/multi-agent-ai-analytics-office/actions/workflows/ci.yml/badge.svg)](https://github.com/Lee2379/multi-agent-ai-analytics-office/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-reproducible%20demo-2496ED?logo=docker&logoColor=white)
 ![Privacy](https://img.shields.io/badge/evidence-privacy--sanitized-176B3A)

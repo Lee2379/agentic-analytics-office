@@ -2,7 +2,7 @@
 
 ## Scope
 
-Agentic Analytics Office is a configuration, orchestration, and evaluation layer built on the third-party Hermes Agent runtime. The live prototype uses Hermes profiles and Slack gateways inside Docker. The public repository does not redistribute Hermes, private profile directories, credentials, raw messages, or private policy text.
+Multi-Agent AI Analytics Office is a configuration, orchestration, and evaluation layer built on the third-party Hermes Agent runtime. The live prototype uses Hermes profiles and Slack gateways inside Docker. The public repository does not redistribute Hermes, private profile directories, credentials, raw messages, or private policy text.
 
 The implementation is documented through two evidence classes:
 

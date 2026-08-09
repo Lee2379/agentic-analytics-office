@@ -31,4 +31,4 @@ jobs:
       - name: Verify reviewed evidence images
         run: python scripts/verify_evidence_images.py
       - name: Build hardened offline image
-        run: docker build -t agentic-analytics-office:ci .
+        run: docker build -t multi-agent-ai-analytics-office:ci .

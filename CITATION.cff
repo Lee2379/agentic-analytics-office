@@ -1,10 +1,10 @@
 cff-version: 1.2.0
 message: "If you use this portfolio implementation, please cite it as follows."
-title: "Agentic Analytics Office"
+title: "Multi-Agent AI Analytics Office"
 type: software
 authors:
   - name: "Lee2379"
 version: 1.0.0
 date-released: 2026-08-09
-repository-code: "https://github.com/Lee2379/agentic-analytics-office"
+repository-code: "https://github.com/Lee2379/multi-agent-ai-analytics-office"
 license: MIT
