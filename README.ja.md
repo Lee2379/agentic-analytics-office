@@ -130,6 +130,23 @@ Oliverは公開情報を用いた市場調査、Miaはrole-specific Skillsとtoo
 
 この証跡により、単なるprofile availabilityではなく、リードエージェントがbusiness problemをSam、Ada、Ethan、Mia、Noah、Sophie向けのartifact contractへ変換した実務stageを確認できます。公開reference pipelineは同じ役割境界を決定論的に実装しており、今後のlive-stage証跡もobserved executionとmodeled orchestrationを区別したまま追加できます。詳細なclaim boundaryは[`docs/evidence/retail-analysis-charter.md`](docs/evidence/retail-analysis-charter.md)に記載しています。
 
+### AIエージェントによるデザインシステム資料作成
+
+<table>
+  <tr>
+    <td width="52%"><img src="assets/evidence/08-slack-specialist-work-sanitized.png" alt="MiaがCanva向けデザインシステム資料を準備するSlack trace" /></td>
+    <td width="48%"><img src="assets/evidence/15-magma-design-system-deliverable-sanitized.png" alt="生成されたMAGMAデザインシステムPDFとsource specificationのpreview" /></td>
+  </tr>
+  <tr>
+    <td><strong>仕様からtool executionへ。</strong> Slack上でMiaに対し、profile内の<code>DESIGN.md</code>を基に、color palette、typography、UI componentsを含むCanva presentationを作成するよう依頼しています。表示されたtraceでは、design、design-system、computer-use、PowerPoint Skillsの読込み、source specificationの参照、artifact書込み、利用可能なpresentation toolchainの確認まで追跡できます。</td>
+    <td><strong>レビュー可能な成果物。</strong> 結果画面には<code>MAGMA_Design_System_v1.pdf</code>と、version、system name、description、color tokenを含む構造化source specificationが表示されています。これにより、限定された依頼がchat responseだけで終わらず、具体的なpresentation artifactへつながったことを確認できます。</td>
+  </tr>
+</table>
+
+依頼者の説明では、このworkflowでCanva APIを使用しています。公開captureから確認できるのは、Canva向けの依頼、agentのSkill/tool trace、生成されたPDF previewまでです。Canva APIのrequest/response log、asset identifier、export logは表示されていないため、API call自体は公開証跡上で**Not independently verified**と分類しています。また、全slideの内容精度、accessibility、visual QAはこの2枚のcaptureの検証範囲外です。
+
+詳細な証跡とclaim boundary: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md)、[`SOUL.md` policy files](docs/evidence/soul-policy-files.md)、[Skills supply chain](docs/evidence/skills-supply-chain.md)、[MCP integration](docs/evidence/mcp-integration.md)、[Google Workspace integration](docs/evidence/google-workspace-integration.md)、[multi-agent Slack](docs/evidence/multi-agent-slack.md)、[retail analysis charter](docs/evidence/retail-analysis-charter.md)、[design-system presentation](docs/evidence/design-system-presentation.md)、[runtime metadata](docs/evidence/runtime-evidence.md)、[live workload](docs/evidence/live-workload.md)。
+
 ## アーキテクチャ
 
 ```mermaid
@@ -268,7 +285,7 @@ CIはschema／data-quality rejection、chronological train/holdout separation、
 
 ## プライバシーを保護する証拠公開方針
 
-raw screenshotにはWorkspace label、display name、local path、application ID、非公開の運用情報が含まれ得ます。公開するのはreview済みの12派生画像のみで、blurではなくopaque maskを使用し、各画像のSHA-256 digestを[`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md)に記録しています。
+raw screenshotにはWorkspace label、display name、local path、application ID、非公開の運用情報が含まれ得ます。公開するのはreview済みの13派生画像のみで、blurではなくopaque maskを使用し、各画像のSHA-256 digestを[`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md)に記録しています。
 
 提供画像の一つではURL内にauthentication tokenが露出していました。公開版ではcredential値全体を不透明な白色maskで覆い、原本をrepositoryとevidence chainから除外しています。マスキングは漏洩credentialを無効化しないため、失効・再発行は別途必要です。
 

@@ -17,6 +17,7 @@ Original digests allow the owner to show during a controlled interview that a pr
 | E-009 | Oliver `SOUL.md` strategic-planning persona excerpt | selected policy UI | 163,040 | `c0daed16b668e1aa821fe56228621f1e1caa649df51bbbef308a65a2a7675175` |
 | E-010 | Retail-analysis charter request addressed to Oliver | private workspace evidence | 121,352 | `87d831f3809bb7122a8c15e7435c21b408425ecc1d633959f8147c1fc58cb075` |
 | E-011 | Oliver file trace and analysis-charter completion summary | private workspace evidence | 203,032 | `9c9174473636312c51a0c87a09236c4873324b5b4345840fd622886016baf3bd` |
+| E-012 | Updated capture of generated MAGMA design-system PDF and source preview | low-sensitivity deliverable | 146,416 | `0feced0e2234f0328a5ff31dd35572d7b32f5d71423eafd26e3ffc3919933d24` |
 
 ## Published derivatives
 
@@ -34,6 +35,7 @@ Original digests allow the owner to show during a controlled interview that a pr
 | P-010 | `assets/evidence/11-oliver-soul-policy-excerpt-sanitized.png` | selected non-secret role-policy excerpt approved for publication; original pixels preserved | 139,189 | `ead7ad39ee156a572bd474f87cb7997fd838f3757f3d8618fbba704425fde278` |
 | P-011 | `assets/evidence/12-oliver-analysis-charter-request-sanitized.png` | requester name/avatar/timestamp covered with opaque white masks | 93,050 | `8b85e1dc8dae3d1fc7accb42ad395e5d152157bb5e85453c789d14b3314afed8` |
 | P-012 | `assets/evidence/13-oliver-analysis-charter-result-sanitized.png` | already-redacted private path segment re-covered with an opaque white mask | 137,642 | `ca862e2a4ebfafe3689da0921922ad0559a3116740003de566332fc123b1409a` |
+| P-013 | `assets/evidence/15-magma-design-system-deliverable-sanitized.png` | metadata-normalized copy; no private identifier or credential observed | 108,866 | `84255f11170cca74c3c62be81651c270aa561a07ef8cf5f1751e84c00e36ae19` |
 
 ## Explicit exclusions
 

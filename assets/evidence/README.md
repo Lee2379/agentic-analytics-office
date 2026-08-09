@@ -16,6 +16,7 @@ These files are privacy-sanitized derivatives prepared for the public portfolio.
 | `11-oliver-soul-policy-excerpt-sanitized.png` | Selected Oliver role-policy example | approved non-secret excerpt; original pixels preserved |
 | `12-oliver-analysis-charter-request-sanitized.png` | Bounded retail-analysis planning request | requester name, avatar, and timestamp covered with opaque white masks |
 | `13-oliver-analysis-charter-result-sanitized.png` | Oliver file-backed charter execution | already-redacted private path segment re-covered with an opaque white mask |
+| `15-magma-design-system-deliverable-sanitized.png` | Generated design-system PDF preview | metadata-normalized copy; no private identifier or credential observed in the published frame |
 
 Binary images require manual visual review. The repository privacy scanner does not claim OCR coverage.
 

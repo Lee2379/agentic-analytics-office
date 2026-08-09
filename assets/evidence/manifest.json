@@ -73,6 +73,12 @@
       "bytes": 137642,
       "sha256": "ca862e2a4ebfafe3689da0921922ad0559a3116740003de566332fc123b1409a",
       "treatment": "Already-redacted private path segment re-covered with an opaque white mask."
+    },
+    {
+      "path": "assets/evidence/15-magma-design-system-deliverable-sanitized.png",
+      "bytes": 108866,
+      "sha256": "84255f11170cca74c3c62be81651c270aa561a07ef8cf5f1751e84c00e36ae19",
+      "treatment": "Metadata-normalized copy; no private identifier or credential observed in the published frame."
     }
   ]
 }
