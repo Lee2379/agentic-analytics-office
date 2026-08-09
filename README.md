@@ -192,10 +192,6 @@ artifacts/sample_run/     Reproducible reference output
 - The role sequence is evaluated; comparative experiments against a single-agent baseline remain future work.
 - The live image was deployed from a moving `latest` tag. A production deployment should pin an immutable image digest.
 
-## Why this matters
-
-For an **AI Engineer**, the project demonstrates agent decomposition, tool boundaries, containerized operation, reproducibility, testing, and observability through structured traces. For a **Data Scientist**, it demonstrates validation, descriptive analysis, leakage-safe temporal evaluation, explicit limitations, and decision-oriented communication.
-
 ## License
 
 The original code and documentation in this repository are available under the [MIT License](LICENSE). Third-party products and trademarks remain the property of their respective owners.
