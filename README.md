@@ -50,22 +50,51 @@ The redacted MCP configuration view and detailed claim boundaries are documented
 ## Architecture
 
 ```mermaid
-flowchart LR
+%%{init: {"theme": "base", "themeVariables": {"fontSize": "18px", "fontFamily": "Arial, sans-serif", "lineColor": "#475569"}}}%%
+flowchart TB
     U["Human request"] --> S["Slack gateway"]
-    S --> R["Role router"]
-    subgraph D["Hermes Agent runtime in Docker"]
-      R --> SAM["Sam · Data engineering"]
-      SAM --> ADA["Ada · Quantitative analysis"]
-      ADA --> ETHAN["Ethan · Business interpretation"]
-      ETHAN --> MIA["Mia · Visualization"]
-      MIA --> NOAH["Noah · Narrative"]
-      NOAH --> SOPHIE["Sophie · QA and operations"]
-      SOPHIE --> OLIVER["Oliver · Executive synthesis"]
+    DATA["Public or synthetic data"]
+    POLICY["Role and tool boundaries"]
+
+    subgraph D["Hermes Agent runtime · Docker"]
+      direction TB
+      R["Role router"]
+
+      subgraph ANALYSIS["Data and analysis"]
+        direction LR
+        SAM["Sam<br/>Data engineering"] --> ADA["Ada<br/>Quantitative analysis"] --> ETHAN["Ethan<br/>Business interpretation"]
+      end
+
+      subgraph DELIVERY["Communication and review"]
+        direction LR
+        MIA["Mia<br/>Visualization"] --> NOAH["Noah<br/>Narrative"] --> SOPHIE["Sophie<br/>QA and operations"]
+      end
+
+      OLIVER["Oliver<br/>Executive synthesis"]
+
+      R --> SAM
+      ETHAN --> MIA
+      SOPHIE --> OLIVER
     end
-    OLIVER --> O["Report + metrics + trace"]
-    O --> S
-    DATA["Public or synthetic data"] --> SAM
-    POLICY["Role and tool boundaries"] --> R
+
+    O["Slack delivery<br/>Report · metrics · execution trace"]
+
+    S --> R
+    DATA --> SAM
+    POLICY --> R
+    OLIVER --> O
+
+    classDef input fill:#EFF6FF,stroke:#2563EB,color:#0F172A,stroke-width:2px;
+    classDef gateway fill:#FFF7ED,stroke:#EA580C,color:#0F172A,stroke-width:2px;
+    classDef router fill:#FAF5FF,stroke:#9333EA,color:#0F172A,stroke-width:2px;
+    classDef agent fill:#ECFDF5,stroke:#059669,color:#0F172A,stroke-width:2px;
+    classDef output fill:#FEF2F2,stroke:#DC2626,color:#0F172A,stroke-width:2px;
+
+    class U,DATA,POLICY input;
+    class S gateway;
+    class R router;
+    class SAM,ADA,ETHAN,MIA,NOAH,SOPHIE,OLIVER agent;
+    class O output;
 ```
 
 The live system supports direct routing to a specialist. The included offline harness models a full sequential handoff so the contracts and evaluation logic can be reviewed without access to private Slack or LLM credentials.
