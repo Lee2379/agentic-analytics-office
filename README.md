@@ -115,7 +115,37 @@ The configured environment exposes the Google Workspace Gmail command surface fo
 
 The two work captures show different specialists used for different assignments: Oliver for public-source market research and Mia for presentation generation with role-specific Skills and tools. They demonstrate multi-profile use in real Slack work; they do not establish autonomous agent-to-agent delegation.
 
-Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
+### Lead-agent planning for an auditable retail analysis
+
+<table>
+  <tr>
+    <td width="58%"><img src="assets/evidence/12-oliver-analysis-charter-request-sanitized.png" alt="Sanitized Slack request asking Oliver to define a retail analytics charter" /></td>
+    <td width="42%"><img src="assets/evidence/13-oliver-analysis-charter-result-sanitized.png" alt="Sanitized Oliver execution trace and analysis-charter result" /></td>
+  </tr>
+  <tr>
+    <td><strong>Bounded assignment.</strong> The requester gives Oliver one explicit management decision—reduce stockouts and excess inventory while maintaining sales—and requires scope, KPIs, assumptions, agent allocation, acceptance criteria, and a handoff. The prompt forbids invented dataset properties and requires unavailable information to be labeled <code>Not Verified</code>.</td>
+    <td><strong>Artifact-producing execution.</strong> Oliver inspects the retail input and existing project artifacts through the live tool surface, then records completion of a nine-part charter as a named Markdown artifact. The visible result establishes planning and file-backed execution; it does not by itself prove that every downstream specialist completed the proposed workflow.</td>
+  </tr>
+</table>
+
+This capture adds a substantive workload beyond profile availability: the lead agent converts a business problem into an artifact contract for Sam, Ada, Ethan, Mia, Noah, and Sophie. The public reference pipeline implements those same role boundaries deterministically; future live-stage captures can be appended without changing the distinction between observed execution and modeled orchestration.
+
+### Agent-produced design-system presentation
+
+<table>
+  <tr>
+    <td width="52%"><img src="assets/evidence/08-slack-specialist-work-sanitized.png" alt="Sanitized Slack trace of Mia preparing a Canva-targeted design-system presentation" /></td>
+    <td width="48%"><img src="assets/evidence/15-magma-design-system-deliverable-sanitized.png" alt="Preview of the generated MAGMA design-system PDF and its source specification" /></td>
+  </tr>
+  <tr>
+    <td><strong>Specification-to-tool execution.</strong> The Slack assignment asks Mia to transform the profile-local <code>DESIGN.md</code> into a Canva presentation covering the color palette, typography, and UI components. The visible trace shows Mia loading design, design-system, computer-use, and PowerPoint skills, reading the source specification, writing an artifact, and checking the available local presentation toolchain.</td>
+    <td><strong>Reviewable deliverable.</strong> The result capture shows <code>MAGMA_Design_System_v1.pdf</code> alongside the structured source specification, including its version, system name, narrative, and color tokens. This links the bounded assignment to a concrete presentation artifact rather than an unmaterialized chat response.</td>
+  </tr>
+</table>
+
+The requester reports that Canva API was used in this workflow. The published captures establish the Canva-targeted assignment, the agent's skill/tool trace, and the generated PDF preview; they do not expose a Canva API request/response record, asset identifier, or export log. The API invocation is therefore classified as **Not independently verified** in the public evidence set. Full-slide content accuracy, accessibility, and visual QA are also outside the scope of these two captures.
+
+Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [retail analysis charter](docs/evidence/retail-analysis-charter.md), [design-system presentation](docs/evidence/design-system-presentation.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
 
 ## Architecture
 
@@ -317,7 +347,7 @@ These values are regression fixtures for the public harness, not production perf
 
 ## Privacy-preserving evidence policy
 
-Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only ten reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
+Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only thirteen reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
 
 One supplied screenshot exposed an authentication token in a URL. The committed derivative covers the full credential value with an opaque white mask; the original is excluded from the repository and evidence chain. Redaction does not invalidate a leaked credential, so revocation and reissuance remain required.
 
