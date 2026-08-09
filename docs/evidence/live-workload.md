@@ -2,7 +2,7 @@
 
 ![Privacy-sanitized market-research result in Slack](../../assets/evidence/03-live-market-research-sanitized.png)
 
-Workspace and requester identity fields are covered with opaque masks. The visible business result and public source links are retained as workload evidence.
+Workspace, requester identity, and private channel fields are covered with opaque masks. The visible business result and public source links are retained as workload evidence.
 
 ## Business question
 

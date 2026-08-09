@@ -30,9 +30,35 @@ The public repository adds the missing engineering layer: deterministic data val
 
 ## Operational evidence
 
-The following images are sanitized derivatives of the live deployment. They support the operational claims, but are not presented as forensic originals. Identity fields and local paths are masked; free-form profile descriptions are normalized to concise public role labels. The underlying originals remain private and are linked to this case study by SHA-256 digest in the [evidence register](docs/evidence/evidence-register.md).
+The following evidence is organized by implementation layer: Docker profiles, Slack access controls, `SOUL.md` role policies, Skills, MCP, and live Slack work. The images are privacy-sanitized derivatives, not forensic originals. The underlying originals remain private and are linked to this case study by SHA-256 digest in the [evidence register](docs/evidence/evidence-register.md).
+
+### Dockerized multi-profile runtime
 
 ![Sanitized Hermes profile registry showing the role-based deployment](assets/evidence/01-hermes-profile-registry-sanitized.png)
+
+The runtime registry shows seven named specialist profiles with active gateways inside the Hermes deployment. Local paths and the account avatar are masked; free-form descriptions are normalized to public role labels.
+
+![Read-only Docker check of per-profile Slack configuration](assets/evidence/05-docker-slack-profile-isolation-sanitized.png)
+
+The read-only command executes inside `hermes-docker` and reports configuration presence without printing credential values. All seven profiles report bot/app configuration and an explicit user allowlist; open access is not configured. This supports profile-specific Slack configuration, but does not prove that the underlying token values are unique.
+
+### `SOUL.md` role-policy separation
+
+![Read-only metadata evidence for profile-specific SOUL.md files](assets/evidence/07-soul-policy-files-sanitized.png)
+
+Each live profile has a `SOUL.md` file, and all seven files have distinct SHA-256 prefixes. No policy body is published. The digests support separate policy artifacts; the public behavioral contracts are documented in [`config/agents.json`](config/agents.json), and enforcement remains a runtime claim rather than something the hashes alone can prove.
+
+### Skills and MCP integration
+
+![Sanitized Hermes third-party skill installation and security scan](assets/evidence/06-skill-installation-sanitized.png)
+
+The Skills workflow quarantines a third-party package, records source provenance, runs the Hermes security scan, shows the human confirmation step, and installs the reviewed files into the Oliver profile. A `SAFE` verdict is evidence of the recorded scan result, not a guarantee that third-party code is risk-free.
+
+![Hermes MCP configuration with the credential value fully redacted](assets/evidence/04-mcp-integration-token-redacted.png)
+
+The MCP screen shows the data-access integration surface used by the research workflow. The original credential value is completely covered by an opaque white mask. The live Slack report below is the separate evidence that a public-source research task produced a business result.
+
+### Slack execution
 
 <table>
   <tr>
@@ -45,7 +71,11 @@ The following images are sanitized derivatives of the live deployment. They supp
   </tr>
 </table>
 
-The redacted MCP configuration view and detailed claim boundaries are documented in [docs/evidence/mcp-integration.md](docs/evidence/mcp-integration.md), [docs/evidence/multi-agent-slack.md](docs/evidence/multi-agent-slack.md), [docs/evidence/runtime-evidence.md](docs/evidence/runtime-evidence.md), and [docs/evidence/live-workload.md](docs/evidence/live-workload.md).
+![Sanitized Slack trace of Mia using role-specific skills and tools for presentation work](assets/evidence/08-slack-specialist-work-sanitized.png)
+
+The two work captures show different specialists used for different assignments: Oliver for public-source market research and Mia for presentation generation with role-specific Skills and tools. They demonstrate multi-profile use in real Slack work; they do not establish autonomous agent-to-agent delegation.
+
+Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
 
 ## Architecture
 
@@ -189,7 +219,7 @@ Current deterministic benchmark results are recorded in [`docs/evaluation.md`](d
 
 ## Privacy-preserving evidence policy
 
-Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only four reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
+Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only eight reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
 
 One supplied screenshot exposed an authentication token in a URL. The committed derivative covers the full credential value with an opaque white mask; the original is excluded from the repository and evidence chain. Redaction does not invalidate a leaked credential, so revocation and reissuance remain required.
 

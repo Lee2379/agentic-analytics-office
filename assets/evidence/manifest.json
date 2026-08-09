@@ -16,15 +16,39 @@
     },
     {
       "path": "assets/evidence/03-live-market-research-sanitized.png",
-      "bytes": 1510376,
-      "sha256": "1e166cecd24b7f3f8f26060fcc1c627a6f33caf715e3d1b1e5ad73e3de6cdd23",
-      "treatment": "Workspace and requester identity masked."
+      "bytes": 1631029,
+      "sha256": "a206cb5ba774fca288925beea09976f049251cfd3391e8394fd7f1def3414411",
+      "treatment": "Workspace, requester identity, and private channel label masked."
     },
     {
       "path": "assets/evidence/04-mcp-integration-token-redacted.png",
       "bytes": 1126794,
       "sha256": "24fef86b7c6fba9e3e67edd0c840ea8f8a7f7aec6b8e539377a5b74c8120ac73",
       "treatment": "Complete credential value covered by an opaque white mask; account avatar masked."
+    },
+    {
+      "path": "assets/evidence/05-docker-slack-profile-isolation-sanitized.png",
+      "bytes": 1280149,
+      "sha256": "3cf3c69ac94d11317837dae52c1995d59a7124ef1f3c829d7ae90217cc157744",
+      "treatment": "Personal host prompt replaced; configuration presence only, with no credential values displayed."
+    },
+    {
+      "path": "assets/evidence/06-skill-installation-sanitized.png",
+      "bytes": 1431361,
+      "sha256": "85214a64c2dd540aed2dc321bccbc75ad9a64d356e82296e6548207b6a7db385",
+      "treatment": "Personal shell prompt replaced; public provenance and scan result retained."
+    },
+    {
+      "path": "assets/evidence/07-soul-policy-files-sanitized.png",
+      "bytes": 70897,
+      "sha256": "4e64aca814e8c2be9af10153891565cd58b4d113c305a7cfe8aa573fc9184f0b",
+      "treatment": "Generated from read-only Docker metadata; file contents and credentials are not displayed."
+    },
+    {
+      "path": "assets/evidence/08-slack-specialist-work-sanitized.png",
+      "bytes": 1324338,
+      "sha256": "b1368e37b2138c09f9784db478555933a20e14035b9b293ba541df936f839dcb",
+      "treatment": "Requester identity and personal local path fragments masked."
     }
   ]
 }

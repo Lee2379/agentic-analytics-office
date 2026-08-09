@@ -6,8 +6,12 @@ These files are privacy-sanitized derivatives prepared for the public portfolio.
 |---|---|---|
 | `01-hermes-profile-registry-sanitized.png` | Deployment overview | local paths and account avatar masked; role descriptions normalized |
 | `02-slack-multi-agent-sanitized.png` | Multi-profile Slack availability | requester name and avatar masked |
-| `03-live-market-research-sanitized.png` | Real business workload | workspace and requester identity masked |
+| `03-live-market-research-sanitized.png` | Real business workload | workspace, requester identity, and private channel label masked |
 | `04-mcp-integration-token-redacted.png` | MCP configuration surface | full token value covered by an opaque white mask; account avatar masked |
+| `05-docker-slack-profile-isolation-sanitized.png` | Docker/per-profile Slack configuration | personal host prompt replaced; no credential values displayed |
+| `06-skill-installation-sanitized.png` | Skills provenance and scan workflow | personal shell prompt replaced |
+| `07-soul-policy-files-sanitized.png` | Profile-specific policy metadata | generated from read-only collector output; no policy body displayed |
+| `08-slack-specialist-work-sanitized.png` | Specialist presentation task in Slack | requester identity and personal paths masked |
 
 Binary images require manual visual review. The repository privacy scanner does not claim OCR coverage.
 
