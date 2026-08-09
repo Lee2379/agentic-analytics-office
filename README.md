@@ -267,8 +267,6 @@ artifacts/local_run/
 └── trace.json
 ```
 
-![Chronological holdout evaluation and seven-day forecast](artifacts/sample_run/forecast.svg)
-
 Run the hardened offline demo:
 
 ```bash
