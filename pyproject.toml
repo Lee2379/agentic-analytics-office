@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "agentic-analytics-office"
+name = "multi-agent-ai-analytics-office"
 version = "1.0.0"
 description = "Deterministic evaluation harness for a Dockerized, Slack-operated multi-agent analytics office."
 readme = "README.md"
