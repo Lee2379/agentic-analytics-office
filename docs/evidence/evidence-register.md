@@ -1,6 +1,6 @@
 # Privacy-preserving evidence register
 
-Raw screenshots that contain workspace labels, user display names, local filesystem paths, credentials, or private operational context are intentionally not committed. This register records the controlled source artifacts and their reviewed public counterparts. The Obsidian workflow captures P-014 through P-024 passed manual privacy review and are published byte-identically; no image generation, blur, or content substitution was applied.
+Raw screenshots that contain workspace labels, user display names, local filesystem paths, credentials, or private operational context are intentionally not committed. This register records the controlled source artifacts and their reviewed public counterparts. The Obsidian/OhMyWiki workflow captures P-014 through P-025 passed manual privacy review and are published byte-identically; no image generation, blur, or content substitution was applied.
 
 Original digests allow the owner to show during a controlled interview that a presented private artifact is the same fixed file referenced here. Public-derivative digests make the committed visual set reproducible at the byte level. Neither digest turns a sanitized derivative into forensic proof.
 
@@ -30,6 +30,7 @@ Original digests allow the owner to show during a controlled interview that a pr
 | E-021 | Facts / interpretations / questions presentation slide | low-sensitivity deliverable | 66,826 | `6f5976d93cdc427825fcdce1d52a0ce7e4f27823eea91a89428f96166f886f66` |
 | E-022 | Presentation source-register slide | low-sensitivity deliverable | 87,512 | `b7c92a70819d7bfb93148540cddefe27caaebfa8c8d0a42e4e7ad0ac1208d8df` |
 | E-023 | English / Korean / Japanese correction diff | low-sensitivity analytical artifact | 284,425 | `aca56837c7c02ab9765b7b1ebbaa3f6f9347b62b41b6920697a5645d615b6266` |
+| E-024 | Japanese direct-evidence review and correction recommendations | low-sensitivity analytical artifact | 252,051 | `512752b1b770690b992712729fcaee9bd1ccc530396429f86c950198c850ec15` |
 
 ## Published derivatives
 
@@ -60,6 +61,7 @@ Original digests allow the owner to show during a controlled interview that a pr
 | P-022 | `assets/evidence/24-fact-interpretation-question-slide.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 66,826 | `6f5976d93cdc427825fcdce1d52a0ce7e4f27823eea91a89428f96166f886f66` |
 | P-023 | `assets/evidence/25-source-register-slide.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 87,512 | `b7c92a70819d7bfb93148540cddefe27caaebfa8c8d0a42e4e7ad0ac1208d8df` |
 | P-024 | `assets/evidence/26-trilingual-correction-diff.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 284,425 | `aca56837c7c02ab9765b7b1ebbaa3f6f9347b62b41b6920697a5645d615b6266` |
+| P-025 | `assets/evidence/27-fact-check-japanese-direct-evidence.png` | manual privacy review; no credential or private identifier observed; claim-level Japanese review and public source URLs retained; published byte-identically | 252,051 | `512752b1b770690b992712729fcaee9bd1ccc530396429f86c950198c850ec15` |
 
 ## Explicit exclusions
 

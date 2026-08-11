@@ -145,6 +145,12 @@
       "bytes": 284425,
       "sha256": "aca56837c7c02ab9765b7b1ebbaa3f6f9347b62b41b6920697a5645d615b6266",
       "treatment": "Manual privacy review; no credential or private identifier observed; multilingual review output retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/27-fact-check-japanese-direct-evidence.png",
+      "bytes": 252051,
+      "sha256": "512752b1b770690b992712729fcaee9bd1ccc530396429f86c950198c850ec15",
+      "treatment": "Manual privacy review; no credential or private identifier observed; claim-level Japanese review and public source URLs retained; published byte-identically."
     }
   ]
 }

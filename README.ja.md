@@ -37,7 +37,7 @@
 |---|---:|
 | Unit／integration tests | 12 / 12 passed |
 | 決定論的reference artifacts | 6 / 6 matched |
-| Reviewed evidence captures | 24 / 24 hashes verified |
+| Reviewed evidence captures | 25 / 25 hashes verified |
 | 内部documentation links | all local targets resolved |
 | Hardened container smoke test | network disabled・read-only rootでpassed |
 
@@ -158,9 +158,9 @@ Oliverは公開情報を用いた市場調査、Miaはrole-specific Skillsとtoo
 
 依頼者の説明では、このworkflowでCanva APIを使用しています。公開captureから確認できるのは、Canva向けの依頼、agentのSkill/tool trace、生成されたPDF previewまでです。Canva APIのrequest/response log、asset identifier、export logは表示されていないため、API call自体は公開証跡上で**Not independently verified**と分類しています。また、全slideの内容精度、accessibility、visual QAはこの2枚のcaptureの検証範囲外です。
 
-### Obsidianを用いた市場インテリジェンス自動化
+### Obsidian／OhMyWikiを用いた市場インテリジェンス自動化
 
-この実運用ケースでは、エージェントの処理をchat responseで終わらせず、レビュー可能なknowledge pipelineへ拡張しました。公開調査ページをsource URI付きMarkdownとしてObsidian vaultに保存し、OliverからOMWのlibrarian workflowを呼び出して、provenance、confidence、relationを持つentity／concept候補へ構造化します。複数のraw sourceとconceptをsynthesisした後、英語・日本語のfact-checkを実行し、source-linked presentationへ変換します。
+この実運用ケースでは、エージェントの処理をchat responseで終わらせず、レビュー可能なknowledge pipelineへ拡張しました。公開調査ページをsource URI付きMarkdownとしてObsidian vaultに保存し、OliverからOhMyWiki（OMW）のlibrarian workflowを呼び出して、provenance、confidence、relationを持つentity／concept候補へ構造化します。複数のraw sourceとconceptをsynthesisした後、英語・日本語のfact-checkを実行し、source-linked presentationへ変換します。
 
 <table>
   <tr>
@@ -188,6 +188,10 @@ Oliverは公開情報を用いた市場調査、Miaはrole-specific Skillsとtoo
     <td><strong>Decision delivery.</strong> レビュー済みcorpusをconfidence mapとsource appendixを含む15ページのPDFへ変換します。</td>
   </tr>
 </table>
+
+![対象segmentの直接根拠をclaim単位で検証した日本語report](assets/evidence/27-fact-check-japanese-direct-evidence.png)
+
+**日本語によるclaim単位の修正。** このreport sectionでは、引用された根拠が30代男性に関する結論を直接支持するかを検証しています。確認済みの人口統計とsegment別利用signalは維持する一方、広すぎる主張を「直接根拠は断片的であり、価格・品揃え・channelの意思決定には不十分」と修正しています。提案事項には明示的に`[unverified]`を付け、表示されたsource registerによってreviewの追跡可能性を保っています。このcaptureが示すのはreview構造と出力された結論であり、基礎となるsource分析を独立に再実行した証拠ではありません。
 
 表示されたlibrarian traceでは、重複taskを抑止し、既存成果として9件のproposed entity pageと7件のproposed concept pageを報告しています。また、fact・interpretation・open questionを分離し、英語・韓国語・日本語でcorrection recommendationを生成しています。これらのcaptureはartifact-backed executionとreview behaviorを示しますが、全sourceの正確性、graph clustering実装、全slideの計算を独立に検証するものではありません。
 
@@ -228,11 +232,59 @@ flowchart TB
     DATA --> SAM
     POLICY --> R
     OLIVER --> O
+
+    classDef input fill:#EFF6FF,stroke:#2563EB,color:#0F172A,stroke-width:2px;
+    classDef gateway fill:#FFF7ED,stroke:#EA580C,color:#0F172A,stroke-width:2px;
+    classDef router fill:#FAF5FF,stroke:#9333EA,color:#0F172A,stroke-width:2px;
+    classDef agent fill:#ECFDF5,stroke:#059669,color:#0F172A,stroke-width:2px;
+    classDef output fill:#FEF2F2,stroke:#DC2626,color:#0F172A,stroke-width:2px;
+
+    class U,DATA,POLICY input;
+    class S gateway;
+    class R router;
+    class SAM,ADA,ETHAN,MIA,NOAH,SOPHIE,OLIVER agent;
+    class O output;
 ```
 
 実運用は専門profileへの直接routingをサポートします。公開offline harnessは、credentialなしでcontractと評価ロジックを検証できるよう、7段階の逐次handoffをモデル化しています。実運用で自律的agent間委任が実証されたとは主張しません。
 
-## Agent contract
+### リクエスト経路
+
+実運用経路と公開評価経路は同じrole modelを使用しますが、検証目的が異なります。
+
+**実運用の専門profile経路**
+
+1. 利用者がSlack上で担当specialistをmentionします。
+2. 対象profileのgatewayがeventを受信し、profile単位の設定を適用します。
+3. `SOUL.md`が非公開のrole policyを、導入済みSkillが再利用可能な手順と許可されたtool利用を定義します。
+4. 外部の公開dataが必要な場合、specialistは承認済みMCP integrationを利用できます。
+5. specialistが成果物を元のSlack threadへ返します。
+
+**公開評価経路**
+
+1. CLIが合成product dataと時系列sales dataを読み込みます。
+2. Samが分析開始前にschema、値、unique性、順序を検証します。
+3. Adaがdescriptive metricを計算し、training windowだけを用いて解釈可能なtrendをfitします。
+4. Ethan、Mia、Noahが承認済みartifactからdecision note、portable chart、narrativeを個別に作成します。
+5. Sophieが必須controlを評価し、不合格があればfinalizationをblockします。
+6. Oliverがreview済みreportとSlack payload previewを出力し、harnessが全stageを`trace.json`へ記録します。
+
+実運用prototypeは自律的なagent間delegationを実証したとは主張しません。専門profileへの直接routingは運用証跡で確認し、公開の逐次pipelineは意図したhandoffを検査できる評価modelとして提供します。
+
+### Hermes runtime primitives
+
+| Primitive | 実運用での機能 | 公開repositoryでの表現 |
+|---|---|---|
+| Profile | shared runtime内で専門家identityとprofile単位の設定・状態を保持 | [`config/agents.json`](config/agents.json)のagent名、role、input、output、reviewer |
+| `SOUL.md` | 非公開persona、mission、decision boundary、response policyを定義 | 異なるfile digest、公開承認済みexcerpt 1件、非機密behavioral contract。全文は非公開 |
+| Skill | 再利用可能な手順とtool instructionをpackage化 | sanitized installation evidenceとdocument化したsupply-chain boundary |
+| MCP integration | 承認済みprofileへ外部data／tool adapterを提供 | tokenを完全maskした設定証跡と、別のSlack result capture |
+| Slack gateway | 業務interfaceで依頼を受信しprofile responseを返却 | sanitized multi-profile／workload screenshot |
+| Docker boundary | bounded compute、非公開service port、Docker socket未mountのshared Hermes runtimeをhost | secret-free deployment noteとoffline hardened Compose設定 |
+
+この分離は意図的です。configuration presence、policy hash、screenshotは限定した運用claimを支え、公開codeとtestは再現可能なengineering claimを支えます。
+
+## Agent contracts
 
 | Agent | 責任 | 必須出力 | Guardrail |
 |---|---|---|---|
@@ -319,6 +371,8 @@ python scripts/verify_reference_artifacts.py
 
 CIはschema／data-quality rejection、7 agent contractのschemaとpublic/package drift、canonical dateとdaily cadence、chronological train/holdout separation、zero actual時のMAPE未定義処理、決定論的forecast・report、7 role stages、QA gate、6つのreference artifactの完全一致、内部document link、digest-pinned containerのhardened smoke run、credential／個人path／private network address／email addressの非混入を検証します。
 
+現在の決定論的benchmark resultは[`docs/evaluation.md`](docs/evaluation.md)に記録しています。[`artifacts/sample_run`](artifacts/sample_run)のcommitted outputはCIで再生成し、完全一致を検証します。
+
 ### Reference benchmark
 
 | 検証項目 | Committed result |
@@ -347,7 +401,7 @@ CIはschema／data-quality rejection、7 agent contractのschemaとpublic/packag
 
 ## プライバシーを保護する証拠公開方針
 
-raw screenshotにはWorkspace label、display name、local path、application ID、非公開の運用情報が含まれ得ます。公開するのは24件のprivacy-reviewed public capture（13件のsanitized derivativeと11件のpixel編集不要capture）のみです。redactionが必要な場合はblurではなくopaque maskを使用し、全画像のSHA-256 digestを[`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md)に記録しています。
+raw screenshotにはWorkspace label、display name、local path、application ID、非公開の運用情報が含まれ得ます。公開するのは25件のprivacy-reviewed public capture（13件のsanitized derivativeと12件のpixel編集不要capture）のみです。redactionが必要な場合はblurではなくopaque maskを使用し、全画像のSHA-256 digestを[`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md)に記録しています。
 
 提供画像の一つではURL内にauthentication tokenが露出していました。公開版ではcredential値全体を不透明な白色maskで覆い、原本をrepositoryとevidence chainから除外しています。マスキングは漏洩credentialを無効化しないため、失効・再発行は別途必要です。
 

@@ -4,6 +4,7 @@ All notable changes to the public evaluation harness are documented here.
 
 ## 1.1.0 — 2026-08-12
 
+- Add a privacy-reviewed Japanese direct-evidence fact-check capture and synchronize the English/Japanese architecture, request-path, runtime-primitive, and evidence documentation.
 - Load and validate the packaged seven-agent contract registry at runtime; reject duplicate or drifted public contracts.
 - Record agent objectives, artifact contracts, and reviewers in the execution trace.
 - Enforce canonical ISO dates and consecutive daily observations before temporal modeling.
