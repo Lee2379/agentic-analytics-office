@@ -160,16 +160,26 @@ Oliverは公開情報を用いた市場調査、Miaはrole-specific Skillsとtoo
     <td><strong>Knowledge modeling.</strong> factとinterpretationを分離し、sourceとrelationを追跡可能なfieldとして公開します。</td>
   </tr>
   <tr>
+    <td width="50%"><img src="assets/evidence/19-evidence-linked-synthesis.png" alt="draft statusとsource referenceを保持したevidence-linked synthesis" /></td>
+    <td width="50%"><img src="assets/evidence/20-fact-check-english.png" alt="claim別confidenceとcaveatを保持した英語fact-check" /></td>
+  </tr>
+  <tr>
+    <td><strong>Evidence-linked synthesis.</strong> draft status、confidence、provenanceを隠さず、複数のraw noteとconceptを統合します。</td>
+    <td><strong>English analytical review.</strong> 正しく出典帰属された数値と、未検証の戦略仮説を分離します。</td>
+  </tr>
+  <tr>
     <td width="50%"><img src="assets/evidence/21-fact-check-japanese.png" alt="claim別confidenceとcaveatを保持した日本語fact-check" /></td>
     <td width="50%"><img src="assets/evidence/23-agent-generated-market-report-deck.png" alt="15ページのsource-linked market report" /></td>
   </tr>
   <tr>
-    <td><strong>Multilingual review.</strong> 英語だけでなく日本語でも、出典帰属、confidence、未検証仮説を保持します。</td>
+    <td><strong>Multilingual review.</strong> 日本語版でも、結論だけを翻訳せず、出典帰属、confidence、未検証仮説を保持します。</td>
     <td><strong>Decision delivery.</strong> レビュー済みcorpusをconfidence mapとsource appendixを含む15ページのPDFへ変換します。</td>
   </tr>
 </table>
 
 表示されたlibrarian traceでは、重複taskを抑止し、既存成果として9件のproposed entity pageと7件のproposed concept pageを報告しています。また、fact・interpretation・open questionを分離し、英語・韓国語・日本語でcorrection recommendationを生成しています。これらのcaptureはartifact-backed executionとreview behaviorを示しますが、全sourceの正確性、graph clustering実装、全slideの計算を独立に検証するものではありません。
+
+読者向け成果物: [英語executive report — Men's Fashion Market in the 30s Segment](docs/case-studies/thirtysomething-mens-fashion-market-report.md)。
 
 workflow、画像別supported claim、検証境界の詳細: [Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md)。
 

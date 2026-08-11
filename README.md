@@ -160,16 +160,26 @@ This live case moves the agent workflow beyond chat delivery into a reviewable k
     <td><strong>Knowledge modeling.</strong> Proposed concepts separate facts from interpretation and expose traceable source and relation fields.</td>
   </tr>
   <tr>
+    <td width="50%"><img src="assets/evidence/19-evidence-linked-synthesis.png" alt="Evidence-linked market synthesis with draft status and source references" /></td>
+    <td width="50%"><img src="assets/evidence/20-fact-check-english.png" alt="English fact-check preserving claim-level confidence and caveats" /></td>
+  </tr>
+  <tr>
+    <td><strong>Evidence-linked synthesis.</strong> Multiple raw notes and concepts are assembled without hiding draft status, confidence, or provenance.</td>
+    <td><strong>English analytical review.</strong> The report separates correctly attributed figures from strategic hypotheses that remain unverified.</td>
+  </tr>
+  <tr>
     <td width="50%"><img src="assets/evidence/21-fact-check-japanese.png" alt="Japanese fact-check preserving claim-level confidence and caveats" /></td>
     <td width="50%"><img src="assets/evidence/23-agent-generated-market-report-deck.png" alt="Overview of the 15-slide source-linked market report" /></td>
   </tr>
   <tr>
-    <td><strong>Multilingual review.</strong> The fact-check preserves attribution, confidence, and unresolved hypotheses in Japanese as well as English.</td>
+    <td><strong>Multilingual review.</strong> The Japanese report preserves attribution, confidence, and unresolved hypotheses instead of translating conclusions without their caveats.</td>
     <td><strong>Decision delivery.</strong> A 15-slide PDF converts the reviewed corpus into an executive artifact with a confidence map and source appendix.</td>
   </tr>
 </table>
 
 The visible librarian trace reports duplicate-task suppression and existing outputs of nine proposed entity pages and seven proposed concept pages. The workflow also separates facts, interpretations, and open questions, and emits correction recommendations in English, Korean, and Japanese. These captures establish artifact-backed execution and review behavior; they do not independently validate every source, graph-clustering implementation, or slide-level calculation.
+
+Reader-facing deliverable: [English executive report — Men's Fashion Market in the 30s Segment](docs/case-studies/thirtysomething-mens-fashion-market-report.md).
 
 Detailed workflow, image-level supported claims, and verification boundaries: [Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md).
 

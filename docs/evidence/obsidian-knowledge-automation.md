@@ -4,6 +4,8 @@
 
 This live case extends the multi-agent office from conversational delivery into an artifact-first market-intelligence workflow. Public web material is retained as source-addressed Markdown, organized into reusable entities and concepts, synthesized into a decision-oriented report, reviewed through multilingual fact-checking, and delivered as a source-linked presentation.
 
+Reader-facing English deliverable: [Men's Fashion Market in the 30s Segment](../case-studies/thirtysomething-mens-fashion-market-report.md).
+
 Obsidian is the human review and storage surface for the Markdown vault. The OMW workflow supplies the role procedures for curation, terminology management, entity/concept linking, fact-checking, and quality review. Hermes/Oliver is the agent entry point shown in the execution trace.
 
 ## Observed workflow
