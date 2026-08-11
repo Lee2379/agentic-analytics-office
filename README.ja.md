@@ -14,7 +14,7 @@
 1. **運用証跡:** 一つの制約付きDocker環境で稼働し、Slack経由で実務タスクを処理する7つのHermes専門プロファイル。
 2. **再現可能な評価:** 同一の役割境界を合成データ上で実行し、監査可能なtraceを生成する、依存関係のない決定論的Pythonハーネス。
 
-認証情報、非公開メッセージ、メール／カレンダーデータ、Workspace識別子、個人のファイルパスは公開していません。掲載画像はすべてプライバシー処理済みの派生物であり、原本はリポジトリ外で管理しています。
+認証情報、非公開メッセージ、メール／カレンダーデータ、Workspace識別子、個人のファイルパスは公開していません。掲載画像はprivacy-sanitized derivative、または変更不要と判断したlow-sensitivity captureです。private originalはリポジトリ外で管理しています。
 
 ## エグゼクティブサマリー
 
@@ -27,6 +27,7 @@
 - 非特権`hermes`ユーザーでの実行
 - 公開情報を用いた市場調査結果のSlack配信
 - 調査、分析、プレゼンテーション作成、運用支援を含む役割別タスク
+- source provenance、concept／relation構造、英語・日本語fact-check、source-linked 15ページ報告書を持つObsidianベースの市場調査workflow
 
 公開リポジトリには、厳格なデータ検証、時間リークを防ぐholdout予測、artifact contract、QA gate、プライバシースキャン、テスト、オフラインで再現できるhardened containerを実装しています。
 
@@ -60,7 +61,7 @@
 
 ## 運用証跡
 
-以下はDocker profiles、Slack access control、`SOUL.md` role policy、Skills、MCP、Slack実務利用の証跡です。画像はforensic originalではなく、プライバシー処理済みの公開派生物です。原本との対応は[evidence register](docs/evidence/evidence-register.md)のSHA-256 digestで管理しています。
+以下はDocker profiles、Slack access control、`SOUL.md` role policy、Skills、MCP、Slack実務利用の証跡です。画像はprivacy-sanitized derivative、または変更不要と判断したlow-sensitivity captureであり、forensic originalとは扱いません。source artifactとの対応は[evidence register](docs/evidence/evidence-register.md)のSHA-256 digestで管理しています。
 
 ### Docker上のmulti-profile runtime
 
@@ -145,7 +146,34 @@ Oliverは公開情報を用いた市場調査、Miaはrole-specific Skillsとtoo
 
 依頼者の説明では、このworkflowでCanva APIを使用しています。公開captureから確認できるのは、Canva向けの依頼、agentのSkill/tool trace、生成されたPDF previewまでです。Canva APIのrequest/response log、asset identifier、export logは表示されていないため、API call自体は公開証跡上で**Not independently verified**と分類しています。また、全slideの内容精度、accessibility、visual QAはこの2枚のcaptureの検証範囲外です。
 
-詳細な証跡とclaim boundary: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md)、[`SOUL.md` policy files](docs/evidence/soul-policy-files.md)、[Skills supply chain](docs/evidence/skills-supply-chain.md)、[MCP integration](docs/evidence/mcp-integration.md)、[Google Workspace integration](docs/evidence/google-workspace-integration.md)、[multi-agent Slack](docs/evidence/multi-agent-slack.md)、[retail analysis charter](docs/evidence/retail-analysis-charter.md)、[design-system presentation](docs/evidence/design-system-presentation.md)、[runtime metadata](docs/evidence/runtime-evidence.md)、[live workload](docs/evidence/live-workload.md)。
+### Obsidianを用いた市場インテリジェンス自動化
+
+この実運用ケースでは、エージェントの処理をchat responseで終わらせず、レビュー可能なknowledge pipelineへ拡張しました。公開調査ページをsource URI付きMarkdownとしてObsidian vaultに保存し、OliverからOMWのlibrarian workflowを呼び出して、provenance、confidence、relationを持つentity／concept候補へ構造化します。複数のraw sourceとconceptをsynthesisした後、英語・日本語のfact-checkを実行し、source-linked presentationへ変換します。
+
+<table>
+  <tr>
+    <td width="50%"><img src="assets/evidence/16-obsidian-raw-source-ingestion.png" alt="Obsidianに保存されたsource URI付きraw research note" /></td>
+    <td width="50%"><img src="assets/evidence/18-structured-concept-page.png" alt="confidence、provenance、relationを持つconcept page" /></td>
+  </tr>
+  <tr>
+    <td><strong>File-backed ingestion.</strong> 公開source URIと抽出テキストを日付付きraw noteとして保持し、chat historyだけに依存しません。</td>
+    <td><strong>Knowledge modeling.</strong> factとinterpretationを分離し、sourceとrelationを追跡可能なfieldとして公開します。</td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="assets/evidence/21-fact-check-japanese.png" alt="claim別confidenceとcaveatを保持した日本語fact-check" /></td>
+    <td width="50%"><img src="assets/evidence/23-agent-generated-market-report-deck.png" alt="15ページのsource-linked market report" /></td>
+  </tr>
+  <tr>
+    <td><strong>Multilingual review.</strong> 英語だけでなく日本語でも、出典帰属、confidence、未検証仮説を保持します。</td>
+    <td><strong>Decision delivery.</strong> レビュー済みcorpusをconfidence mapとsource appendixを含む15ページのPDFへ変換します。</td>
+  </tr>
+</table>
+
+表示されたlibrarian traceでは、重複taskを抑止し、既存成果として9件のproposed entity pageと7件のproposed concept pageを報告しています。また、fact・interpretation・open questionを分離し、英語・韓国語・日本語でcorrection recommendationを生成しています。これらのcaptureはartifact-backed executionとreview behaviorを示しますが、全sourceの正確性、graph clustering実装、全slideの計算を独立に検証するものではありません。
+
+workflow、画像別supported claim、検証境界の詳細: [Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md)。
+
+詳細な証跡とclaim boundary: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md)、[`SOUL.md` policy files](docs/evidence/soul-policy-files.md)、[Skills supply chain](docs/evidence/skills-supply-chain.md)、[MCP integration](docs/evidence/mcp-integration.md)、[Google Workspace integration](docs/evidence/google-workspace-integration.md)、[multi-agent Slack](docs/evidence/multi-agent-slack.md)、[retail analysis charter](docs/evidence/retail-analysis-charter.md)、[design-system presentation](docs/evidence/design-system-presentation.md)、[Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md)、[runtime metadata](docs/evidence/runtime-evidence.md)、[live workload](docs/evidence/live-workload.md)。
 
 ## アーキテクチャ
 
@@ -285,7 +313,7 @@ CIはschema／data-quality rejection、chronological train/holdout separation、
 
 ## プライバシーを保護する証拠公開方針
 
-raw screenshotにはWorkspace label、display name、local path、application ID、非公開の運用情報が含まれ得ます。公開するのはreview済みの13派生画像のみで、blurではなくopaque maskを使用し、各画像のSHA-256 digestを[`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md)に記録しています。
+raw screenshotにはWorkspace label、display name、local path、application ID、非公開の運用情報が含まれ得ます。公開するのは24件のprivacy-reviewed public capture（13件のsanitized derivativeと11件のpixel編集不要capture）のみです。redactionが必要な場合はblurではなくopaque maskを使用し、全画像のSHA-256 digestを[`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md)に記録しています。
 
 提供画像の一つではURL内にauthentication tokenが露出していました。公開版ではcredential値全体を不透明な白色maskで覆い、原本をrepositoryとevidence chainから除外しています。マスキングは漏洩credentialを無効化しないため、失効・再発行は別途必要です。
 

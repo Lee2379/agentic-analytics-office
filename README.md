@@ -14,7 +14,7 @@ This portfolio case study separates two things that are often mixed together:
 1. **Operational evidence:** seven specialized Hermes profiles running in one bounded Docker deployment and serving work through Slack.
 2. **Reproducible evaluation:** a deterministic, dependency-free Python harness that exercises the same role boundaries on synthetic data, produces an auditable trace, and is tested in CI.
 
-No credentials, private messages, email/calendar data, workspace identifiers, or personal filesystem paths are published. Selected screenshots appear only as privacy-sanitized derivatives; the original private artifacts remain outside the repository.
+No credentials, private messages, email/calendar data, workspace identifiers, or personal filesystem paths are published. Selected screenshots are either privacy-sanitized derivatives or low-sensitivity captures approved unchanged; private originals remain outside the repository.
 
 ## Executive summary
 
@@ -26,7 +26,8 @@ The live deployment demonstrated:
 - Docker resource limits of 2 CPUs and 4 GiB memory;
 - execution as the unprivileged `hermes` user;
 - Slack delivery of a public-source market scan;
-- role-specific work, including research, analysis, presentation generation, and operations support.
+- role-specific work, including research, analysis, presentation generation, and operations support;
+- an Obsidian-backed research workflow that preserved source provenance, structured concepts and relations, produced multilingual fact-checks, and delivered a source-linked 15-slide report.
 
 The public repository adds the missing engineering layer: deterministic data validation, leakage-safe holdout forecasting, artifact contracts, a QA gate, privacy scanning, tests, and a hardened offline container.
 
@@ -60,7 +61,7 @@ The detailed component model, configuration boundaries, and request paths are do
 
 ## Operational evidence
 
-The following evidence is organized by implementation layer: Docker profiles, Slack access controls, `SOUL.md` role policies, Skills, MCP, and live Slack work. The images are privacy-sanitized derivatives, not forensic originals. The underlying originals remain private and are linked to this case study by SHA-256 digest in the [evidence register](docs/evidence/evidence-register.md).
+The following evidence is organized by implementation layer: Docker profiles, Slack access controls, `SOUL.md` role policies, Skills, MCP, and live Slack work. The images are either privacy-sanitized derivatives or low-sensitivity captures approved unchanged; they are not treated as forensic originals. Controlled source artifacts are linked to this case study by SHA-256 digest in the [evidence register](docs/evidence/evidence-register.md).
 
 ### Dockerized multi-profile runtime
 
@@ -145,7 +146,34 @@ This capture adds a substantive workload beyond profile availability: the lead a
 
 The requester reports that Canva API was used in this workflow. The published captures establish the Canva-targeted assignment, the agent's skill/tool trace, and the generated PDF preview; they do not expose a Canva API request/response record, asset identifier, or export log. The API invocation is therefore classified as **Not independently verified** in the public evidence set. Full-slide content accuracy, accessibility, and visual QA are also outside the scope of these two captures.
 
-Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [retail analysis charter](docs/evidence/retail-analysis-charter.md), [design-system presentation](docs/evidence/design-system-presentation.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
+### Obsidian-backed market-intelligence automation
+
+This live case moves the agent workflow beyond chat delivery into a reviewable knowledge pipeline. Public research pages are retained as source-addressed Markdown in an Obsidian vault; Oliver invokes the OMW librarian workflow to organize approved material into proposed entity and concept pages with typed provenance, confidence, and relations. A synthesis stage combines multiple raw sources and concepts, then separate review stages produce English and Japanese fact-check reports before a source-linked presentation is delivered.
+
+<table>
+  <tr>
+    <td width="50%"><img src="assets/evidence/16-obsidian-raw-source-ingestion.png" alt="Source-addressed raw research notes stored in Obsidian" /></td>
+    <td width="50%"><img src="assets/evidence/18-structured-concept-page.png" alt="Structured concept page with confidence, provenance, and relations" /></td>
+  </tr>
+  <tr>
+    <td><strong>File-backed ingestion.</strong> Dated raw notes retain the public source URI and extracted text instead of leaving evidence inside an ephemeral chat.</td>
+    <td><strong>Knowledge modeling.</strong> Proposed concepts separate facts from interpretation and expose traceable source and relation fields.</td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="assets/evidence/21-fact-check-japanese.png" alt="Japanese fact-check preserving claim-level confidence and caveats" /></td>
+    <td width="50%"><img src="assets/evidence/23-agent-generated-market-report-deck.png" alt="Overview of the 15-slide source-linked market report" /></td>
+  </tr>
+  <tr>
+    <td><strong>Multilingual review.</strong> The fact-check preserves attribution, confidence, and unresolved hypotheses in Japanese as well as English.</td>
+    <td><strong>Decision delivery.</strong> A 15-slide PDF converts the reviewed corpus into an executive artifact with a confidence map and source appendix.</td>
+  </tr>
+</table>
+
+The visible librarian trace reports duplicate-task suppression and existing outputs of nine proposed entity pages and seven proposed concept pages. The workflow also separates facts, interpretations, and open questions, and emits correction recommendations in English, Korean, and Japanese. These captures establish artifact-backed execution and review behavior; they do not independently validate every source, graph-clustering implementation, or slide-level calculation.
+
+Detailed workflow, image-level supported claims, and verification boundaries: [Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md).
+
+Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [retail analysis charter](docs/evidence/retail-analysis-charter.md), [design-system presentation](docs/evidence/design-system-presentation.md), [Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
 
 ## Architecture
 
@@ -347,7 +375,7 @@ These values are regression fixtures for the public harness, not production perf
 
 ## Privacy-preserving evidence policy
 
-Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Only thirteen reviewed derivatives are committed. Redaction uses opaque masks rather than blur, and each public derivative has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
+Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Twenty-four privacy-reviewed public captures are committed: thirteen sanitized derivatives and eleven low-sensitivity captures that required no pixel edits. Where redaction is required it uses opaque masks rather than blur, and every public image has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
 
 One supplied screenshot exposed an authentication token in a URL. The committed derivative covers the full credential value with an opaque white mask; the original is excluded from the repository and evidence chain. Redaction does not invalidate a leaked credential, so revocation and reissuance remain required.
 

@@ -1,10 +1,10 @@
 # Privacy-preserving evidence register
 
-Raw screenshots are intentionally not committed. They contain workspace labels, user display names, local filesystem paths, or private operational context. This register separately records selected private originals and the reviewed public derivatives.
+Raw screenshots that contain workspace labels, user display names, local filesystem paths, credentials, or private operational context are intentionally not committed. This register records the controlled source artifacts and their reviewed public counterparts. The Obsidian workflow captures P-014 through P-024 passed manual privacy review and are published byte-identically; no image generation, blur, or content substitution was applied.
 
 Original digests allow the owner to show during a controlled interview that a presented private artifact is the same fixed file referenced here. Public-derivative digests make the committed visual set reproducible at the byte level. Neither digest turns a sanitized derivative into forensic proof.
 
-| ID | Private artifact | Classification | Bytes | SHA-256 |
+| ID | Source artifact | Classification | Bytes | SHA-256 |
 |---|---|---|---:|---|
 | E-001 | Seven Hermes profiles visible and gateways running | private operational UI | 143,823 | `ed1e9e8ba7b6700e21f75a53dd0b9665e5e4eca8037bfe6cbaff374c7df984c8` |
 | E-002 | Public-source market research delivered to Slack | private workspace evidence | 572,208 | `1f08c72c3f30c429d9908b008a136c4f731b1657cd7fdc9f11c9426ca8e397ea` |
@@ -18,6 +18,18 @@ Original digests allow the owner to show during a controlled interview that a pr
 | E-010 | Retail-analysis charter request addressed to Oliver | private workspace evidence | 121,352 | `87d831f3809bb7122a8c15e7435c21b408425ecc1d633959f8147c1fc58cb075` |
 | E-011 | Oliver file trace and analysis-charter completion summary | private workspace evidence | 203,032 | `9c9174473636312c51a0c87a09236c4873324b5b4345840fd622886016baf3bd` |
 | E-012 | Updated capture of generated MAGMA design-system PDF and source preview | low-sensitivity deliverable | 146,416 | `0feced0e2234f0328a5ff31dd35572d7b32f5d71423eafd26e3ffc3919933d24` |
+
+| E-013 | Obsidian raw-note corpus with retained public source URI | low-sensitivity research UI | 308,317 | `a0ecc058c1b1a1d7333fdeac1bd9e804b0eb6a206a55f0e6f0cda69ae0683c36` |
+| E-014 | Oliver OMW librarian request and duplicate-task trace | low-sensitivity agent trace | 107,671 | `d7695df33274e8e0f5306713dacd9b42737a49ab3fd0d889892da9317949d2a7` |
+| E-015 | Structured fashion-app category-expansion concept page | low-sensitivity research artifact | 161,646 | `98ec4e8e92f88d191d054ee13ef9493e8d6cd866e71eb1223f2fb5f83a5b759f` |
+| E-016 | Evidence-linked menswear market synthesis page | low-sensitivity research artifact | 210,793 | `44649991a0ad26974c85138dd3a64330f1fcc8cea114291f8dde6a1c7dffc484` |
+| E-017 | English fact-check report | low-sensitivity analytical artifact | 128,955 | `21bcf1fdb1b5848b637ad2fc893c52380a85836370251af81d0e8b794b13d25a` |
+| E-018 | Japanese fact-check report | low-sensitivity analytical artifact | 302,944 | `cbb98528b7cec19f9ee0542b9ce0db7632d9a9f6b1b2370d63113aee6254bfce` |
+| E-019 | Japanese correction recommendations and source register | low-sensitivity analytical artifact | 308,320 | `cdf95946f3ab3a890db56b6ccc0921538403461ae343c7ecfcd231947814e2ab` |
+| E-020 | Fifteen-slide market-report overview | low-sensitivity deliverable | 165,043 | `4842290eafa3b1a690919ef79ad4a1b19ce944d064dd564ca05e999da4eacd6c` |
+| E-021 | Facts / interpretations / questions presentation slide | low-sensitivity deliverable | 66,826 | `6f5976d93cdc427825fcdce1d52a0ce7e4f27823eea91a89428f96166f886f66` |
+| E-022 | Presentation source-register slide | low-sensitivity deliverable | 87,512 | `b7c92a70819d7bfb93148540cddefe27caaebfa8c8d0a42e4e7ad0ac1208d8df` |
+| E-023 | English / Korean / Japanese correction diff | low-sensitivity analytical artifact | 284,425 | `aca56837c7c02ab9765b7b1ebbaa3f6f9347b62b41b6920697a5645d615b6266` |
 
 ## Published derivatives
 
@@ -37,6 +49,18 @@ Original digests allow the owner to show during a controlled interview that a pr
 | P-012 | `assets/evidence/13-oliver-analysis-charter-result-sanitized.png` | already-redacted private path segment re-covered with an opaque white mask | 137,642 | `ca862e2a4ebfafe3689da0921922ad0559a3116740003de566332fc123b1409a` |
 | P-013 | `assets/evidence/15-magma-design-system-deliverable-sanitized.png` | metadata-normalized copy; no private identifier or credential observed | 108,866 | `84255f11170cca74c3c62be81651c270aa561a07ef8cf5f1751e84c00e36ae19` |
 
+| P-014 | `assets/evidence/16-obsidian-raw-source-ingestion.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 308,317 | `a0ecc058c1b1a1d7333fdeac1bd9e804b0eb6a206a55f0e6f0cda69ae0683c36` |
+| P-015 | `assets/evidence/17-oliver-librarian-workflow.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 107,671 | `d7695df33274e8e0f5306713dacd9b42737a49ab3fd0d889892da9317949d2a7` |
+| P-016 | `assets/evidence/18-structured-concept-page.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 161,646 | `98ec4e8e92f88d191d054ee13ef9493e8d6cd866e71eb1223f2fb5f83a5b759f` |
+| P-017 | `assets/evidence/19-evidence-linked-synthesis.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 210,793 | `44649991a0ad26974c85138dd3a64330f1fcc8cea114291f8dde6a1c7dffc484` |
+| P-018 | `assets/evidence/20-fact-check-english.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 128,955 | `21bcf1fdb1b5848b637ad2fc893c52380a85836370251af81d0e8b794b13d25a` |
+| P-019 | `assets/evidence/21-fact-check-japanese.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 302,944 | `cbb98528b7cec19f9ee0542b9ce0db7632d9a9f6b1b2370d63113aee6254bfce` |
+| P-020 | `assets/evidence/22-japanese-corrections-and-sources.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 308,320 | `cdf95946f3ab3a890db56b6ccc0921538403461ae343c7ecfcd231947814e2ab` |
+| P-021 | `assets/evidence/23-agent-generated-market-report-deck.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 165,043 | `4842290eafa3b1a690919ef79ad4a1b19ce944d064dd564ca05e999da4eacd6c` |
+| P-022 | `assets/evidence/24-fact-interpretation-question-slide.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 66,826 | `6f5976d93cdc427825fcdce1d52a0ce7e4f27823eea91a89428f96166f886f66` |
+| P-023 | `assets/evidence/25-source-register-slide.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 87,512 | `b7c92a70819d7bfb93148540cddefe27caaebfa8c8d0a42e4e7ad0ac1208d8df` |
+| P-024 | `assets/evidence/26-trilingual-correction-diff.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 284,425 | `aca56837c7c02ab9765b7b1ebbaa3f6f9347b62b41b6920697a5645d615b6266` |
+
 ## Explicit exclusions
 
 - Slack API application inventory screens: workspace and application identifiers.
@@ -44,5 +68,7 @@ Original digests allow the owner to show during a controlled interview that a pr
 - Screens containing actual email, calendar, task, or personal morning-brief content.
 - Unredacted local profile screens containing personal filesystem names.
 - The original data-access configuration screen containing an authentication token in a URL.
+- The supplied entity-file listing containing a personal Windows home path; excluded in full rather than blurred.
+- The redundant terminal rendering of the fact-check document; the structured English and Japanese report views provide stronger evidence.
 
 The exposed data-access token must be revoked and reissued. Its original screenshot is not hashed here because a credential-bearing source must not become part of the portfolio evidence chain; only P-004 is published.
