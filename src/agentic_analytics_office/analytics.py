@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import statistics
 from collections import Counter
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -81,32 +82,47 @@ def load_sales(path: str | Path) -> list[SaleDay]:
         reader = csv.DictReader(handle)
         _require_fields(set(reader.fieldnames or []), SALES_FIELDS, source)
         sales: list[SaleDay] = []
+        parsed_dates: list[date] = []
         seen: set[str] = set()
         for line_number, row in enumerate(reader, start=2):
+            date_text = row["date"].strip()
             try:
                 item = SaleDay(
-                    date=row["date"].strip(),
+                    date=date_text,
                     units=int(row["units"]),
                     revenue_krw=int(row["revenue_krw"]),
                 )
             except (TypeError, ValueError) as exc:
                 raise ValueError(f"{source}:{line_number}: invalid sales value") from exc
             errors: list[str] = []
-            if not item.date:
-                errors.append("empty date")
+            try:
+                parsed_date = date.fromisoformat(item.date)
+            except ValueError:
+                parsed_date = None
+                errors.append("date must use canonical ISO format YYYY-MM-DD")
+            if parsed_date is not None and parsed_date.isoformat() != item.date:
+                errors.append("date must use canonical ISO format YYYY-MM-DD")
             if item.date in seen:
                 errors.append(f"duplicate date {item.date}")
             if item.units < 0 or item.revenue_krw < 0:
                 errors.append("units and revenue must be non-negative")
             if errors:
                 raise ValueError(f"{source}:{line_number}: {'; '.join(errors)}")
+            assert parsed_date is not None
             seen.add(item.date)
             sales.append(item)
+            parsed_dates.append(parsed_date)
 
     if len(sales) < 10:
         raise ValueError(f"{source}: at least 10 chronological observations are required")
-    if [item.date for item in sales] != sorted(item.date for item in sales):
+    if parsed_dates != sorted(parsed_dates):
         raise ValueError(f"{source}: sales rows must be sorted chronologically")
+    for previous, current in zip(parsed_dates, parsed_dates[1:]):
+        if current != previous + timedelta(days=1):
+            raise ValueError(
+                f"{source}: sales rows must contain consecutive daily observations; "
+                f"expected {(previous + timedelta(days=1)).isoformat()}, found {current.isoformat()}"
+            )
     return sales
 
 

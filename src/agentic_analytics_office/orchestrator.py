@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
 
+from . import __version__
 from .analytics import load_products, load_sales, market_summary
+from .contracts import canonical_contract_bytes, load_agent_contracts
 from .forecast import evaluate_and_forecast
 from .models import AgentEvent
 from .render import render_forecast_svg
@@ -12,18 +15,39 @@ from .render import render_forecast_svg
 
 def _event(
     sequence: int,
-    agent: str,
-    role: str,
+    contract: dict[str, Any],
     stage: str,
-    inputs: tuple[str, ...],
-    outputs: tuple[str, ...],
     checks: tuple[str, ...],
 ) -> AgentEvent:
-    return AgentEvent(sequence, agent, role, stage, "completed", inputs, outputs, checks)
+    return AgentEvent(
+        sequence=sequence,
+        agent=contract["name"],
+        role=contract["role"],
+        objective=contract["objective"],
+        stage=stage,
+        status="completed",
+        input_artifacts=tuple(contract["allowed_inputs"]),
+        output_artifacts=tuple(contract["required_outputs"]),
+        checks=checks,
+        reviewed_by=contract["reviewed_by"],
+    )
 
 
 def _write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+
+
+def _normalized_text_bytes(path: Path) -> bytes:
+    """Return UTF-8/LF bytes so provenance is stable across Git checkout settings."""
+    return path.read_text(encoding="utf-8").replace("\r\n", "\n").encode("utf-8")
+
+
+def _file_record(path: Path) -> dict[str, Any]:
+    payload = _normalized_text_bytes(path)
+    return {
+        "sha256": hashlib.sha256(payload).hexdigest(),
+        "bytes_utf8_lf": len(payload),
+    }
 
 
 def _business_notes(summary: dict[str, Any], forecast: dict[str, Any]) -> list[str]:
@@ -49,10 +73,19 @@ def run_workflow(
     products_path: str | Path,
     sales_path: str | Path,
     output_dir: str | Path,
+    contracts_path: str | Path | None = None,
 ) -> dict[str, Any]:
     output = Path(output_dir)
     output.mkdir(parents=True, exist_ok=True)
     events: list[AgentEvent] = []
+    registry = load_agent_contracts(contracts_path)
+    expected_agents = ("sam", "ada", "ethan", "mia", "noah", "sophie", "oliver")
+    actual_agents = tuple(agent["name"] for agent in registry["agents"])
+    if actual_agents != expected_agents:
+        raise ValueError(
+            "agent contracts must define the executable sequence: " + ", ".join(expected_agents)
+        )
+    contracts = {agent["name"]: agent for agent in registry["agents"]}
 
     products = load_products(products_path)
     sales = load_sales(sales_path)
@@ -62,27 +95,48 @@ def run_workflow(
         "duplicate_skus": 0,
         "duplicate_dates": 0,
         "chronological_sales": True,
+        "consecutive_daily_sales": True,
         "status": "passed",
     }
     events.append(
-        _event(1, "sam", "data_engineer", "validate_inputs", ("products.csv", "sales.csv"), ("data_quality",), ("schema_valid", "no_duplicates", "chronological_order"))
+        _event(
+            1,
+            contracts["sam"],
+            "validate_inputs",
+            ("schema_valid", "no_duplicates", "chronological_order", "daily_cadence"),
+        )
     )
 
     summary = market_summary(products)
     result = evaluate_and_forecast(sales)
     forecast = result.to_dict()
     events.append(
-        _event(2, "ada", "data_analyst", "analyze_and_forecast", ("validated_products", "validated_sales"), ("market_summary", "forecast_metrics"), ("descriptive_metrics_computed", "holdout_not_used_for_fit"))
+        _event(
+            2,
+            contracts["ada"],
+            "analyze_and_forecast",
+            ("descriptive_metrics_computed", "holdout_not_used_for_fit"),
+        )
     )
 
     notes = _business_notes(summary, forecast)
     events.append(
-        _event(3, "ethan", "business_analyst", "interpret_metrics", ("market_summary", "forecast_metrics"), ("decision_notes",), ("claims_linked_to_metrics", "observation_separated_from_recommendation"))
+        _event(
+            3,
+            contracts["ethan"],
+            "interpret_metrics",
+            ("claims_linked_to_metrics", "observation_separated_from_recommendation"),
+        )
     )
 
     render_forecast_svg(result, output / "forecast.svg")
     events.append(
-        _event(4, "mia", "visualization_designer", "render_forecast", ("forecast_metrics",), ("forecast.svg",), ("portable_svg", "accessible_description"))
+        _event(
+            4,
+            contracts["mia"],
+            "render_forecast",
+            ("portable_svg", "accessible_description"),
+        )
     )
 
     narrative = (
@@ -91,7 +145,12 @@ def run_workflow(
         f"{forecast['mae']:.2f} units and projects {sum(forecast['future_predicted']):.0f} units over seven days."
     )
     events.append(
-        _event(5, "noah", "narrative_editor", "draft_summary", ("market_summary", "decision_notes"), ("draft_summary",), ("figures_preserved", "uncertainty_stated"))
+        _event(
+            5,
+            contracts["noah"],
+            "draft_summary",
+            ("figures_preserved", "uncertainty_stated"),
+        )
     )
 
     required = {
@@ -103,11 +162,21 @@ def run_workflow(
     }
     qa_passed = all(required.values())
     events.append(
-        _event(6, "sophie", "quality_reviewer", "review_artifacts", ("all_stage_artifacts",), ("qa_verdict",), tuple(f"{name}={str(value).lower()}" for name, value in required.items()))
+        _event(
+            6,
+            contracts["sophie"],
+            "review_artifacts",
+            tuple(f"{name}={str(value).lower()}" for name, value in required.items()),
+        )
     )
     if not qa_passed:
         raise RuntimeError("quality gate failed; executive report was not finalized")
 
+    mape_display = (
+        f"{result.mape_pct:.2f}%"
+        if result.mape_pct is not None
+        else "not defined (holdout contains no non-zero actuals)"
+    )
     report = f"""# Executive analytics report
 
 ## Decision summary
@@ -139,7 +208,8 @@ def run_workflow(
 - Holdout start: {result.holdout_start_date}
 - MAE: {result.mae:.2f} units
 - RMSE: {result.rmse:.2f} units
-- MAPE: {result.mape_pct:.2f}%
+- MAPE: {mape_display}
+- MAPE observations: {result.mape_nonzero_observations}/{result.holdout_size} non-zero actuals
 - Seven-day projected demand: {sum(result.future_predicted):.0f} units
 
 ## Decision notes
@@ -155,7 +225,12 @@ def run_workflow(
 """
     (output / "executive_report.md").write_text(report, encoding="utf-8")
     events.append(
-        _event(7, "oliver", "strategy_lead", "finalize_report", ("reviewed_artifacts", "qa_verdict"), ("executive_report.md", "slack_payload.json"), ("qa_passed", "limitations_included", "private_data_absent"))
+        _event(
+            7,
+            contracts["oliver"],
+            "finalize_report",
+            ("qa_passed", "limitations_included", "private_data_absent"),
+        )
     )
 
     metrics = {
@@ -163,7 +238,11 @@ def run_workflow(
         "market_summary": summary,
         "forecast": forecast,
         "qa": {"passed": qa_passed, "checks": required},
-        "workflow": {"stages_completed": len(events), "stages_expected": 7},
+        "workflow": {
+            "contract_version": registry["version"],
+            "stages_completed": len(events),
+            "stages_expected": 7,
+        },
     }
     slack_payload = {
         "channel": "portfolio-demo",
@@ -180,4 +259,40 @@ def run_workflow(
     _write_json(output / "metrics.json", metrics)
     _write_json(output / "trace.json", [event.to_dict() for event in events])
     _write_json(output / "slack_payload.json", slack_payload)
+
+    artifact_names = (
+        "executive_report.md",
+        "forecast.svg",
+        "metrics.json",
+        "slack_payload.json",
+        "trace.json",
+    )
+    contract_payload = canonical_contract_bytes(registry)
+    input_records = {
+        "products.csv": _file_record(Path(products_path)),
+        "sales.csv": _file_record(Path(sales_path)),
+        "agent_contracts.json": {
+            "sha256": hashlib.sha256(contract_payload).hexdigest(),
+            "bytes_canonical_json": len(contract_payload),
+        },
+    }
+    run_basis = {
+        "schema_version": "1.0",
+        "package_version": __version__,
+        "synthetic_data": True,
+        "inputs": input_records,
+    }
+    run_id = hashlib.sha256(
+        json.dumps(run_basis, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    manifest = {
+        **run_basis,
+        "run_id": run_id,
+        "hash_normalization": {
+            "text_files": "UTF-8 with LF line endings",
+            "agent_contracts.json": "canonical JSON with sorted keys and no insignificant whitespace",
+        },
+        "artifacts": {name: _file_record(output / name) for name in artifact_names},
+    }
+    _write_json(output / "run_manifest.json", manifest)
     return metrics

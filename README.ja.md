@@ -31,6 +31,18 @@
 
 公開リポジトリには、厳格なデータ検証、時間リークを防ぐholdout予測、artifact contract、QA gate、プライバシースキャン、テスト、オフラインで再現できるhardened containerを実装しています。
 
+### 検証状況
+
+| Control | Committed status |
+|---|---:|
+| Unit／integration tests | 12 / 12 passed |
+| 決定論的reference artifacts | 6 / 6 matched |
+| Reviewed evidence captures | 24 / 24 hashes verified |
+| 内部documentation links | all local targets resolved |
+| Hardened container smoke test | network disabled・read-only rootでpassed |
+
+benchmark、test範囲、統計上の制約、release historyは[`docs/evaluation.md`](docs/evaluation.md)、[`docs/limitations.md`](docs/limitations.md)、[`CHANGELOG.md`](CHANGELOG.md)に記録しています。これらは公開engineering harnessとevidence controlを検証するものであり、非公開Hermes deploymentのproduction accuracyを主張するものではありません。
+
 ## 課題と設計目標
 
 市場調査は、情報収集、データ検証、定量分析、解釈、可視化、文章化、レビューを一つのモデル応答に混在させがちです。その場合、誤りがどの工程で混入したのか、主張がどの証拠に基づくのか、独立した品質確認を通過したのかを追跡しにくくなります。
@@ -232,7 +244,7 @@ flowchart TB
 | Sophie | 完全性・整合性検査 | QA verdict | 必須artifact失敗時にfinalizationをblock |
 | Oliver | decision memo統合 | executive report | reviewed artifactのみ利用 |
 
-Machine-readable contractは[`config/agents.json`](config/agents.json)にあります。
+Machine-readable contractは[`config/agents.json`](config/agents.json)にあります。同じregistryをCLI packageに含め、runtimeで各trace eventのrole、objective、input、output、reviewerを設定します。test suiteでは公開copyとの完全一致を確認し、documentationとexecutionのdriftを検出します。
 
 ## 実業務データの証跡
 
@@ -251,7 +263,7 @@ Machine-readable contractは[`config/agents.json`](config/agents.json)にあり�
 
 ## 再現可能なdemo
 
-合成product dataとdaily sales dataを使用し、schema検査、descriptive metric、training windowのみでのlinear trend fitting、chronological holdout評価、7日予測、7つのagent contractによるartifact処理を実行します。
+合成product dataとdaily sales dataを使用し、schema・値域に加えてcanonical ISO dateと連続したdaily cadenceを検証します。その後、descriptive metric、training windowのみでのlinear trend fitting、chronological holdout評価、7日予測、7つのagent contractによるartifact処理を実行します。
 
 ```bash
 python -m venv .venv
@@ -276,9 +288,12 @@ artifacts/local_run/
 ├── executive_report.md
 ├── forecast.svg
 ├── metrics.json
+├── run_manifest.json
 ├── slack_payload.json
 └── trace.json
 ```
+
+`run_manifest.json`にはpackage version、content-derived run ID、2つのCSV input、実行したagent-contract registry、および全生成artifactの正規化SHA-256 digestを記録します。local filesystem pathやtimestampを含めないため、reference runはOSをまたいで決定論的に検証できます。
 
 Hardened offline demo:
 
@@ -286,16 +301,23 @@ Hardened offline demo:
 docker compose up --build --abort-on-container-exit
 ```
 
-containerはnon-rootで実行し、Linux capabilitiesをすべてdropし、`no-new-privileges`、read-only root filesystem、network dependencyなしで構成しています。
+containerはnon-rootで実行し、Linux capabilitiesをすべてdropし、`no-new-privileges`、read-only root filesystem、network dependencyなしで構成しています。書込み可能なのは宣言済みの`/output` volumeだけです。Python base imageはdigestでpinし、CIでも同じhardening flagでcontainer smoke testを実行します。
 
 ## 評価とquality gate
 
 ```bash
 python -m unittest discover -s tests -v
 python scripts/privacy_scan.py .
+python scripts/verify_markdown_links.py
+
+agentic-office run \
+  --products data/sample_products.csv \
+  --sales data/sample_sales.csv \
+  --output artifacts/ci_run
+python scripts/verify_reference_artifacts.py
 ```
 
-CIはschema／data-quality rejection、chronological train/holdout separation、決定論的forecast・report、7 role stages、QA gate、credential／個人path／private network address／email addressの非混入を検証します。
+CIはschema／data-quality rejection、7 agent contractのschemaとpublic/package drift、canonical dateとdaily cadence、chronological train/holdout separation、zero actual時のMAPE未定義処理、決定論的forecast・report、7 role stages、QA gate、6つのreference artifactの完全一致、内部document link、digest-pinned containerのhardened smoke run、credential／個人path／private network address／email addressの非混入を検証します。
 
 ### Reference benchmark
 
@@ -307,6 +329,7 @@ CIはschema／data-quality rejection、chronological train/holdout separation、
 | Holdout MAE | 2.3831 units |
 | Holdout RMSE | 2.7670 units |
 | Holdout MAPE | 6.9532% |
+| MAPEに使用した非ゼロactual | 7 / 7 |
 | 7日間の予測需要 | 約274 units |
 | Workflow / QA status | 7/7 stages、passed |
 
@@ -316,7 +339,8 @@ CIはschema／data-quality rejection、chronological train/holdout separation、
 
 - **決定論的な公開harness:** model callやnetwork requestなしで再現可能。ただし非公開LLM reasoning自体は再現しない。
 - **逐次的な公開orchestration:** handoffを検査・test可能にする一方、実運用では必要な専門家へ直接routingできる。
-- **chronological evaluation:** 最後の7 observationsをholdoutとし、fittingから除外してtemporal leakageを防止。linear trendは解釈可能性を優先し、seasonality、promotion、causal effectは扱わない。
+- **chronological evaluation:** 最後の7 observationsをholdoutとし、fittingから除外してtemporal leakageを防止。slopeをunits/dayとして扱うためcanonical ISO dateと連続daily cadenceを必須とし、MAPEは非ゼロactualだけで計算して対象がなければ未定義とする。linear trendは解釈可能性を優先し、seasonality、promotion、causal effectは扱わない。
+- **content-addressed provenance:** 決定論的manifestがinput／output digestとpackage version 1.1.0を結び付け、machine-specific pathを公開せずにstaleまたは改変されたreference artifactを検出する。
 - **非公開の運用状態:** credential、raw Slack history、`SOUL.md`全文、session、原本画像はGit外で管理するため、公開claimはsanitized evidenceとdigestの範囲に限定する。
 - **free-form coordinationよりartifact contract:** traceabilityを高める代わりにworkflowの柔軟性を制限する。
 - **upstream runtime boundary:** Hermesはthird-party runtimeとして利用し、本リポジトリはconfiguration、orchestration、evaluation、evidence methodologyを所有する。

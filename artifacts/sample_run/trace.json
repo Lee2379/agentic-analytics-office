@@ -3,6 +3,7 @@
     "sequence": 1,
     "agent": "sam",
     "role": "data_engineer",
+    "objective": "Load, validate, and document analytical inputs.",
     "stage": "validate_inputs",
     "status": "completed",
     "input_artifacts": [
@@ -15,13 +16,16 @@
     "checks": [
       "schema_valid",
       "no_duplicates",
-      "chronological_order"
-    ]
+      "chronological_order",
+      "daily_cadence"
+    ],
+    "reviewed_by": "sophie"
   },
   {
     "sequence": 2,
     "agent": "ada",
     "role": "data_analyst",
+    "objective": "Compute descriptive statistics and temporal forecasts.",
     "stage": "analyze_and_forecast",
     "status": "completed",
     "input_artifacts": [
@@ -35,12 +39,14 @@
     "checks": [
       "descriptive_metrics_computed",
       "holdout_not_used_for_fit"
-    ]
+    ],
+    "reviewed_by": "sophie"
   },
   {
     "sequence": 3,
     "agent": "ethan",
     "role": "business_analyst",
+    "objective": "Translate quantitative evidence into decision implications.",
     "stage": "interpret_metrics",
     "status": "completed",
     "input_artifacts": [
@@ -53,12 +59,14 @@
     "checks": [
       "claims_linked_to_metrics",
       "observation_separated_from_recommendation"
-    ]
+    ],
+    "reviewed_by": "oliver"
   },
   {
     "sequence": 4,
     "agent": "mia",
     "role": "visualization_designer",
+    "objective": "Render accessible, portable analytical figures.",
     "stage": "render_forecast",
     "status": "completed",
     "input_artifacts": [
@@ -70,12 +78,14 @@
     "checks": [
       "portable_svg",
       "accessible_description"
-    ]
+    ],
+    "reviewed_by": "sophie"
   },
   {
     "sequence": 5,
     "agent": "noah",
     "role": "narrative_editor",
+    "objective": "Create concise narrative without changing source figures.",
     "stage": "draft_summary",
     "status": "completed",
     "input_artifacts": [
@@ -88,12 +98,14 @@
     "checks": [
       "figures_preserved",
       "uncertainty_stated"
-    ]
+    ],
+    "reviewed_by": "sophie"
   },
   {
     "sequence": 6,
     "agent": "sophie",
     "role": "quality_reviewer",
+    "objective": "Check artifact completeness, consistency, and privacy.",
     "stage": "review_artifacts",
     "status": "completed",
     "input_artifacts": [
@@ -108,12 +120,14 @@
       "forecast_chart=true",
       "decision_notes=true",
       "narrative=true"
-    ]
+    ],
+    "reviewed_by": "human"
   },
   {
     "sequence": 7,
     "agent": "oliver",
     "role": "strategy_lead",
+    "objective": "Synthesize reviewed evidence into an executive decision memo.",
     "stage": "finalize_report",
     "status": "completed",
     "input_artifacts": [
@@ -128,6 +142,7 @@
       "qa_passed",
       "limitations_included",
       "private_data_absent"
-    ]
+    ],
+    "reviewed_by": "human"
   }
 ]

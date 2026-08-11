@@ -30,6 +30,7 @@ The synthetic portfolio contains 15 products with a median price of KRW 21,900. 
 - MAE: 2.38 units
 - RMSE: 2.77 units
 - MAPE: 6.95%
+- MAPE observations: 7/7 non-zero actuals
 - Seven-day projected demand: 274 units
 
 ## Decision notes

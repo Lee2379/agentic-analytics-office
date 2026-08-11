@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multi-agent-ai-analytics-office"
-version = "1.0.0"
+version = "1.1.0"
 description = "Deterministic evaluation harness for a Dockerized, Slack-operated multi-agent analytics office."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -24,6 +24,9 @@ agentic-office = "agentic_analytics_office.cli:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
+
+[tool.setuptools.package-data]
+agentic_analytics_office = ["agent_contracts.json"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -31,6 +31,18 @@ The live deployment demonstrated:
 
 The public repository adds the missing engineering layer: deterministic data validation, leakage-safe holdout forecasting, artifact contracts, a QA gate, privacy scanning, tests, and a hardened offline container.
 
+### Verification snapshot
+
+| Control | Committed status |
+|---|---:|
+| Unit and integration tests | 12 / 12 passed |
+| Deterministic reference artifacts | 6 / 6 matched |
+| Reviewed evidence captures | 24 / 24 hashes verified |
+| Internal documentation links | all local targets resolved |
+| Hardened container smoke test | passed with network disabled and read-only root |
+
+The detailed benchmark, test scope, statistical limitations, and release history are recorded in [`docs/evaluation.md`](docs/evaluation.md), [`docs/limitations.md`](docs/limitations.md), and [`CHANGELOG.md`](CHANGELOG.md). These checks validate the public engineering harness and evidence controls; they are not production-accuracy claims for the private Hermes deployment.
+
 ## Problem and design objectives
 
 Market-research requests often combine source collection, data validation, quantitative analysis, interpretation, visualization, writing, and review in one unconstrained model interaction. That makes it difficult to identify where an error entered the workflow, which evidence supports a claim, or whether a final answer passed an independent check.
@@ -285,7 +297,7 @@ This separation is intentional: configuration presence, policy hashes, and scree
 | Sophie | Check completeness and consistency | QA verdict | Blocks finalization when required artifacts fail |
 | Oliver | Synthesize the decision memo | Executive report | Uses only reviewed artifacts |
 
-Machine-readable contracts are in [`config/agents.json`](config/agents.json).
+Machine-readable contracts are in [`config/agents.json`](config/agents.json). The same registry is packaged with the CLI, loaded at runtime to populate each trace event, and checked against the public copy in the test suite so documentation and execution cannot drift silently.
 
 ## Live workload evidence
 
@@ -304,7 +316,7 @@ This is evidence of live task routing and delivery, not a population-level marke
 
 ## Reproducible demo
 
-The demo uses synthetic product and daily-sales data. It performs strict schema checks, computes descriptive market metrics, trains a linear trend only on the training window, evaluates on a chronological holdout, creates a seven-day forecast, and passes the artifacts through the seven agent contracts.
+The demo uses synthetic product and daily-sales data. It validates canonical ISO dates and consecutive daily cadence in addition to schema and value constraints, computes descriptive market metrics, trains a linear trend only on the training window, evaluates on a chronological holdout, creates a seven-day forecast, and passes the artifacts through the seven agent contracts.
 
 ```bash
 python -m venv .venv
@@ -329,9 +341,12 @@ artifacts/local_run/
 ├── executive_report.md
 ├── forecast.svg
 ├── metrics.json
+├── run_manifest.json
 ├── slack_payload.json
 └── trace.json
 ```
+
+`run_manifest.json` records the package version, a content-derived run ID, normalized SHA-256 digests for the two CSV inputs and the executed agent-contract registry, and digests for every generated artifact. It contains no local filesystem paths or timestamps, so the reference run remains deterministic and portable across operating systems.
 
 Run the hardened offline demo:
 
@@ -339,22 +354,34 @@ Run the hardened offline demo:
 docker compose up --build --abort-on-container-exit
 ```
 
-The demo container runs as a non-root user, drops all Linux capabilities, sets `no-new-privileges`, uses a read-only root filesystem, and has no network dependency.
+The demo container runs as a non-root user, drops all Linux capabilities, sets `no-new-privileges`, uses a read-only root filesystem, and has no network dependency. Only the declared `/output` volume is writable. The Python base image is pinned by digest, and CI executes the image under the same hardening flags as a smoke test.
 
 ## Evaluation and quality gates
 
 ```bash
 python -m unittest discover -s tests -v
 python scripts/privacy_scan.py .
+python scripts/verify_markdown_links.py
+
+agentic-office run \
+  --products data/sample_products.csv \
+  --sales data/sample_sales.csv \
+  --output artifacts/ci_run
+python scripts/verify_reference_artifacts.py
 ```
 
 The CI workflow verifies:
 
 - schema and data-quality rejection paths;
-- chronological train/holdout separation;
+- schema validation and drift detection for the seven executable agent contracts;
+- canonical dates, consecutive daily cadence, and chronological train/holdout separation;
+- explicit undefined MAPE handling when a holdout contains no non-zero actuals;
 - deterministic forecasting and report generation;
 - completion of all seven role stages;
 - QA-gate behavior;
+- exact regeneration of the six committed reference artifacts;
+- validity of internal documentation and evidence links;
+- successful execution of the digest-pinned container with no network, a read-only root filesystem, no Linux capabilities, and `no-new-privileges`;
 - absence of common secrets, personal paths, private-network addresses, and email addresses.
 
 Current deterministic benchmark results are recorded in [`docs/evaluation.md`](docs/evaluation.md). The committed output in [`artifacts/sample_run`](artifacts/sample_run) is regenerated and compared in CI.
@@ -369,6 +396,7 @@ Current deterministic benchmark results are recorded in [`docs/evaluation.md`](d
 | Holdout MAE | 2.3831 units |
 | Holdout RMSE | 2.7670 units |
 | Holdout MAPE | 6.9532% |
+| Non-zero actuals used by MAPE | 7 / 7 |
 | Seven-day projected demand | approximately 274 units |
 | Workflow and QA status | 7/7 stages, passed |
 
@@ -378,7 +406,8 @@ These values are regression fixtures for the public harness, not production perf
 
 - **Deterministic public harness:** no model call or network request is needed to reproduce the analytical result. This improves reviewability but does not reproduce private LLM reasoning.
 - **Sequential public orchestration:** the reference workflow makes every handoff inspectable and testable. The live system can route directly to a specialist instead of executing the full chain for every request.
-- **Chronological evaluation:** the final seven observations form the holdout and are excluded from fitting, preventing temporal leakage. The linear trend is deliberately interpretable and does not model seasonality, promotions, or causal effects.
+- **Chronological evaluation:** the final seven observations form the holdout and are excluded from fitting, preventing temporal leakage. Canonical ISO dates and consecutive daily cadence are enforced because the slope is interpreted as units per day. MAPE is reported only over non-zero actuals and becomes undefined when none exist. The linear trend is deliberately interpretable and does not model seasonality, promotions, or causal effects.
+- **Content-addressed provenance:** a deterministic manifest binds input and output digests to package version 1.1.0. This detects stale or altered reference artifacts without publishing machine-specific paths.
 - **Private operational state:** credentials, raw Slack history, `SOUL.md` bodies, sessions, and source screenshots stay outside Git. This limits external forensic verification, so public claims are scoped to sanitized evidence and recorded digests.
 - **Artifact contracts over free-form coordination:** downstream roles consume approved outputs rather than unrestricted conversation context. This increases traceability at the cost of a more rigid workflow.
 - **Upstream runtime boundary:** Hermes is consumed as a third-party runtime. The portfolio owns configuration, orchestration, evaluation, and evidence methodology—not the Hermes implementation itself.

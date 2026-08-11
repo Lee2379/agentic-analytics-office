@@ -9,6 +9,8 @@
 5. **Simple forecast:** linear trend is an interpretable baseline, not a production demand-forecasting model.
 6. **Moving upstream image tag:** the observed live deployment used `latest`; production should pin a digest.
 7. **Human approval remains external:** the harness models a QA gate but does not automate Slack approval decisions.
+8. **MAPE scope:** zero actuals are excluded and the eligible holdout count is reported; MAE and RMSE remain the primary scale-dependent metrics for this fixture.
+9. **Manifest boundary:** content digests detect changed public inputs and outputs, but they are not a signed software attestation and do not prove how the private live system executed.
 
 ## Planned experiments
 

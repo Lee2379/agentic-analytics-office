@@ -5,6 +5,7 @@
     "duplicate_skus": 0,
     "duplicate_dates": 0,
     "chronological_sales": true,
+    "consecutive_daily_sales": true,
     "status": "passed"
   },
   "market_summary": {
@@ -47,6 +48,7 @@
     "mae": 2.3831,
     "rmse": 2.767,
     "mape_pct": 6.9532,
+    "mape_nonzero_observations": 7,
     "holdout_actual": [
       31,
       33,
@@ -95,6 +97,7 @@
     }
   },
   "workflow": {
+    "contract_version": "1.1",
     "stages_completed": 7,
     "stages_expected": 7
   }
