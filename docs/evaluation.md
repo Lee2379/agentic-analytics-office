@@ -59,7 +59,7 @@ These metrics validate the harness on one deliberately small synthetic dataset. 
 
 ## Reproducibility controls
 
-The committed reference contains six generated files. CI regenerates the workflow from the two synthetic CSV inputs and the validated agent-contract registry, then requires exact normalized content equality for every output. `run_manifest.json` additionally records the package version, a deterministic run ID, input digests, output digests, and normalized byte counts. Internal Markdown links and all 24 reviewed evidence-image hashes are checked independently.
+The committed reference contains six generated files. CI regenerates the workflow from the two synthetic CSV inputs and the validated agent-contract registry, then requires exact normalized content equality for every output. `run_manifest.json` additionally records the package version, a deterministic run ID, input digests, output digests, and normalized byte counts. Internal Markdown links and all 25 reviewed evidence-image hashes are checked independently.
 
 ## Privacy scan
 

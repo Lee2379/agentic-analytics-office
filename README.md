@@ -37,7 +37,7 @@ The public repository adds the missing engineering layer: deterministic data val
 |---|---:|
 | Unit and integration tests | 12 / 12 passed |
 | Deterministic reference artifacts | 6 / 6 matched |
-| Reviewed evidence captures | 24 / 24 hashes verified |
+| Reviewed evidence captures | 25 / 25 hashes verified |
 | Internal documentation links | all local targets resolved |
 | Hardened container smoke test | passed with network disabled and read-only root |
 
@@ -158,9 +158,9 @@ This capture adds a substantive workload beyond profile availability: the lead a
 
 The requester reports that Canva API was used in this workflow. The published captures establish the Canva-targeted assignment, the agent's skill/tool trace, and the generated PDF preview; they do not expose a Canva API request/response record, asset identifier, or export log. The API invocation is therefore classified as **Not independently verified** in the public evidence set. Full-slide content accuracy, accessibility, and visual QA are also outside the scope of these two captures.
 
-### Obsidian-backed market-intelligence automation
+### Obsidian/OhMyWiki market-intelligence automation
 
-This live case moves the agent workflow beyond chat delivery into a reviewable knowledge pipeline. Public research pages are retained as source-addressed Markdown in an Obsidian vault; Oliver invokes the OMW librarian workflow to organize approved material into proposed entity and concept pages with typed provenance, confidence, and relations. A synthesis stage combines multiple raw sources and concepts, then separate review stages produce English and Japanese fact-check reports before a source-linked presentation is delivered.
+This live case moves the agent workflow beyond chat delivery into a reviewable knowledge pipeline. Public research pages are retained as source-addressed Markdown in an Obsidian vault; Oliver invokes the OhMyWiki (OMW) librarian workflow to organize approved material into proposed entity and concept pages with typed provenance, confidence, and relations. A synthesis stage combines multiple raw sources and concepts, then separate review stages produce English and Japanese fact-check reports before a source-linked presentation is delivered.
 
 <table>
   <tr>
@@ -188,6 +188,10 @@ This live case moves the agent workflow beyond chat delivery into a reviewable k
     <td><strong>Decision delivery.</strong> A 15-slide PDF converts the reviewed corpus into an executive artifact with a confidence map and source appendix.</td>
   </tr>
 </table>
+
+![Japanese claim-level review of direct evidence for the target segment](assets/evidence/27-fact-check-japanese-direct-evidence.png)
+
+**Claim-level correction in Japanese.** This report segment tests whether the cited evidence directly supports conclusions about men in their thirties. It preserves the verified population figures and a segment-level usage signal, but corrects the broader claim to state that direct evidence is fragmentary and insufficient for pricing, assortment, or channel decisions. Proposed actions remain explicitly marked `[unverified]`, and the visible source register keeps the review traceable. The capture establishes the review structure and rendered conclusions; it does not independently reperform the underlying source analysis.
 
 The visible librarian trace reports duplicate-task suppression and existing outputs of nine proposed entity pages and seven proposed concept pages. The workflow also separates facts, interpretations, and open questions, and emits correction recommendations in English, Korean, and Japanese. These captures establish artifact-backed execution and review behavior; they do not independently validate every source, graph-clustering implementation, or slide-level calculation.
 
@@ -414,7 +418,7 @@ These values are regression fixtures for the public harness, not production perf
 
 ## Privacy-preserving evidence policy
 
-Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Twenty-four privacy-reviewed public captures are committed: thirteen sanitized derivatives and eleven low-sensitivity captures that required no pixel edits. Where redaction is required it uses opaque masks rather than blur, and every public image has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
+Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Twenty-five privacy-reviewed public captures are committed: thirteen sanitized derivatives and twelve low-sensitivity captures that required no pixel edits. Where redaction is required it uses opaque masks rather than blur, and every public image has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
 
 One supplied screenshot exposed an authentication token in a URL. The committed derivative covers the full credential value with an opaque white mask; the original is excluded from the repository and evidence chain. Redaction does not invalidate a leaked credential, so revocation and reissuance remain required.
 

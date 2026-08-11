@@ -6,7 +6,7 @@ This live case extends the multi-agent office from conversational delivery into 
 
 Reader-facing English deliverable: [Men's Fashion Market in the 30s Segment](../case-studies/thirtysomething-mens-fashion-market-report.md).
 
-Obsidian is the human review and storage surface for the Markdown vault. The OMW workflow supplies the role procedures for curation, terminology management, entity/concept linking, fact-checking, and quality review. Hermes/Oliver is the agent entry point shown in the execution trace.
+Obsidian is the human review and storage surface for the Markdown vault. The OhMyWiki (OMW) workflow supplies the role procedures for curation, terminology management, entity/concept linking, fact-checking, and quality review. Hermes/Oliver is the agent entry point shown in the execution trace.
 
 ## Observed workflow
 
@@ -64,6 +64,10 @@ The synthesis page for the menswear market in the thirties segment references mu
 
 The Japanese review narrows overbroad claims, preserves verified figures, labels causal explanations as company statements, and directs the reader to the source register. This demonstrates multilingual analytical communication with uncertainty preservation rather than translation alone.
 
+![Japanese claim-level review of direct evidence for men in their thirties](../../assets/evidence/27-fact-check-japanese-direct-evidence.png)
+
+The additional Japanese report section tests a narrower decision claim: whether the cited material directly supports conclusions about men in their thirties. It retains verified population statistics and a reported segment-level usage signal, but replaces an overbroad “no evidence” conclusion with the more defensible statement that direct evidence is fragmentary and insufficient for pricing, assortment, and channel decisions. Its five recommendations remain marked `[unverified]`, and the source URLs remain visible. The capture supports the rendered review logic and caveat preservation; it does not independently recalculate the source statistics or establish the strategic hypotheses as facts.
+
 ### 6. Presentation delivery and source traceability
 
 ![Overview of the 15-slide agent-produced market report](../../assets/evidence/23-agent-generated-market-report-deck.png)
@@ -117,7 +121,7 @@ A human used the Hermes/Oliver agent entry point and the OMW role workflow to ma
 
 ## Privacy review
 
-- No credential, email address, Slack workspace identifier, account ID, or private network address is visible in the 11 published captures.
+- No credential, email address, Slack workspace identifier, account ID, or private network address is visible in the 12 published captures.
 - The supplied file-list screenshot containing a personal Windows home path was excluded in full instead of blurred.
 - A redundant terminal rendering of the fact-check page was excluded because the structured report captures provide stronger and more readable evidence.
 - Public URLs and generic vault-relative paths remain visible because they are required for provenance and do not identify the local account.
