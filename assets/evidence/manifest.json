@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "notice": "Privacy-sanitized portfolio derivatives; not forensic originals.",
+  "notice": "Privacy-reviewed portfolio captures; sanitized derivatives and approved low-sensitivity files are not forensic originals.",
   "artifacts": [
     {
       "path": "assets/evidence/01-hermes-profile-registry-sanitized.png",
@@ -79,6 +79,72 @@
       "bytes": 108866,
       "sha256": "84255f11170cca74c3c62be81651c270aa561a07ef8cf5f1751e84c00e36ae19",
       "treatment": "Metadata-normalized copy; no private identifier or credential observed in the published frame."
+    },
+    {
+      "path": "assets/evidence/16-obsidian-raw-source-ingestion.png",
+      "bytes": 308317,
+      "sha256": "a0ecc058c1b1a1d7333fdeac1bd9e804b0eb6a206a55f0e6f0cda69ae0683c36",
+      "treatment": "Manual privacy review; no credential or private identifier observed; public source provenance retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/17-oliver-librarian-workflow.png",
+      "bytes": 107671,
+      "sha256": "d7695df33274e8e0f5306713dacd9b42737a49ab3fd0d889892da9317949d2a7",
+      "treatment": "Manual privacy review; no credential or private identifier observed; generic vault identifiers retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/18-structured-concept-page.png",
+      "bytes": 161646,
+      "sha256": "98ec4e8e92f88d191d054ee13ef9493e8d6cd866e71eb1223f2fb5f83a5b759f",
+      "treatment": "Manual privacy review; no credential or private identifier observed; public source provenance retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/19-evidence-linked-synthesis.png",
+      "bytes": 210793,
+      "sha256": "44649991a0ad26974c85138dd3a64330f1fcc8cea114291f8dde6a1c7dffc484",
+      "treatment": "Manual privacy review; no credential or private identifier observed; vault-relative provenance retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/20-fact-check-english.png",
+      "bytes": 128955,
+      "sha256": "21bcf1fdb1b5848b637ad2fc893c52380a85836370251af81d0e8b794b13d25a",
+      "treatment": "Manual privacy review; no credential or private identifier observed; citation markers retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/21-fact-check-japanese.png",
+      "bytes": 302944,
+      "sha256": "cbb98528b7cec19f9ee0542b9ce0db7632d9a9f6b1b2370d63113aee6254bfce",
+      "treatment": "Manual privacy review; no credential or private identifier observed; citation markers retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/22-japanese-corrections-and-sources.png",
+      "bytes": 308320,
+      "sha256": "cdf95946f3ab3a890db56b6ccc0921538403461ae343c7ecfcd231947814e2ab",
+      "treatment": "Manual privacy review; no credential or private identifier observed; public source URLs retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/23-agent-generated-market-report-deck.png",
+      "bytes": 165043,
+      "sha256": "4842290eafa3b1a690919ef79ad4a1b19ce944d064dd564ca05e999da4eacd6c",
+      "treatment": "Manual privacy review; no credential or private identifier observed; portfolio deliverable retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/24-fact-interpretation-question-slide.png",
+      "bytes": 66826,
+      "sha256": "6f5976d93cdc427825fcdce1d52a0ce7e4f27823eea91a89428f96166f886f66",
+      "treatment": "Manual privacy review; no credential or private identifier observed; portfolio deliverable retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/25-source-register-slide.png",
+      "bytes": 87512,
+      "sha256": "b7c92a70819d7bfb93148540cddefe27caaebfa8c8d0a42e4e7ad0ac1208d8df",
+      "treatment": "Manual privacy review; no credential or private identifier observed; public source URLs retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/26-trilingual-correction-diff.png",
+      "bytes": 284425,
+      "sha256": "aca56837c7c02ab9765b7b1ebbaa3f6f9347b62b41b6920697a5645d615b6266",
+      "treatment": "Manual privacy review; no credential or private identifier observed; multilingual review output retained; published byte-identically."
     }
   ]
 }
