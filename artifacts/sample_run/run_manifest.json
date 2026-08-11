@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "package_version": "1.1.0",
+  "synthetic_data": true,
+  "inputs": {
+    "products.csv": {
+      "sha256": "be1416cb7d688bde0ab409310f9ccf5b183d30676184339cbfc45c377b9103ec",
+      "bytes_utf8_lf": 776
+    },
+    "sales.csv": {
+      "sha256": "17c980034674e84a131257bf09ea5be8cccc95b4e3568b14332764a08afb2d47",
+      "bytes_utf8_lf": 758
+    },
+    "agent_contracts.json": {
+      "sha256": "3e2960b773bdf14da6ed6816d970a4944fbdbec0c8d69b4deff9bf583f1cd02f",
+      "bytes_canonical_json": 1609
+    }
+  },
+  "run_id": "687e1e538a4b9be5f61ca95fe4095aa19a85016fd5bf60462e4a011d4caaea16",
+  "hash_normalization": {
+    "text_files": "UTF-8 with LF line endings",
+    "agent_contracts.json": "canonical JSON with sorted keys and no insignificant whitespace"
+  },
+  "artifacts": {
+    "executive_report.md": {
+      "sha256": "5f6c0e9dda3dfbffcb6935e7cef4fa98b2d9ae8588b2f7cd2456db5bb3f53cac",
+      "bytes_utf8_lf": 1593
+    },
+    "forecast.svg": {
+      "sha256": "c966d2fe2f5fe5b3e62dd1f08810c7a19fcb83f3ccf4e07a38751235cdbaaaf0",
+      "bytes_utf8_lf": 3314
+    },
+    "metrics.json": {
+      "sha256": "20dbf2c6d24bf16c9d7d21c41eaae5ecdde9c8ab2e2cd7de8ebc8366fa85db3c",
+      "bytes_utf8_lf": 2016
+    },
+    "slack_payload.json": {
+      "sha256": "41268a51b87f632d2cc68d024a295787bd7cbc288927ec8806717ba87ff1741b",
+      "bytes_utf8_lf": 505
+    },
+    "trace.json": {
+      "sha256": "9e1803ecbb4f96aa35c9d0819a9b0582b2b53cd4b1157d45fb1d9fe766f5a1e9",
+      "bytes_utf8_lf": 3396
+    }
+  }
+}

@@ -39,7 +39,8 @@ class ForecastResult:
     intercept: float
     mae: float
     rmse: float
-    mape_pct: float
+    mape_pct: float | None
+    mape_nonzero_observations: int
     holdout_actual: tuple[int, ...]
     holdout_predicted: tuple[float, ...]
     future_dates: tuple[str, ...]
@@ -54,11 +55,13 @@ class AgentEvent:
     sequence: int
     agent: str
     role: str
+    objective: str
     stage: str
     status: str
     input_artifacts: tuple[str, ...]
     output_artifacts: tuple[str, ...]
     checks: tuple[str, ...]
+    reviewed_by: str
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

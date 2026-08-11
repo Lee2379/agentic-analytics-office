@@ -43,7 +43,7 @@ def evaluate_and_forecast(sales: list[SaleDay], holdout_size: int = 7) -> Foreca
         for actual, predicted in zip(holdout_actual, holdout_predicted)
         if actual != 0
     ]
-    mape = 100 * sum(nonzero) / len(nonzero) if nonzero else 0.0
+    mape = 100 * sum(nonzero) / len(nonzero) if nonzero else None
 
     full_slope, full_intercept = _fit_linear([item.units for item in sales])
     future_indexes = list(range(len(sales), len(sales) + 7))
@@ -60,7 +60,8 @@ def evaluate_and_forecast(sales: list[SaleDay], holdout_size: int = 7) -> Foreca
         intercept=round(intercept, 4),
         mae=round(mae, 4),
         rmse=round(rmse, 4),
-        mape_pct=round(mape, 4),
+        mape_pct=round(mape, 4) if mape is not None else None,
+        mape_nonzero_observations=len(nonzero),
         holdout_actual=tuple(holdout_actual),
         holdout_predicted=tuple(round(value, 3) for value in holdout_predicted),
         future_dates=tuple(future_dates),

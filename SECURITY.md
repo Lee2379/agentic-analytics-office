@@ -8,7 +8,7 @@ Please do not open a public issue containing credentials, private workspace data
 
 - Demo data is synthetic.
 - No live credential is required to run the tests or offline workflow.
-- CI runs `scripts/privacy_scan.py` before accepting changes.
+- CI runs `scripts/privacy_scan.py`, verifies internal links and evidence-image hashes, and compares regenerated reference artifacts before accepting changes.
 - Raw operational screenshots are not stored in Git.
 
 ## Credential response

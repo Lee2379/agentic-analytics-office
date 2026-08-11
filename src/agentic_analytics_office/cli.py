@@ -16,13 +16,18 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--products", type=Path, required=True)
     run.add_argument("--sales", type=Path, required=True)
     run.add_argument("--output", type=Path, required=True)
+    run.add_argument(
+        "--contracts",
+        type=Path,
+        help="optional contract registry; defaults to the version packaged with the application",
+    )
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "run":
-        metrics = run_workflow(args.products, args.sales, args.output)
+        metrics = run_workflow(args.products, args.sales, args.output, args.contracts)
         forecast = metrics["forecast"]
         print("Multi-Agent AI Analytics Office: completed")
         print(f"stages: {metrics['workflow']['stages_completed']}/7")

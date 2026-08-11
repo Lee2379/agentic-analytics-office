@@ -18,6 +18,10 @@ jobs:
           cache: pip
       - name: Install package
         run: python -m pip install -e .
+      - name: Package and syntax checks
+        run: |
+          python -m pip check
+          python -m compileall -q src tests scripts
       - name: Unit and integration tests
         run: python -m unittest discover -s tests -v
       - name: Generate deterministic workflow artifacts
@@ -26,9 +30,22 @@ jobs:
           --products data/sample_products.csv
           --sales data/sample_sales.csv
           --output artifacts/ci_run
+      - name: Verify committed reference artifacts
+        run: python scripts/verify_reference_artifacts.py
+      - name: Verify internal documentation links
+        run: python scripts/verify_markdown_links.py
       - name: Privacy and credential scan
         run: python scripts/privacy_scan.py .
       - name: Verify reviewed evidence images
         run: python scripts/verify_evidence_images.py
       - name: Build hardened offline image
         run: docker build -t multi-agent-ai-analytics-office:ci .
+      - name: Smoke test hardened offline image
+        run: >-
+          docker run --rm
+          --network none
+          --read-only
+          --cap-drop ALL
+          --security-opt no-new-privileges:true
+          --tmpfs /tmp:rw,noexec,nosuid,size=32m
+          multi-agent-ai-analytics-office:ci

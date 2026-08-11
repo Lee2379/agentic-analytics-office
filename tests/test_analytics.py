@@ -37,6 +37,27 @@ class AnalyticsTests(unittest.TestCase):
         self.assertEqual(len(sales), 35)
         self.assertEqual([item.date for item in sales], sorted(item.date for item in sales))
 
+    def test_invalid_iso_date_is_rejected(self) -> None:
+        content = "date,units,revenue_krw\n" + "\n".join(
+            f"2026-06-{day:02d},10,10000" for day in range(1, 10)
+        ) + "\n2026-06-XX,10,10000\n"
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "sales.csv"
+            path.write_text(content, encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "canonical ISO format"):
+                load_sales(path)
+
+    def test_gap_in_daily_series_is_rejected(self) -> None:
+        dates = [f"2026-06-{day:02d}" for day in range(1, 11)] + ["2026-06-12"]
+        content = "date,units,revenue_krw\n" + "\n".join(
+            f"{day},10,10000" for day in dates
+        ) + "\n"
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "sales.csv"
+            path.write_text(content, encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "consecutive daily observations"):
+                load_sales(path)
+
 
 if __name__ == "__main__":
     unittest.main()

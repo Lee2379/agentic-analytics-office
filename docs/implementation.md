@@ -35,7 +35,7 @@ The observed container controls include bounded CPU and memory, an unprivileged 
 
 A profile is the primary isolation and routing unit in the live design. A Slack app identity is associated with a specialist profile, allowing a user to address a specific function instead of sending every request to one general-purpose assistant.
 
-The public repository mirrors only the non-sensitive portion of that design in [`../config/agents.json`](../config/agents.json): role name, allowed inputs, required outputs, and reviewer. Live credentials and runtime state are excluded.
+The public repository mirrors only the non-sensitive portion of that design in [`../config/agents.json`](../config/agents.json): role name, objective, allowed inputs, required outputs, and reviewer. The same registry is packaged with the CLI, validated on load, and used to populate every execution event. A test requires the packaged registry and public copy to remain identical. Live credentials and runtime state are excluded.
 
 ### `SOUL.md`
 
@@ -108,13 +108,13 @@ synthetic CSV inputs
 
 ### Input contracts
 
-Product records require identifiers, category and brand labels, selling and list prices, ratings, review counts, and stock. Sales records require date, units, and revenue. Validation rejects missing columns, invalid numeric ranges, duplicate identifiers or dates, empty categorical fields, unsorted observations, and insufficient history.
+Product records require identifiers, category and brand labels, selling and list prices, ratings, review counts, and stock. Sales records require a canonical ISO `YYYY-MM-DD` date, units, and revenue. Validation rejects missing columns, invalid numeric ranges, duplicate identifiers or dates, empty categorical fields, unsorted observations, gaps in the daily cadence, and insufficient history.
 
 Analysis does not begin when validation fails.
 
 ### Temporal evaluation
 
-The baseline holds out the final seven daily observations. Model fitting uses only the preceding 28 observations; holdout predictions are then scored with MAE, RMSE, and MAPE. The code asserts that the training end precedes the holdout start. After evaluation, a full-history linear trend generates the next seven dates for the reference forecast.
+The baseline holds out the final seven daily observations. Model fitting uses only the preceding 28 observations; holdout predictions are then scored with MAE, RMSE, and MAPE. MAPE excludes zero actuals, records the number of eligible observations, and is represented as undefined rather than `0%` when no eligible actual exists. The code asserts that the training end precedes the holdout start. After evaluation, a full-history linear trend generates the next seven dates for the reference forecast.
 
 The method is intentionally simple and inspectable. It is a contract and leakage test, not a production demand-forecasting model.
 
@@ -124,11 +124,14 @@ Every completed stage appends a structured event containing:
 
 - sequence number;
 - specialist and role;
+- objective and reviewer from the validated contract registry;
 - stage name and status;
 - named input and output artifacts; and
 - checks performed at that boundary.
 
 The final `trace.json` therefore records the route by which the report was produced. `metrics.json` contains data-quality, market, forecast, QA, and workflow fields. `forecast.svg`, `executive_report.md`, and `slack_payload.json` are generated from those approved values.
+
+`run_manifest.json` is written last and binds the package version and a content-derived run ID to normalized SHA-256 digests of the two CSV inputs, the executed contract registry, and the five preceding outputs. Text files are normalized to UTF-8 with LF line endings; the registry is canonicalized as sorted, whitespace-free JSON. The manifest intentionally excludes its own digest, timestamps, hostnames, usernames, and absolute paths.
 
 ### QA gate
 
@@ -144,7 +147,7 @@ A failed prerequisite raises an error and prevents final report generation. The 
 
 ## Reproducibility and verification
 
-The public workflow requires no API key and makes no network request. A reviewer can run it directly or through the hardened Compose service. CI executes the test suite, regenerates the reference artifacts, compares them with the committed sample run, performs the privacy scan, verifies evidence-image hashes, and builds the Docker image.
+The public workflow requires no API key and makes no network request. A reviewer can run it directly or through the hardened Compose service. The offline image pins its Python base by digest, executes as the unprivileged `office` user, and declares `/output` as its only writable volume. CI checks package integrity and syntax, executes the test suite, regenerates all six reference artifacts, compares them with the committed sample run, verifies internal Markdown links, performs the privacy scan, verifies evidence-image hashes, builds the Docker image, and smoke-tests it with network access disabled, a read-only root filesystem, all capabilities dropped, and `no-new-privileges` enabled.
 
 The synthetic fixture contains 15 products and 35 chronological sales observations. The committed run completes all seven stages and passes the QA gate. Exact evaluation values and limitations are recorded in [`evaluation.md`](evaluation.md).
 

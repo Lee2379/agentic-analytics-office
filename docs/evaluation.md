@@ -1,6 +1,6 @@
 # Deterministic benchmark
 
-**Run date:** 2026-08-09<br>
+**Run date:** 2026-08-12<br>
 **Python used for local verification:** 3.11.15<br>
 **External dependencies:** none<br>
 **Dataset:** synthetic 15-product assortment and 35 daily sales observations
@@ -8,23 +8,26 @@
 ## Test result
 
 ```text
-Tests run: 7
-Passed: 7
+Tests run: 12
+Passed: 12
 Failed: 0
 ```
 
-Coverage includes schema validation, duplicate rejection, chronological ordering, strict train/holdout separation, deterministic forecasting, completion of all role stages, artifact creation, and repository privacy scanning.
+Coverage includes data and agent-contract schema validation, public/package contract drift detection, duplicate rejection, canonical ISO date validation, continuous daily cadence, strict train/holdout separation, deterministic forecasting, zero-actual MAPE semantics, completion of all role stages, artifact hashing, and repository privacy scanning.
 
 ## Workflow result
 
 | Metric | Result |
 |---|---:|
 | Role stages completed | 7 / 7 |
+| Agent contract registry | v1.1; public/package copies matched |
 | Valid product rows | 15 |
 | Valid sales days | 35 |
 | Duplicate SKUs | 0 |
 | Duplicate dates | 0 |
+| Consecutive daily cadence | passed |
 | QA gate | passed |
+| Hardened container smoke test | passed |
 
 ## Market summary
 
@@ -49,9 +52,14 @@ The first 28 observations form the training window. The final seven observations
 | Holdout MAE | 2.3831 units |
 | Holdout RMSE | 2.7670 units |
 | Holdout MAPE | 6.9532% |
+| Non-zero actuals used by MAPE | 7 / 7 |
 | Next-seven-day forecast | approximately 274 units |
 
 These metrics validate the harness on one deliberately small synthetic dataset. They are not estimates of performance on a real production dataset.
+
+## Reproducibility controls
+
+The committed reference contains six generated files. CI regenerates the workflow from the two synthetic CSV inputs and the validated agent-contract registry, then requires exact normalized content equality for every output. `run_manifest.json` additionally records the package version, a deterministic run ID, input digests, output digests, and normalized byte counts. Internal Markdown links and all 24 reviewed evidence-image hashes are checked independently.
 
 ## Privacy scan
 
