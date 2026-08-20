@@ -28,6 +28,21 @@ A single agent can produce an answer quickly, but it also combines data handling
 | 6 | Sophie | All artifacts | Pass/fail QA verdict |
 | 7 | Oliver | Reviewed artifacts | Executive report and Slack payload |
 
+## Database-backed operating loop
+
+The live Supabase case adds a durable data plane and an explicit control plane to the role model:
+
+- Oliver collects approved source records into a fixed file contract;
+- Ethan validates and stages the batch;
+- Sam loads and reconciles records transactionally;
+- Supabase/PostgreSQL enforces types, nullability, key structure, and selected domain checks;
+- Ada performs read-only SQL analysis against an approved view and retains the executed SQL;
+- Noah drafts the report only after the analysis artifact is available;
+- Sam publishes only after the validation/approval gate passes; and
+- the scheduler and Kanban state machine preserve execution order and escalate blocked work to a human.
+
+The database is not used as unconstrained agent memory. It is a governed system of record behind bounded role and task contracts. The captured implementation is scheduled batch automation rather than a streaming system. See the [Supabase-backed agent data operations case study](case-studies/supabase-agent-data-operations.md).
+
 ## Evaluation boundary
 
 The offline harness is deliberately deterministic. It is not presented as a replacement for the live LLM agents; it is a test double for the data contracts and handoff logic. This makes CI repeatable and prevents portfolio reviewers from needing paid APIs or private Slack access.

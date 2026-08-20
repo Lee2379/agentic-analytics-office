@@ -151,6 +151,72 @@
       "bytes": 252051,
       "sha256": "512752b1b770690b992712729fcaee9bd1ccc530396429f86c950198c850ec15",
       "treatment": "Manual privacy review; no credential or private identifier observed; claim-level Japanese review and public source URLs retained; published byte-identically."
+    },
+    {
+      "path": "assets/evidence/28-ada-supabase-schema-review.png",
+      "bytes": 121100,
+      "sha256": "57a855147dd32937a520db5ba66644daa522f1e832893b7b4b4f27507303f814",
+      "treatment": "Metadata-normalized copy; no credential, endpoint, or private identifier observed; agent schema-review output retained."
+    },
+    {
+      "path": "assets/evidence/29-postgres-schema-contract.png",
+      "bytes": 226433,
+      "sha256": "0b72e875d4e5f6f0a203e330475368c906bf3e5036d85fb145dd52bbf5435657",
+      "treatment": "Metadata-normalized copy; no credential or private identifier observed; visible DDL and constraints retained."
+    },
+    {
+      "path": "assets/evidence/30-supabase-schema-sanitized.png",
+      "bytes": 91212,
+      "sha256": "e24f2366523c177baa35bb805efc71be27180c9c8517f69930b5b4284ebadaa4",
+      "treatment": "Browser URL, project reference, organization name, and project name removed by cropping; schema UI retained."
+    },
+    {
+      "path": "assets/evidence/31-supabase-loaded-records-sanitized.png",
+      "bytes": 140271,
+      "sha256": "c068da3f2c33ff96fa9c6c7e903bd39a33ddf421bc2c0a12d4763a224755672a",
+      "treatment": "Supabase account/project header removed by cropping; public product-source URLs and table records retained."
+    },
+    {
+      "path": "assets/evidence/32-supabase-load-reconciliation-sanitized.png",
+      "bytes": 118812,
+      "sha256": "b03b5a3081c29ac078d4bccad1ca8fb0b4d97eef67d1dae7269584034ab14f6d",
+      "treatment": "Personal filesystem paths and internal run identifier covered with an opaque black mask; reconciliation counts retained."
+    },
+    {
+      "path": "assets/evidence/33-data-quality-human-review.png",
+      "bytes": 189650,
+      "sha256": "7294952e9c3683ee36fd847ff9a81664bca45021e7b2c247eeae044b40fc7147",
+      "treatment": "Metadata-normalized copy; no credential or private identifier observed; quality findings and decision points retained."
+    },
+    {
+      "path": "assets/evidence/34-agent-sql-analysis.png",
+      "bytes": 161764,
+      "sha256": "5f6926c2bb8af56872e26b447ba50606a49ff916e2fc7ef40c33cb0eab81c853",
+      "treatment": "Metadata-normalized copy; no credential or private identifier observed; query and aggregate result retained."
+    },
+    {
+      "path": "assets/evidence/35-deployed-bi-dashboard.png",
+      "bytes": 87827,
+      "sha256": "bca3daf0fba936de852686652ee48869ff93510081dabdb275f0fd61085e34ee",
+      "treatment": "Metadata-normalized copy; public deployment URL and dashboard output retained; no credential observed."
+    },
+    {
+      "path": "assets/evidence/36-multi-agent-kanban-loop.png",
+      "bytes": 53285,
+      "sha256": "f4b74e966f991e32ced066e633e9d425dd0f758167e04756e4c61a6584c8fddc",
+      "treatment": "Metadata-normalized copy; no credential or private identifier observed; card states and assignments retained."
+    },
+    {
+      "path": "assets/evidence/37-ada-read-only-task-contract-sanitized.png",
+      "bytes": 187621,
+      "sha256": "1388aec5a578f25f5c35001369bd8763278b69b28f3d3f3d39d91897e18d4266",
+      "treatment": "Personal workspace paths and private notification target covered with opaque background masks; read-only task constraints retained."
+    },
+    {
+      "path": "assets/evidence/38-scheduled-loop-run-sanitized.png",
+      "bytes": 196273,
+      "sha256": "2fd007ca512c653e88a399ae186438c215833b2b43ca6a9c8d5b9920bc83246e",
+      "treatment": "Personal artifact paths covered with opaque black masks; scheduled-run status, validation gate, and next-run state retained."
     }
   ]
 }

@@ -7,7 +7,7 @@
 ![Docker](https://img.shields.io/badge/Docker-reproducible%20demo-2496ED?logo=docker&logoColor=white)
 ![Privacy](https://img.shields.io/badge/evidence-privacy--sanitized-176B3A)
 
-**A role-based AI office for market research, data analysis, forecasting, review, and executive reporting—operated through Slack on the Hermes Agent runtime in Docker.**
+**A role-based AI office for research, governed data operations, analytics, review, and executive delivery—combining Hermes and Slack with Supabase/PostgreSQL and Obsidian/OhMyWiki inside a Dockerized operating model.**
 
 This portfolio case study separates two things that are often mixed together:
 
@@ -27,7 +27,8 @@ The live deployment demonstrated:
 - execution as the unprivileged `hermes` user;
 - Slack delivery of a public-source market scan;
 - role-specific work, including research, analysis, presentation generation, and operations support;
-- an Obsidian-backed research workflow that preserved source provenance, structured concepts and relations, produced multilingual fact-checks, and delivered a source-linked 15-slide report.
+- an Obsidian-backed research workflow that preserved source provenance, structured concepts and relations, produced multilingual fact-checks, and delivered a source-linked 15-slide report; and
+- a Supabase-backed data-operations loop spanning schema controls, role-separated ingestion, reconciliation, human-reviewed data quality, auditable SQL analysis, scheduled orchestration, and a deployed BI dashboard.
 
 The public repository adds the missing engineering layer: deterministic data validation, leakage-safe holdout forecasting, artifact contracts, a QA gate, privacy scanning, tests, and a hardened offline container.
 
@@ -37,7 +38,7 @@ The public repository adds the missing engineering layer: deterministic data val
 |---|---:|
 | Unit and integration tests | 12 / 12 passed |
 | Deterministic reference artifacts | 6 / 6 matched |
-| Reviewed evidence captures | 25 / 25 hashes verified |
+| Reviewed evidence captures | 36 / 36 hashes verified |
 | Internal documentation links | all local targets resolved |
 | Hardened container smoke test | passed with network disabled and read-only root |
 
@@ -64,7 +65,7 @@ The repository documents one system through two deliberately separate layers. Op
 | Runtime | Hermes Agent in one bounded Docker deployment | Python 3.11+ package and hardened offline container |
 | Entry point | Slack mentions routed through profile gateways | `agentic-office run` CLI |
 | Specialization | Seven Hermes profiles with profile-scoped identity, policy, Skills, and Slack configuration | Seven machine-readable contracts in [`config/agents.json`](config/agents.json) |
-| Data access | Approved profile tools and optional MCP integrations | Synthetic CSV inputs; no network or external credentials |
+| Data access | Approved profile tools, Supabase Skill/MCP access, and optional public-source integrations | Synthetic CSV inputs; no network or external credentials |
 | Coordination | Direct specialist routing for live work | Deterministic seven-stage artifact pipeline for evaluation |
 | Outputs | Slack research reports and work products | JSON metrics and trace, SVG chart, Slack payload preview, executive report |
 | Verification | Privacy-sanitized operational evidence with a digest register | Unit/integration tests, CI regeneration, privacy scan, and Docker build |
@@ -199,7 +200,40 @@ Reader-facing deliverable: [English executive report — Men's Fashion Market in
 
 Detailed workflow, image-level supported claims, and verification boundaries: [Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md).
 
-Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [retail analysis charter](docs/evidence/retail-analysis-charter.md), [design-system presentation](docs/evidence/design-system-presentation.md), [Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
+### Supabase-backed agent data operations
+
+This case extends the office into a governed database workflow. Oliver collects approved source data, Ethan validates CSV contracts and stages records, Sam performs controlled loading and reconciliation, and Ada uses Supabase MCP for read-only quality checks and SQL analysis. A separate scheduled reporting loop assigns analysis, narrative, and publication to different Kanban cards, with an approval gate that stops downstream work instead of publishing an unverified result.
+
+<table>
+  <tr>
+    <td width="50%"><img src="assets/evidence/28-ada-supabase-schema-review.png" alt="Ada reviewing the Supabase snapshot schema through the configured skill" /></td>
+    <td width="50%"><img src="assets/evidence/31-supabase-loaded-records-sanitized.png" alt="Sanitized Supabase table with loaded product snapshot records" /></td>
+  </tr>
+  <tr>
+    <td><strong>Schema-aware agent access.</strong> Ada interprets the snapshot grain and append-only rules through the configured Supabase capability.</td>
+    <td><strong>Materialized data.</strong> Run IDs, source identifiers, URLs, product attributes, and provenance are retained in the database.</td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="assets/evidence/32-supabase-load-reconciliation-sanitized.png" alt="Sanitized five-table Supabase load reconciliation" /></td>
+    <td width="50%"><img src="assets/evidence/34-agent-sql-analysis.png" alt="Ada SQL analysis with the executed query preserved" /></td>
+  </tr>
+  <tr>
+    <td><strong>Load verification.</strong> Five staging tables reconcile exactly across 54,690 rows and 113 batches; ambiguous duplicates are escalated rather than deleted automatically.</td>
+    <td><strong>Auditable analysis.</strong> The agent returns channel metrics together with the SQL used to calculate them.</td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="assets/evidence/36-multi-agent-kanban-loop.png" alt="Kanban control plane for the multi-agent quarterly analysis loop" /></td>
+    <td width="50%"><img src="assets/evidence/35-deployed-bi-dashboard.png" alt="Deployed business-intelligence dashboard" /></td>
+  </tr>
+  <tr>
+    <td><strong>Closed-loop operations.</strong> Fixed artifact contracts, ordered cards, scheduled execution, and failure/approval escalation make handoffs visible.</td>
+    <td><strong>Shared delivery.</strong> Approved aggregates are published as a collaborative dashboard rather than left inside an agent session.</td>
+  </tr>
+</table>
+
+The evidence supports scheduled batch automation, not a streaming claim. Exact schema controls, row-count reconciliation, human-in-the-loop decisions, SQL results, task boundaries, and limitations are documented in the [Supabase-backed agent data operations case study](docs/case-studies/supabase-agent-data-operations.md).
+
+Detailed evidence and claim boundaries: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md), [`SOUL.md` policy files](docs/evidence/soul-policy-files.md), [Skills supply chain](docs/evidence/skills-supply-chain.md), [MCP integration](docs/evidence/mcp-integration.md), [Google Workspace integration](docs/evidence/google-workspace-integration.md), [multi-agent Slack](docs/evidence/multi-agent-slack.md), [retail analysis charter](docs/evidence/retail-analysis-charter.md), [design-system presentation](docs/evidence/design-system-presentation.md), [Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md), [Supabase-backed agent data operations](docs/case-studies/supabase-agent-data-operations.md), [runtime metadata](docs/evidence/runtime-evidence.md), and [live workload](docs/evidence/live-workload.md).
 
 ## Architecture
 
