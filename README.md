@@ -243,6 +243,7 @@ flowchart TB
     U["Human request"] --> S["Slack gateway"]
     DATA["Public or synthetic data"]
     POLICY["Role and tool boundaries"]
+    H["Human-in-the-loop approval gate<br/>Approve · revise · reject"]
 
     subgraph D["Hermes Agent runtime · Docker"]
       direction TB
@@ -262,30 +263,37 @@ flowchart TB
 
       R --> SAM
       ETHAN --> MIA
-      SOPHIE --> OLIVER
+      SOPHIE -->|Submit QA evidence| H
+      H -->|Approve| OLIVER
+      H -.->|Revise| R
     end
 
     O["Slack delivery<br/>Report · metrics · execution trace"]
+    BLOCKED["Publication blocked<br/>Issue and rationale recorded"]
 
     S --> R
     DATA --> SAM
     POLICY --> R
+    H -->|Reject| BLOCKED
     OLIVER --> O
+    O -->|Reviewed result| U
 
     classDef input fill:#EFF6FF,stroke:#2563EB,color:#0F172A,stroke-width:2px;
     classDef gateway fill:#FFF7ED,stroke:#EA580C,color:#0F172A,stroke-width:2px;
     classDef router fill:#FAF5FF,stroke:#9333EA,color:#0F172A,stroke-width:2px;
     classDef agent fill:#ECFDF5,stroke:#059669,color:#0F172A,stroke-width:2px;
+    classDef human fill:#FFFBEB,stroke:#D97706,color:#0F172A,stroke-width:3px;
     classDef output fill:#FEF2F2,stroke:#DC2626,color:#0F172A,stroke-width:2px;
 
     class U,DATA,POLICY input;
     class S gateway;
     class R router;
     class SAM,ADA,ETHAN,MIA,NOAH,SOPHIE,OLIVER agent;
-    class O output;
+    class H human;
+    class O,BLOCKED output;
 ```
 
-The live system supports direct routing to a specialist. The included offline harness models a full sequential handoff so the contracts and evaluation logic can be reviewed without access to private Slack or LLM credentials.
+The human control point sits between QA and final synthesis. Sophie submits the evidence and control verdict; the reviewer may approve the bounded result, return it to the role router for revision, or reject publication with a recorded rationale. Only an approved path reaches Oliver and Slack delivery. The included offline harness represents this checkpoint as a deterministic blocking gate so the contracts and evaluation logic remain reviewable without private Slack or LLM credentials.
 
 ### Request paths
 
@@ -305,8 +313,9 @@ The live and public paths share the same role model but serve different verifica
 2. Sam validates schema, values, uniqueness, and ordering before analysis starts.
 3. Ada computes descriptive metrics and fits an interpretable trend on the training window only.
 4. Ethan, Mia, and Noah independently produce decision notes, a portable chart, and a narrative from approved artifacts.
-5. Sophie evaluates required controls and blocks finalization if any check fails.
-6. Oliver emits the reviewed report and a Slack payload preview; the harness records every stage in `trace.json`.
+5. Sophie evaluates required controls and submits the QA evidence to the review gate.
+6. In the live workflow, a human reviewer approves, requests revision, or rejects publication. The public harness preserves the checkpoint as a deterministic pass/fail gate for non-interactive CI.
+7. Oliver emits the report and Slack payload preview only on the approved or passing path; the harness records every agent stage in `trace.json`.
 
 The live prototype does not claim autonomous agent-to-agent delegation. Direct profile routing is operationally evidenced; the sequential public pipeline is an inspectable evaluation model of the intended handoffs.
 
