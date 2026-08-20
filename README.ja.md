@@ -12,7 +12,7 @@
 本リポジトリでは、混同されやすい二つの検証対象を明確に分離しています。
 
 1. **運用証跡:** 一つの制約付きDocker環境で稼働し、Slack経由で実務タスクを処理する7つのHermes専門プロファイル。
-2. **再現可能な評価:** 同一の役割境界を合成データ上で実行し、監査可能なtraceを生成する、依存関係のない決定論的Pythonハーネス。
+2. **再現可能な評価:** 同一の役割境界を合成データ上で実行し、監査可能なtraceを生成してCIで継続的に検証する、外部依存のない決定論的Pythonハーネス。
 
 認証情報、非公開メッセージ、メール／カレンダーデータ、Workspace識別子、個人のファイルパスは公開していません。掲載画像はprivacy-sanitized derivative、または変更不要と判断したlow-sensitivity captureです。private originalはリポジトリ外で管理しています。
 
@@ -58,7 +58,7 @@ benchmark、test範囲、統計上の制約、release historyは[`docs/evaluatio
 
 ## 実装モデル
 
-同一システムを、運用証跡と公開参照実装という二つの層で検証します。スクリーンショットはDocker・Slack上での実運用を示し、実行可能コードは分析契約、評価ロジック、QA gateの挙動を示します。
+同一システムを、運用証跡と公開参照実装という二つの層で検証します。スクリーンショットはDocker・Slack上での実運用を示し、実行可能コードは分析契約、評価ロジック、QA gateの挙動を示します。両者を相互の代替とはみなさず、運用上のclaimと再現可能なengineering claimを明確に区別しています。
 
 | 観点 | 実運用レイヤー | 公開参照レイヤー |
 |---|---|---|
@@ -70,7 +70,7 @@ benchmark、test範囲、統計上の制約、release historyは[`docs/evaluatio
 | Outputs | Slack調査レポートと業務成果物 | JSON metrics／trace、SVG chart、Slack payload preview、executive report |
 | Verification | digest登録済みのprivacy-sanitized evidence | unit/integration tests、CI再生成、privacy scan、Docker build |
 
-詳細は[`docs/implementation.md`](docs/implementation.md)に記載しています。
+component構成、configuration boundary、request pathの詳細は[`docs/implementation.md`](docs/implementation.md)に記載しています。
 
 ## 運用証跡
 
@@ -240,43 +240,43 @@ workflow、画像別supported claim、検証境界の詳細: [Obsidian-backed kn
 ```mermaid
 %%{init: {"theme": "base", "themeVariables": {"fontSize": "18px", "fontFamily": "Arial, sans-serif", "lineColor": "#475569"}}}%%
 flowchart TB
-    U["Human request"] --> S["Slack gateway"]
-    DATA["Public or synthetic data"]
-    POLICY["Role and tool boundaries"]
-    H["Human-in-the-loop approval gate<br/>Approve · revise · reject"]
+    U["人間による依頼"] --> S["Slackゲートウェイ"]
+    DATA["公開データ／合成データ"]
+    POLICY["役割・ツール境界"]
+    H["Human-in-the-loop承認ゲート<br/>承認 · 差し戻し · 拒否"]
 
-    subgraph D["Hermes Agent runtime · Docker"]
+    subgraph D["Hermes Agentランタイム · Docker"]
       direction TB
-      R["Role router"]
+      R["役割ルーター"]
 
-      subgraph ANALYSIS["Data and analysis"]
+      subgraph ANALYSIS["データ処理・分析"]
         direction LR
-        SAM["Sam<br/>Data engineering"] --> ADA["Ada<br/>Quantitative analysis"] --> ETHAN["Ethan<br/>Business interpretation"]
+        SAM["Sam<br/>データエンジニアリング"] --> ADA["Ada<br/>定量分析"] --> ETHAN["Ethan<br/>ビジネス解釈"]
       end
 
-      subgraph DELIVERY["Communication and review"]
+      subgraph DELIVERY["伝達・レビュー"]
         direction LR
-        MIA["Mia<br/>Visualization"] --> NOAH["Noah<br/>Narrative"] --> SOPHIE["Sophie<br/>QA and operations"]
+        MIA["Mia<br/>可視化"] --> NOAH["Noah<br/>ナラティブ"] --> SOPHIE["Sophie<br/>QA・運用"]
       end
 
-      OLIVER["Oliver<br/>Executive synthesis"]
+      OLIVER["Oliver<br/>経営向け統合"]
 
       R --> SAM
       ETHAN --> MIA
-      SOPHIE -->|Submit QA evidence| H
-      H -->|Approve| OLIVER
-      H -.->|Revise| R
+      SOPHIE -->|QA証跡を提出| H
+      H -->|承認| OLIVER
+      H -.->|差し戻し| R
     end
 
-    O["Slack delivery<br/>Report · metrics · execution trace"]
-    BLOCKED["Publication blocked<br/>Issue and rationale recorded"]
+    O["Slack配信<br/>レポート · 指標 · 実行trace"]
+    BLOCKED["公開停止<br/>問題と理由を記録"]
 
     S --> R
     DATA --> SAM
     POLICY --> R
-    H -->|Reject| BLOCKED
+    H -->|拒否| BLOCKED
     OLIVER --> O
-    O -->|Reviewed result| U
+    O -->|レビュー済み結果| U
 
     classDef input fill:#EFF6FF,stroke:#2563EB,color:#0F172A,stroke-width:2px;
     classDef gateway fill:#FFF7ED,stroke:#EA580C,color:#0F172A,stroke-width:2px;
@@ -293,33 +293,33 @@ flowchart TB
     class O,BLOCKED output;
 ```
 
-Human-in-the-loopのcontrol pointはQAと最終統合の間に置きます。Sophieがevidenceとcontrol verdictを提出し、reviewerは限定された結果の承認、role routerへの差し戻し、または理由を記録した公開拒否を選択します。Oliverによる最終統合とSlack deliveryへ進めるのは承認経路だけです。公開offline harnessでは、private SlackやLLM credentialなしでもcontractと評価ロジックを検証できるよう、このcheckpointを決定論的なblocking gateとして表現しています。
+Human-in-the-loopの承認ゲートは、QAと最終統合の間に配置しています。Sophieが根拠資料と統制判定を提出し、人間のレビュー担当者が、成果物の承認、役割ルーターへの差し戻し、または理由を記録した公開拒否のいずれかを選択します。Oliverによる経営向け統合とSlack配信へ進めるのは、承認された経路だけです。公開offline harnessでは人間の判断を自動化したとはみなさず、非公開のSlack情報やLLM認証情報がなくても契約と評価ロジックを確認できるよう、この境界を決定論的なblocking gateとして再現しています。
 
 ### リクエスト経路
 
-実運用経路と公開評価経路は同じrole modelを使用しますが、検証目的が異なります。
+実運用経路と公開評価経路は同じ役割モデルを共有しますが、それぞれ異なる検証目的を持ちます。
 
-**実運用の専門profile経路**
+**実運用における専門プロファイル経路**
 
-1. 利用者がSlack上で担当specialistをmentionします。
-2. 対象profileのgatewayがeventを受信し、profile単位の設定を適用します。
-3. `SOUL.md`が非公開のrole policyを、導入済みSkillが再利用可能な手順と許可されたtool利用を定義します。
-4. 外部の公開dataが必要な場合、specialistは承認済みMCP integrationを利用できます。
-5. specialistが成果物を元のSlack threadへ返します。
+1. 利用者がSlack上で担当する専門エージェントをmentionします。
+2. 対象プロファイルのgatewayがeventを受信し、プロファイル単位の設定を適用します。
+3. `SOUL.md`が非公開の役割policyを定義し、導入済みSkillが再利用可能な手順と許可されたtool利用を規定します。
+4. 外部の公開データが必要な場合、専門エージェントは承認済みMCP integrationを利用できます。
+5. 専門エージェントが成果物を依頼元のSlack threadへ返します。
 
 **公開評価経路**
 
-1. CLIが合成product dataと時系列sales dataを読み込みます。
-2. Samが分析開始前にschema、値、unique性、順序を検証します。
-3. Adaがdescriptive metricを計算し、training windowだけを用いて解釈可能なtrendをfitします。
-4. Ethan、Mia、Noahが承認済みartifactからdecision note、portable chart、narrativeを個別に作成します。
-5. Sophieが必須controlを評価し、QA evidenceをreview gateへ提出します。
-6. 実運用workflowではhuman reviewerが承認、修正依頼、または公開拒否を選択します。公開harnessでは、非対話型CIの再現性を保つため、このcheckpointを決定論的なpass/fail gateとして実装しています。
+1. CLIが合成商品データと時系列売上データを読み込みます。
+2. Samが分析開始前にschema、値、unique性、並び順を検証します。
+3. Adaが記述統計を計算し、training windowだけを用いて解釈可能なtrendをfitします。
+4. Ethan、Mia、Noahが承認済みartifactからdecision note、可搬性のあるchart、narrativeをそれぞれ作成します。
+5. Sophieが必須controlを評価し、QA証跡をreview gateへ提出します。
+6. 実運用workflowでは、人間のレビュー担当者が承認、修正依頼、または公開拒否を選択します。公開harnessでは、非対話型CIの再現性を保つため、このcheckpointを決定論的なpass/fail gateとして実装しています。
 7. Oliverは承認またはpassした経路でのみreportとSlack payload previewを出力し、harnessは全agent stageを`trace.json`へ記録します。
 
-実運用prototypeは自律的なagent間delegationを実証したとは主張しません。専門profileへの直接routingは運用証跡で確認し、公開の逐次pipelineは意図したhandoffを検査できる評価modelとして提供します。
+実運用prototypeについて、自律的なagent間delegationを実証したとは主張しません。専門プロファイルへの直接routingは運用証跡で確認し、公開の逐次pipelineは意図したhandoffを検査できる評価モデルとして提供しています。
 
-### Hermes runtime primitives
+### Hermesランタイムの構成要素
 
 | Primitive | 実運用での機能 | 公開repositoryでの表現 |
 |---|---|---|
@@ -332,7 +332,7 @@ Human-in-the-loopのcontrol pointはQAと最終統合の間に置きます。Sop
 
 この分離は意図的です。configuration presence、policy hash、screenshotは限定した運用claimを支え、公開codeとtestは再現可能なengineering claimを支えます。
 
-## Agent contracts
+## エージェント契約
 
 | Agent | 責任 | 必須出力 | Guardrail |
 |---|---|---|---|
