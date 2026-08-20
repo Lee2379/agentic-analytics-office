@@ -76,14 +76,15 @@ Original digests allow the owner to show during a controlled interview that a pr
 | P-026 | `assets/evidence/28-ada-supabase-schema-review.png` | metadata-normalized copy; no credential, endpoint, or private identifier observed | 121,100 | `57a855147dd32937a520db5ba66644daa522f1e832893b7b4b4f27507303f814` |
 | P-027 | `assets/evidence/29-postgres-schema-contract.png` | metadata-normalized copy; visible DDL and constraints retained | 226,433 | `0b72e875d4e5f6f0a203e330475368c906bf3e5036d85fb145dd52bbf5435657` |
 | P-028 | `assets/evidence/30-supabase-schema-sanitized.png` | browser URL, project reference, organization name, and project name removed by cropping | 91,212 | `e24f2366523c177baa35bb805efc71be27180c9c8517f69930b5b4284ebadaa4` |
-| P-029 | `assets/evidence/31-supabase-loaded-records-sanitized.png` | Supabase account/project header removed by cropping; public source URLs retained | 140,271 | `c068da3f2c33ff96fa9c6c7e903bd39a33ddf421bc2c0a12d4763a224755672a` |
-| P-030 | `assets/evidence/32-supabase-load-reconciliation-sanitized.png` | personal filesystem paths and internal run identifier covered with an opaque black mask | 118,812 | `b03b5a3081c29ac078d4bccad1ca8fb0b4d97eef67d1dae7269584034ab14f6d` |
-| P-031 | `assets/evidence/33-data-quality-human-review.png` | metadata-normalized copy; no credential or private identifier observed | 189,650 | `7294952e9c3683ee36fd847ff9a81664bca45021e7b2c247eeae044b40fc7147` |
-| P-032 | `assets/evidence/34-agent-sql-analysis.png` | metadata-normalized copy; query and aggregate result retained | 161,764 | `5f6926c2bb8af56872e26b447ba50606a49ff916e2fc7ef40c33cb0eab81c853` |
-| P-033 | `assets/evidence/35-deployed-bi-dashboard.png` | metadata-normalized copy; public deployment URL retained; no credential observed | 87,827 | `bca3daf0fba936de852686652ee48869ff93510081dabdb275f0fd61085e34ee` |
-| P-034 | `assets/evidence/36-multi-agent-kanban-loop.png` | metadata-normalized copy; card states and role assignments retained | 53,285 | `f4b74e966f991e32ced066e633e9d425dd0f758167e04756e4c61a6584c8fddc` |
-| P-035 | `assets/evidence/37-ada-read-only-task-contract-sanitized.png` | personal workspace paths and private notification target covered with opaque background masks | 187,621 | `1388aec5a578f25f5c35001369bd8763278b69b28f3d3f3d39d91897e18d4266` |
-| P-036 | `assets/evidence/38-scheduled-loop-run-sanitized.png` | personal artifact paths covered with opaque black masks; scheduled-run status and approval gate retained | 196,273 | `2fd007ca512c653e88a399ae186438c215833b2b43ca6a9c8d5b9920bc83246e` |
+| P-029 | `assets/evidence/31-supabase-loaded-records-sanitized.png` | Supabase organization/project labels covered with opaque white masks; public source URLs retained | 252,885 | `c3623b0100c4d9f79b3b753640e37e54089b5835d992d706d0da106020f2e7ef` |
+| P-030 | `assets/evidence/32-supabase-load-reconciliation-sanitized.png` | personal filesystem paths and internal run identifier covered with opaque white masks | 161,412 | `7a0843ddb9b50df4461ffbdf0c0c5af6a7536ad66fb09fed8422c93b5689ad16` |
+| P-031 | `assets/evidence/33-data-quality-human-review.png` | metadata-normalized copy; no credential or private identifier observed | 251,940 | `b1362a6a70781b27ebfbc29a16a9e62e25346069be58463888eea0bacccd1091` |
+| P-032 | `assets/evidence/34-agent-sql-analysis.png` | metadata-normalized copy; query and aggregate result retained | 217,766 | `43a776df5e28b5da827209d0ccd1217adc1c9d3ef13c322ef95ba570d743e6d6` |
+| P-033 | `assets/evidence/35-deployed-bi-dashboard.png` | metadata-normalized copy; public deployment URL retained; no credential observed | 84,127 | `eb46cc57624e487c124c68fe09f21496c9b3c8f0532ddf75b3189e84eaccb443` |
+| P-034 | `assets/evidence/36-multi-agent-kanban-loop.png` | metadata-normalized copy; card states and role assignments retained | 93,786 | `3ea22b766c6dd1bd8fdb440bb2ec0951565fb9e5533d5c4bfb590ebc5dc4430e` |
+| P-035 | `assets/evidence/37-ada-read-only-task-contract-sanitized.png` | personal workspace paths covered with opaque white masks; task contract retained | 168,234 | `7d5bcbfe1fa84d551e0243ba458695209198ba075b6beb7631968919fc99eb11` |
+| P-036 | `assets/evidence/38-scheduled-loop-run-sanitized.png` | personal artifact paths covered with opaque white masks; scheduled-run status and approval gate retained | 274,692 | `910a96df4a954bb849e03ab01fb56c914e7a1ecd28115a2fc5a2de11eb5ad66c` |
+| P-037 | `assets/evidence/39-scheduled-quarterly-report-definition-sanitized.png` | personal workspace and generated-template paths covered with opaque white masks; schedule and handoff contract retained | 157,946 | `48b346d78156e23b7e9b224270e14fa7c7cd88f5907681562baa2e174ec693f5` |
 
 ## Explicit exclusions
 

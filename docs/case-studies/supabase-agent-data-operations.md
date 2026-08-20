@@ -73,11 +73,11 @@ The ingestion operating model assigns collection to Oliver, CSV contract validat
 
 ![Sanitized Supabase table view showing records loaded from multiple public commerce sources](../../assets/evidence/31-supabase-loaded-records-sanitized.png)
 
-The table capture shows records materialized in Supabase with run identifiers, source-specific product IDs, retained source URLs, product names, and brand fields. Public commerce URLs remain visible as provenance; private Supabase account and project identifiers were removed.
+The table capture shows records materialized in Supabase with run identifiers, source-specific product IDs, retained source URLs, product names, and brand fields. Public commerce URLs remain visible as provenance; private Supabase organization and project labels are covered with opaque white masks.
 
 ![Sanitized reconciliation report comparing five CSV staging inputs with Supabase counts](../../assets/evidence/32-supabase-load-reconciliation-sanitized.png)
 
-The captured reconciliation checks five staging tables against direct Supabase queries. All five source/database row counts match, covering **54,690 rows** across **113 batches**. The loader is described as transactional and stops rather than appending duplicates when a target batch already exists. Personal paths and the internal run identifier are covered by opaque masks.
+The captured reconciliation checks five staging tables against direct Supabase queries. All five source/database row counts match, covering **54,690 rows** across **113 batches**. The loader is described as transactional and stops rather than appending duplicates when a target batch already exists. Personal paths and the internal run identifier are covered by opaque white masks.
 
 ## 3. Data quality with human decision points
 
@@ -121,11 +121,15 @@ The Kanban control plane turns agent work into explicit state transitions. Each 
 
 ![Sanitized read-only Ada task contract for a quarter-over-quarter analysis](../../assets/evidence/37-ada-read-only-task-contract-sanitized.png)
 
-The Ada card defines the comparison period, allowed Supabase view, required dimensions, SQL-based cross-check, output contract, and prohibitions. It limits data access and verification to Supabase MCP SQL, forbids source-table/database changes, preserves excluded products, and instructs the workflow not to guess or retry ambiguous errors. Private workspace paths and the notification target are masked.
+The Ada card defines the comparison period, allowed Supabase view, required dimensions, SQL-based cross-check, output contract, and prohibitions. It limits data access and verification to Supabase MCP SQL, forbids source-table/database changes, preserves excluded products, and instructs the workflow not to guess or retry ambiguous errors. Personal workspace paths are covered with opaque white masks.
+
+![Sanitized quarterly-report schedule showing the cron expression, handoff order, and approval behavior](../../assets/evidence/39-scheduled-quarterly-report-definition-sanitized.png)
+
+The scheduled-job definition fixes the quarterly trigger, analysis target, agent handoff order, retry ceiling, and approval behavior before execution. This separates durable workflow policy from an ad hoc prompt. Personal workspace and generated-template paths are covered with opaque white masks.
 
 ![Sanitized scheduled-run report showing completed, blocked, and waiting cards](../../assets/evidence/38-scheduled-loop-run-sanitized.png)
 
-The scheduled run records a successful analysis card, a report card blocked at an automated validation/approval gate, and a publication card left waiting. It also records the next scheduled run. This demonstrates four operating primitives working together:
+The scheduled run records a successful analysis card, a report card blocked at an automated validation/approval gate, and a publication card left waiting. It also records the next scheduled run. Personal artifact paths are covered with opaque white masks. This demonstrates four operating primitives working together:
 
 1. **fixed artifact locations** define how data and reports move between workers;
 2. **ordered Kanban cards** define ownership and handoff state;

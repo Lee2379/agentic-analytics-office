@@ -32,14 +32,15 @@ These files are privacy-reviewed captures prepared for the public portfolio. The
 | `28-ada-supabase-schema-review.png` | Agent-assisted Supabase schema review | metadata normalized; no credential, endpoint, or private identifier observed |
 | `29-postgres-schema-contract.png` | PostgreSQL snapshot-table contract | metadata normalized; visible DDL and constraints retained |
 | `30-supabase-schema-sanitized.png` | Deployed Supabase schema | browser URL and account/project identifiers removed by cropping |
-| `31-supabase-loaded-records-sanitized.png` | Materialized product snapshots | account/project header removed; public source URLs retained |
-| `32-supabase-load-reconciliation-sanitized.png` | Five-table load reconciliation | personal paths and internal run identifier covered with opaque masks |
+| `31-supabase-loaded-records-sanitized.png` | Materialized product snapshots | organization/project labels covered with opaque white masks; public source URLs retained |
+| `32-supabase-load-reconciliation-sanitized.png` | Five-table load reconciliation | personal paths and internal run identifier covered with opaque white masks |
 | `33-data-quality-human-review.png` | Data-quality findings and human decision points | metadata normalized; no credential or private identifier observed |
 | `34-agent-sql-analysis.png` | Auditable channel-performance SQL | metadata normalized; query and aggregate output retained |
 | `35-deployed-bi-dashboard.png` | Deployed collaborative BI artifact | metadata normalized; public deployment and dashboard output retained |
 | `36-multi-agent-kanban-loop.png` | Kanban control plane | metadata normalized; workflow states and role assignments retained |
-| `37-ada-read-only-task-contract-sanitized.png` | Read-only Ada analytical task contract | personal paths and private notification target covered with opaque masks |
-| `38-scheduled-loop-run-sanitized.png` | Scheduled closed-loop execution | personal artifact paths covered with opaque masks; run/gate status retained |
+| `37-ada-read-only-task-contract-sanitized.png` | Read-only Ada analytical task contract | personal workspace paths covered with opaque white masks |
+| `38-scheduled-loop-run-sanitized.png` | Scheduled closed-loop execution | personal artifact paths covered with opaque white masks; run/gate status retained |
+| `39-scheduled-quarterly-report-definition-sanitized.png` | Quarterly report schedule and handoff contract | personal workspace and generated-template paths covered with opaque white masks |
 
 Binary images require manual visual review. The repository privacy scanner does not claim OCR coverage.
 
