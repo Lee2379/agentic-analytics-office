@@ -38,7 +38,7 @@
 |---|---:|
 | Unit／integration tests | 12 / 12 passed |
 | 決定論的reference artifacts | 6 / 6 matched |
-| Reviewed evidence captures | 36 / 36 hashes verified |
+| Reviewed evidence captures | 37 / 37 hashes verified |
 | 内部documentation links | all local targets resolved |
 | Hardened container smoke test | network disabled・read-only rootでpassed |
 
@@ -437,7 +437,7 @@ CIはschema／data-quality rejection、7 agent contractのschemaとpublic/packag
 
 ## プライバシーを保護する証拠公開方針
 
-raw screenshotにはWorkspace label、display name、local path、application ID、非公開の運用情報が含まれ得ます。公開するのは25件のprivacy-reviewed public capture（13件のsanitized derivativeと12件のpixel編集不要capture）のみです。redactionが必要な場合はblurではなくopaque maskを使用し、全画像のSHA-256 digestを[`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md)に記録しています。
+raw screenshotにはWorkspace label、display name、local path、application ID、非公開の運用情報が含まれ得ます。公開している37件のprivacy-reviewed public captureは、匿名化した派生画像と、内容編集を行わず公開を承認した低機密度captureで構成されています。redactionが必要な場合はblurではなくopaque maskを使用し、全画像のSHA-256 digestを[`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md)に記録しています。
 
 提供画像の一つではURL内にauthentication tokenが露出していました。公開版ではcredential値全体を不透明な白色maskで覆い、原本をrepositoryとevidence chainから除外しています。マスキングは漏洩credentialを無効化しないため、失効・再発行は別途必要です。
 

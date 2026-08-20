@@ -38,7 +38,7 @@ The public repository adds the missing engineering layer: deterministic data val
 |---|---:|
 | Unit and integration tests | 12 / 12 passed |
 | Deterministic reference artifacts | 6 / 6 matched |
-| Reviewed evidence captures | 36 / 36 hashes verified |
+| Reviewed evidence captures | 37 / 37 hashes verified |
 | Internal documentation links | all local targets resolved |
 | Hardened container smoke test | passed with network disabled and read-only root |
 
@@ -449,7 +449,7 @@ These values are regression fixtures for the public harness, not production perf
 
 ## Privacy-preserving evidence policy
 
-Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Twenty-five privacy-reviewed public captures are committed: thirteen sanitized derivatives and twelve low-sensitivity captures that required no pixel edits. Where redaction is required it uses opaque masks rather than blur, and every public image has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
+Raw screenshots are not evidence-safe: they can contain workspace labels, user display names, local paths, application IDs, or private operational context. Thirty-seven privacy-reviewed public captures are committed, comprising sanitized derivatives and low-sensitivity captures approved without content edits. Where redaction is required it uses opaque masks rather than blur, and every public image has its own SHA-256 digest in [`docs/evidence/evidence-register.md`](docs/evidence/evidence-register.md).
 
 One supplied screenshot exposed an authentication token in a URL. The committed derivative covers the full credential value with an opaque white mask; the original is excluded from the repository and evidence chain. Redaction does not invalidate a leaked credential, so revocation and reissuance remain required.
 
