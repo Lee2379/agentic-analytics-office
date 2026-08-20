@@ -243,44 +243,57 @@ flowchart TB
     U["Human request"] --> S["Slack gateway"]
     DATA["Public or synthetic data"]
     POLICY["Role and tool boundaries"]
+    H["Human-in-the-loop approval gate<br/>Approve · revise · reject"]
 
     subgraph D["Hermes Agent runtime · Docker"]
       direction TB
       R["Role router"]
+
       subgraph ANALYSIS["Data and analysis"]
         direction LR
         SAM["Sam<br/>Data engineering"] --> ADA["Ada<br/>Quantitative analysis"] --> ETHAN["Ethan<br/>Business interpretation"]
       end
+
       subgraph DELIVERY["Communication and review"]
         direction LR
         MIA["Mia<br/>Visualization"] --> NOAH["Noah<br/>Narrative"] --> SOPHIE["Sophie<br/>QA and operations"]
       end
+
       OLIVER["Oliver<br/>Executive synthesis"]
+
       R --> SAM
       ETHAN --> MIA
-      SOPHIE --> OLIVER
+      SOPHIE -->|Submit QA evidence| H
+      H -->|Approve| OLIVER
+      H -.->|Revise| R
     end
 
     O["Slack delivery<br/>Report · metrics · execution trace"]
+    BLOCKED["Publication blocked<br/>Issue and rationale recorded"]
+
     S --> R
     DATA --> SAM
     POLICY --> R
+    H -->|Reject| BLOCKED
     OLIVER --> O
+    O -->|Reviewed result| U
 
     classDef input fill:#EFF6FF,stroke:#2563EB,color:#0F172A,stroke-width:2px;
     classDef gateway fill:#FFF7ED,stroke:#EA580C,color:#0F172A,stroke-width:2px;
     classDef router fill:#FAF5FF,stroke:#9333EA,color:#0F172A,stroke-width:2px;
     classDef agent fill:#ECFDF5,stroke:#059669,color:#0F172A,stroke-width:2px;
+    classDef human fill:#FFFBEB,stroke:#D97706,color:#0F172A,stroke-width:3px;
     classDef output fill:#FEF2F2,stroke:#DC2626,color:#0F172A,stroke-width:2px;
 
     class U,DATA,POLICY input;
     class S gateway;
     class R router;
     class SAM,ADA,ETHAN,MIA,NOAH,SOPHIE,OLIVER agent;
-    class O output;
+    class H human;
+    class O,BLOCKED output;
 ```
 
-実運用は専門profileへの直接routingをサポートします。公開offline harnessは、credentialなしでcontractと評価ロジックを検証できるよう、7段階の逐次handoffをモデル化しています。実運用で自律的agent間委任が実証されたとは主張しません。
+Human-in-the-loopのcontrol pointはQAと最終統合の間に置きます。Sophieがevidenceとcontrol verdictを提出し、reviewerは限定された結果の承認、role routerへの差し戻し、または理由を記録した公開拒否を選択します。Oliverによる最終統合とSlack deliveryへ進めるのは承認経路だけです。公開offline harnessでは、private SlackやLLM credentialなしでもcontractと評価ロジックを検証できるよう、このcheckpointを決定論的なblocking gateとして表現しています。
 
 ### リクエスト経路
 
@@ -300,8 +313,9 @@ flowchart TB
 2. Samが分析開始前にschema、値、unique性、順序を検証します。
 3. Adaがdescriptive metricを計算し、training windowだけを用いて解釈可能なtrendをfitします。
 4. Ethan、Mia、Noahが承認済みartifactからdecision note、portable chart、narrativeを個別に作成します。
-5. Sophieが必須controlを評価し、不合格があればfinalizationをblockします。
-6. Oliverがreview済みreportとSlack payload previewを出力し、harnessが全stageを`trace.json`へ記録します。
+5. Sophieが必須controlを評価し、QA evidenceをreview gateへ提出します。
+6. 実運用workflowではhuman reviewerが承認、修正依頼、または公開拒否を選択します。公開harnessでは、非対話型CIの再現性を保つため、このcheckpointを決定論的なpass/fail gateとして実装しています。
+7. Oliverは承認またはpassした経路でのみreportとSlack payload previewを出力し、harnessは全agent stageを`trace.json`へ記録します。
 
 実運用prototypeは自律的なagent間delegationを実証したとは主張しません。専門profileへの直接routingは運用証跡で確認し、公開の逐次pipelineは意図したhandoffを検査できる評価modelとして提供します。
 

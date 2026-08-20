@@ -13,7 +13,7 @@ A single agent can produce an answer quickly, but it also combines data handling
 - invalid inputs fail before analysis;
 - numerical artifacts can be inspected independently of prose;
 - visualization consumes aggregates instead of raw operational data;
-- the reviewer can block finalization;
+- a human reviewer can approve finalization, request revision through the role router, or reject publication with a recorded rationale;
 - the final report has a traceable lineage.
 
 ## Artifact flow
@@ -26,7 +26,10 @@ A single agent can produce an answer quickly, but it also combines data handling
 | 4 | Mia | Forecast series | Portable SVG figure |
 | 5 | Noah | Metrics and notes | Concise narrative draft |
 | 6 | Sophie | All artifacts | Pass/fail QA verdict |
+| Control gate | Human reviewer in the live workflow; deterministic gate in the public harness | QA verdict and reviewed artifacts | Approve, revise, or reject decision |
 | 7 | Oliver | Reviewed artifacts | Executive report and Slack payload |
+
+The human-in-the-loop gate is deliberately outside the Docker agent runtime. A revision returns to the role router, a rejection blocks publication and records the reason, and only approval permits executive synthesis and Slack delivery. For reproducible, non-interactive CI, the public harness models the same boundary as a deterministic blocking gate rather than pretending to automate a human decision.
 
 ## Database-backed operating loop
 

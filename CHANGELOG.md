@@ -4,6 +4,7 @@ All notable changes to the public evaluation harness are documented here.
 
 ## Unreleased
 
+- Add an explicit human-in-the-loop approval gate to the English and Japanese architecture: QA evidence can be approved, returned through the role router for revision, or rejected with a recorded rationale before final synthesis and Slack delivery.
 - Add a Supabase-backed agent data-operations case study covering schema contracts, role-separated ingestion, five-table reconciliation, human-reviewed data quality, auditable SQL analysis, deployed BI delivery, Kanban orchestration, scheduled execution, and approval-gated publication.
 - Add eleven privacy-reviewed evidence derivatives and bind them to source/public SHA-256 records.
 - Synchronize the English and Japanese README summaries and extend the architecture/implementation documentation with the database data plane and workflow control plane.
