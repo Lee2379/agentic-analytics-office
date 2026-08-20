@@ -332,21 +332,6 @@ flowchart TB
 
 Machine-readable contractは[`config/agents.json`](config/agents.json)にあります。同じregistryをCLI packageに含め、runtimeで各trace eventのrole、objective、input、output、reviewerを設定します。test suiteでは公開copyとの完全一致を確認し、documentationとexecutionのdriftを検出します。
 
-## 実業務データの証跡
-
-公開menswear ranking snapshotを分析し、Slackへ配信したsanitized production runです。画面上の上位10商品について、以下を報告しました。
-
-![Slackに配信されたmarket research result](assets/evidence/03-live-market-research-sanitized.png)
-
-- 平均価格: **KRW 15,689**
-- 中央値: **KRW 12,210**
-- 10商品のうち7商品がKRW 15,000以下
-- 10商品のうち9商品に表示上の割引あり
-- 平均表示割引率: **26.1%**
-- 合計1,067 reviews、review-weighted rating約**4.17/5**
-
-これはlive task routingとdeliveryの証拠であり、市場全体の推定値ではありません。sourceは動的でsampleはranking-selectedです。詳細は[`docs/evidence/live-workload.md`](docs/evidence/live-workload.md)を参照してください。
-
 ## 再現可能なdemo
 
 合成product dataとdaily sales dataを使用し、schema・値域に加えてcanonical ISO dateと連続したdaily cadenceを検証します。その後、descriptive metric、training windowのみでのlinear trend fitting、chronological holdout評価、7日予測、7つのagent contractによるartifact処理を実行します。

@@ -337,21 +337,6 @@ This separation is intentional: configuration presence, policy hashes, and scree
 
 Machine-readable contracts are in [`config/agents.json`](config/agents.json). The same registry is packaged with the CLI, loaded at runtime to populate each trace event, and checked against the public copy in the test suite so documentation and execution cannot drift silently.
 
-## Live workload evidence
-
-A sanitized production run analyzed a public men's-clothing ranking snapshot and delivered the result to Slack. The agent reported, for the visible top ten listings:
-
-![Privacy-sanitized market-research result delivered to Slack](assets/evidence/03-live-market-research-sanitized.png)
-
-- average price: **KRW 15,689**;
-- median price: **KRW 12,210**;
-- seven of ten listings at or below KRW 15,000;
-- nine of ten listings displaying a discount;
-- average displayed discount: **26.1%**;
-- 1,067 combined reviews and a review-weighted rating of approximately **4.17/5**.
-
-This is evidence of live task routing and delivery, not a population-level market estimate. The source was dynamic and the sample was rank-selected. The screenshot retains visible public product URLs as source context; the reproducible public dataset does not depend on them. See [`docs/evidence/live-workload.md`](docs/evidence/live-workload.md).
-
 ## Reproducible demo
 
 The demo uses synthetic product and daily-sales data. It validates canonical ISO dates and consecutive daily cadence in addition to schema and value constraints, computes descriptive market metrics, trains a linear trend only on the training window, evaluates on a chronological holdout, creates a seven-day forecast, and passes the artifacts through the seven agent contracts.
