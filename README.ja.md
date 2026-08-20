@@ -204,32 +204,35 @@ workflow、画像別supported claim、検証境界の詳細: [Obsidian-backed kn
 
 本ケースでは、分析オフィスをgoverned database workflowへ拡張しました。Oliverが承認済みsourceからデータを収集し、EthanがCSV contractを検証してstagingへ格納し、Samが制御されたloadとreconciliationを実行します。AdaはSupabase MCPを介してread-onlyの品質検査とSQL分析を行います。別の定期reporting loopでは、分析、report draft、公開を別々のKanban cardへ割り当て、未検証の結果を公開せずapproval gateで停止します。
 
-<table>
-  <tr>
-    <td width="50%"><img src="assets/evidence/28-ada-supabase-schema-review.png" alt="設定済みSupabase capabilityを用いてsnapshot schemaを確認するAda" /></td>
-    <td width="50%"><img src="assets/evidence/31-supabase-loaded-records-sanitized.png" alt="product snapshot recordが格納されたSupabase tableの匿名化capture" /></td>
-  </tr>
-  <tr>
-    <td><strong>Schema-aware agent access.</strong> Adaが設定済みSupabase capabilityを通じてsnapshotの粒度とappend-only ruleを解釈します。</td>
-    <td><strong>Materialized data.</strong> run ID、source identifier、URL、product attribute、provenanceをdatabaseに保持します。</td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="assets/evidence/32-supabase-load-reconciliation-sanitized.png" alt="5 tableのSupabase load reconciliation" /></td>
-    <td width="50%"><img src="assets/evidence/34-agent-sql-analysis.png" alt="実行SQLを保持したAdaのSQL分析" /></td>
-  </tr>
-  <tr>
-    <td><strong>Load verification.</strong> 5つのstaging tableについて、54,690行・113 batchの件数がすべて一致しました。曖昧なduplicate candidateは自動削除せず、人間へescalateします。</td>
-    <td><strong>Auditable analysis.</strong> channel別指標と、その計算に使用したSQLを同時に返します。</td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="assets/evidence/36-multi-agent-kanban-loop.png" alt="multi-agent quarterly analysis loopのKanban control plane" /></td>
-    <td width="50%"><img src="assets/evidence/35-deployed-bi-dashboard.png" alt="deploy済みbusiness-intelligence dashboard" /></td>
-  </tr>
-  <tr>
-    <td><strong>Closed-loop operations.</strong> 固定artifact contract、順序付きcard、定期実行、failure／approval escalationによってhandoffを可視化します。</td>
-    <td><strong>Shared delivery.</strong> 承認済みaggregateをagent session内に残さず、共同閲覧可能なdashboardとして公開します。</td>
-  </tr>
-</table>
+#### 1. Schema contractと永続化されたrecord
+
+<p align="center"><a href="assets/evidence/28-ada-supabase-schema-review.png"><img src="assets/evidence/28-ada-supabase-schema-review.png" alt="設定済みSupabase capabilityを用いてsnapshot schemaを確認するAda" width="100%" /></a></p>
+
+**Schema-aware agent access.** Adaが設定済みSupabase capabilityを通じてsnapshotの粒度とappend-only ruleを解釈します。
+
+<p align="center"><a href="assets/evidence/31-supabase-loaded-records-sanitized.png"><img src="assets/evidence/31-supabase-loaded-records-sanitized.png" alt="product snapshot recordが格納されたSupabase tableの匿名化capture" width="100%" /></a></p>
+
+**Materialized data.** run ID、source identifier、URL、product attribute、provenanceをdatabaseに保持します。
+
+#### 2. Reconciliationと監査可能なSQL
+
+<p align="center"><a href="assets/evidence/32-supabase-load-reconciliation-sanitized.png"><img src="assets/evidence/32-supabase-load-reconciliation-sanitized.png" alt="5 tableのSupabase load reconciliation" width="100%" /></a></p>
+
+**Load verification.** 5つのstaging tableについて、54,690行・113 batchの件数がすべて一致しました。曖昧なduplicate candidateは自動削除せず、人間へescalateします。
+
+<p align="center"><a href="assets/evidence/34-agent-sql-analysis.png"><img src="assets/evidence/34-agent-sql-analysis.png" alt="実行SQLを保持したAdaのSQL分析" width="100%" /></a></p>
+
+**Auditable analysis.** channel別指標と、その計算に使用したSQLを同時に返します。
+
+#### 3. Orchestrationと共有delivery
+
+<p align="center"><a href="assets/evidence/36-multi-agent-kanban-loop.png"><img src="assets/evidence/36-multi-agent-kanban-loop.png" alt="multi-agent quarterly analysis loopのKanban control plane" width="100%" /></a></p>
+
+**Closed-loop operations.** 固定artifact contract、順序付きcard、定期実行、failure／approval escalationによってhandoffを可視化します。
+
+<p align="center"><a href="assets/evidence/35-deployed-bi-dashboard.png"><img src="assets/evidence/35-deployed-bi-dashboard.png" alt="deploy済みbusiness-intelligence dashboard" width="100%" /></a></p>
+
+**Shared delivery.** 承認済みaggregateをagent session内に残さず、共同閲覧可能なdashboardとして公開します。
 
 本証跡が示すのは定期batch automationであり、streaming処理ではありません。schema control、件数reconciliation、人間が判断すべきdata-quality issue、SQL結果、task boundary、制約事項は[Supabase-backed agent data operations case study](docs/case-studies/supabase-agent-data-operations.md)に記載しています。
 

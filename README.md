@@ -204,32 +204,35 @@ Detailed workflow, image-level supported claims, and verification boundaries: [O
 
 This case extends the office into a governed database workflow. Oliver collects approved source data, Ethan validates CSV contracts and stages records, Sam performs controlled loading and reconciliation, and Ada uses Supabase MCP for read-only quality checks and SQL analysis. A separate scheduled reporting loop assigns analysis, narrative, and publication to different Kanban cards, with an approval gate that stops downstream work instead of publishing an unverified result.
 
-<table>
-  <tr>
-    <td width="50%"><img src="assets/evidence/28-ada-supabase-schema-review.png" alt="Ada reviewing the Supabase snapshot schema through the configured skill" /></td>
-    <td width="50%"><img src="assets/evidence/31-supabase-loaded-records-sanitized.png" alt="Sanitized Supabase table with loaded product snapshot records" /></td>
-  </tr>
-  <tr>
-    <td><strong>Schema-aware agent access.</strong> Ada interprets the snapshot grain and append-only rules through the configured Supabase capability.</td>
-    <td><strong>Materialized data.</strong> Run IDs, source identifiers, URLs, product attributes, and provenance are retained in the database.</td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="assets/evidence/32-supabase-load-reconciliation-sanitized.png" alt="Sanitized five-table Supabase load reconciliation" /></td>
-    <td width="50%"><img src="assets/evidence/34-agent-sql-analysis.png" alt="Ada SQL analysis with the executed query preserved" /></td>
-  </tr>
-  <tr>
-    <td><strong>Load verification.</strong> Five staging tables reconcile exactly across 54,690 rows and 113 batches; ambiguous duplicates are escalated rather than deleted automatically.</td>
-    <td><strong>Auditable analysis.</strong> The agent returns channel metrics together with the SQL used to calculate them.</td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="assets/evidence/36-multi-agent-kanban-loop.png" alt="Kanban control plane for the multi-agent quarterly analysis loop" /></td>
-    <td width="50%"><img src="assets/evidence/35-deployed-bi-dashboard.png" alt="Deployed business-intelligence dashboard" /></td>
-  </tr>
-  <tr>
-    <td><strong>Closed-loop operations.</strong> Fixed artifact contracts, ordered cards, scheduled execution, and failure/approval escalation make handoffs visible.</td>
-    <td><strong>Shared delivery.</strong> Approved aggregates are published as a collaborative dashboard rather than left inside an agent session.</td>
-  </tr>
-</table>
+#### 1. Schema contract and materialized records
+
+<p align="center"><a href="assets/evidence/28-ada-supabase-schema-review.png"><img src="assets/evidence/28-ada-supabase-schema-review.png" alt="Ada reviewing the Supabase snapshot schema through the configured skill" width="100%" /></a></p>
+
+**Schema-aware agent access.** Ada interprets the snapshot grain and append-only rules through the configured Supabase capability.
+
+<p align="center"><a href="assets/evidence/31-supabase-loaded-records-sanitized.png"><img src="assets/evidence/31-supabase-loaded-records-sanitized.png" alt="Sanitized Supabase table with loaded product snapshot records" width="100%" /></a></p>
+
+**Materialized data.** Run IDs, source identifiers, URLs, product attributes, and provenance are retained in the database.
+
+#### 2. Reconciliation and auditable SQL
+
+<p align="center"><a href="assets/evidence/32-supabase-load-reconciliation-sanitized.png"><img src="assets/evidence/32-supabase-load-reconciliation-sanitized.png" alt="Sanitized five-table Supabase load reconciliation" width="100%" /></a></p>
+
+**Load verification.** Five staging tables reconcile exactly across 54,690 rows and 113 batches; ambiguous duplicates are escalated rather than deleted automatically.
+
+<p align="center"><a href="assets/evidence/34-agent-sql-analysis.png"><img src="assets/evidence/34-agent-sql-analysis.png" alt="Ada SQL analysis with the executed query preserved" width="100%" /></a></p>
+
+**Auditable analysis.** The agent returns channel metrics together with the SQL used to calculate them.
+
+#### 3. Orchestration and shared delivery
+
+<p align="center"><a href="assets/evidence/36-multi-agent-kanban-loop.png"><img src="assets/evidence/36-multi-agent-kanban-loop.png" alt="Kanban control plane for the multi-agent quarterly analysis loop" width="100%" /></a></p>
+
+**Closed-loop operations.** Fixed artifact contracts, ordered cards, scheduled execution, and failure/approval escalation make handoffs visible.
+
+<p align="center"><a href="assets/evidence/35-deployed-bi-dashboard.png"><img src="assets/evidence/35-deployed-bi-dashboard.png" alt="Deployed business-intelligence dashboard" width="100%" /></a></p>
+
+**Shared delivery.** Approved aggregates are published as a collaborative dashboard rather than left inside an agent session.
 
 The evidence supports scheduled batch automation, not a streaming claim. Exact schema controls, row-count reconciliation, human-in-the-loop decisions, SQL results, task boundaries, and limitations are documented in the [Supabase-backed agent data operations case study](docs/case-studies/supabase-agent-data-operations.md).
 
