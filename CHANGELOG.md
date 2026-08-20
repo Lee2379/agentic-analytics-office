@@ -2,6 +2,12 @@
 
 All notable changes to the public evaluation harness are documented here.
 
+## Unreleased
+
+- Add a Supabase-backed agent data-operations case study covering schema contracts, role-separated ingestion, five-table reconciliation, human-reviewed data quality, auditable SQL analysis, deployed BI delivery, Kanban orchestration, scheduled execution, and approval-gated publication.
+- Add eleven privacy-reviewed evidence derivatives and bind them to source/public SHA-256 records.
+- Synchronize the English and Japanese README summaries and extend the architecture/implementation documentation with the database data plane and workflow control plane.
+
 ## 1.1.0 — 2026-08-12
 
 - Add a privacy-reviewed Japanese direct-evidence fact-check capture and synchronize the English/Japanese architecture, request-path, runtime-primitive, and evidence documentation.

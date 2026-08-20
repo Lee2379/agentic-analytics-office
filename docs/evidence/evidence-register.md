@@ -31,6 +31,17 @@ Original digests allow the owner to show during a controlled interview that a pr
 | E-022 | Presentation source-register slide | low-sensitivity deliverable | 87,512 | `b7c92a70819d7bfb93148540cddefe27caaebfa8c8d0a42e4e7ad0ac1208d8df` |
 | E-023 | English / Korean / Japanese correction diff | low-sensitivity analytical artifact | 284,425 | `aca56837c7c02ab9765b7b1ebbaa3f6f9347b62b41b6920697a5645d615b6266` |
 | E-024 | Japanese direct-evidence review and correction recommendations | low-sensitivity analytical artifact | 252,051 | `512752b1b770690b992712729fcaee9bd1ccc530396429f86c950198c850ec15` |
+| E-025 | Ada Supabase schema review | low-sensitivity agent output | 143,950 | `af2e103373f39da51487c770741ddfcc706fda1640ba5f4deec767913acfbe85` |
+| E-026 | PostgreSQL product snapshot DDL | low-sensitivity engineering artifact | 267,140 | `dde710c29150b3982ceb098fd97751b0eee3f4d5906eb66e3fcd0eb67a4091a3` |
+| E-027 | Supabase schema interface | private account/project UI | 125,236 | `024926816cbe8ea9a55d5da8fe0ee0ba0ac5f233a1714d95942bc99168dddea0` |
+| E-028 | Supabase loaded-record table | private account/project UI with public product data | 171,679 | `11b6bb981f38580544e2bd22fc7422d4f191604dbf44658578b69fd10d976711` |
+| E-029 | Five-table Supabase load reconciliation | private terminal evidence | 183,680 | `51c11acfe95d0f622e80057749a076adae800243201f5bf983011311cdeedd9d` |
+| E-030 | Database data-quality and human-review report | low-sensitivity analytical artifact | 223,965 | `bbf4362f75f9babd49bec965a3fb73554cd3a328e2bb0e65f8458b6e9214c89b` |
+| E-031 | Ada channel-performance SQL and result | low-sensitivity analytical artifact | 189,730 | `b9304ab5c2ef152110807cc04eb1499f5518db7b24c93c407040255093123e11` |
+| E-032 | Deployed BI dashboard and deployment status | public deployment evidence | 103,691 | `449ba65ba29ddb5b78030f9b77d513b2235dd82b170f3fc4a1f9b7d51afdfa6f` |
+| E-033 | Multi-agent quarterly-analysis Kanban board | low-sensitivity orchestration UI | 61,946 | `7f72ce476eb4e2a0c7966caeeb9f8f3cefd53117e284233b84c50e164504678a` |
+| E-034 | Ada read-only quarter-analysis task contract | private orchestration UI | 265,232 | `faad496824dfea28e3bccf23aff41709acd38c91afeb3b3d0ffc819e1380e279` |
+| E-035 | Scheduled quarterly workflow execution report | private terminal evidence | 260,104 | `a1ec32b5f4d7fbb29f1a259187732053b9acb9e4ab973d00181affa216c58ff9` |
 
 ## Published derivatives
 
@@ -62,6 +73,17 @@ Original digests allow the owner to show during a controlled interview that a pr
 | P-023 | `assets/evidence/25-source-register-slide.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 87,512 | `b7c92a70819d7bfb93148540cddefe27caaebfa8c8d0a42e4e7ad0ac1208d8df` |
 | P-024 | `assets/evidence/26-trilingual-correction-diff.png` | manual privacy review; no credential or private identifier observed; public provenance retained where applicable; published byte-identically | 284,425 | `aca56837c7c02ab9765b7b1ebbaa3f6f9347b62b41b6920697a5645d615b6266` |
 | P-025 | `assets/evidence/27-fact-check-japanese-direct-evidence.png` | manual privacy review; no credential or private identifier observed; claim-level Japanese review and public source URLs retained; published byte-identically | 252,051 | `512752b1b770690b992712729fcaee9bd1ccc530396429f86c950198c850ec15` |
+| P-026 | `assets/evidence/28-ada-supabase-schema-review.png` | metadata-normalized copy; no credential, endpoint, or private identifier observed | 121,100 | `57a855147dd32937a520db5ba66644daa522f1e832893b7b4b4f27507303f814` |
+| P-027 | `assets/evidence/29-postgres-schema-contract.png` | metadata-normalized copy; visible DDL and constraints retained | 226,433 | `0b72e875d4e5f6f0a203e330475368c906bf3e5036d85fb145dd52bbf5435657` |
+| P-028 | `assets/evidence/30-supabase-schema-sanitized.png` | browser URL, project reference, organization name, and project name removed by cropping | 91,212 | `e24f2366523c177baa35bb805efc71be27180c9c8517f69930b5b4284ebadaa4` |
+| P-029 | `assets/evidence/31-supabase-loaded-records-sanitized.png` | Supabase account/project header removed by cropping; public source URLs retained | 140,271 | `c068da3f2c33ff96fa9c6c7e903bd39a33ddf421bc2c0a12d4763a224755672a` |
+| P-030 | `assets/evidence/32-supabase-load-reconciliation-sanitized.png` | personal filesystem paths and internal run identifier covered with an opaque black mask | 118,812 | `b03b5a3081c29ac078d4bccad1ca8fb0b4d97eef67d1dae7269584034ab14f6d` |
+| P-031 | `assets/evidence/33-data-quality-human-review.png` | metadata-normalized copy; no credential or private identifier observed | 189,650 | `7294952e9c3683ee36fd847ff9a81664bca45021e7b2c247eeae044b40fc7147` |
+| P-032 | `assets/evidence/34-agent-sql-analysis.png` | metadata-normalized copy; query and aggregate result retained | 161,764 | `5f6926c2bb8af56872e26b447ba50606a49ff916e2fc7ef40c33cb0eab81c853` |
+| P-033 | `assets/evidence/35-deployed-bi-dashboard.png` | metadata-normalized copy; public deployment URL retained; no credential observed | 87,827 | `bca3daf0fba936de852686652ee48869ff93510081dabdb275f0fd61085e34ee` |
+| P-034 | `assets/evidence/36-multi-agent-kanban-loop.png` | metadata-normalized copy; card states and role assignments retained | 53,285 | `f4b74e966f991e32ced066e633e9d425dd0f758167e04756e4c61a6584c8fddc` |
+| P-035 | `assets/evidence/37-ada-read-only-task-contract-sanitized.png` | personal workspace paths and private notification target covered with opaque background masks | 187,621 | `1388aec5a578f25f5c35001369bd8763278b69b28f3d3f3d39d91897e18d4266` |
+| P-036 | `assets/evidence/38-scheduled-loop-run-sanitized.png` | personal artifact paths covered with opaque black masks; scheduled-run status and approval gate retained | 196,273 | `2fd007ca512c653e88a399ae186438c215833b2b43ca6a9c8d5b9920bc83246e` |
 
 ## Explicit exclusions
 

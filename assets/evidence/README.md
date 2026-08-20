@@ -28,6 +28,18 @@ These files are privacy-reviewed captures prepared for the public portfolio. The
 | `24-fact-interpretation-question-slide.png` | Decision-hygiene presentation slide | no pixel edits; portfolio deliverable retained |
 | `25-source-register-slide.png` | Presentation source appendix | no pixel edits; public source URLs retained |
 | `26-trilingual-correction-diff.png` | English, Korean, and Japanese corrections | no pixel edits; multilingual review output retained |
+| `27-fact-check-japanese-direct-evidence.png` | Japanese direct-evidence review | no pixel edits; claim-level review and public source URLs retained |
+| `28-ada-supabase-schema-review.png` | Agent-assisted Supabase schema review | metadata normalized; no credential, endpoint, or private identifier observed |
+| `29-postgres-schema-contract.png` | PostgreSQL snapshot-table contract | metadata normalized; visible DDL and constraints retained |
+| `30-supabase-schema-sanitized.png` | Deployed Supabase schema | browser URL and account/project identifiers removed by cropping |
+| `31-supabase-loaded-records-sanitized.png` | Materialized product snapshots | account/project header removed; public source URLs retained |
+| `32-supabase-load-reconciliation-sanitized.png` | Five-table load reconciliation | personal paths and internal run identifier covered with opaque masks |
+| `33-data-quality-human-review.png` | Data-quality findings and human decision points | metadata normalized; no credential or private identifier observed |
+| `34-agent-sql-analysis.png` | Auditable channel-performance SQL | metadata normalized; query and aggregate output retained |
+| `35-deployed-bi-dashboard.png` | Deployed collaborative BI artifact | metadata normalized; public deployment and dashboard output retained |
+| `36-multi-agent-kanban-loop.png` | Kanban control plane | metadata normalized; workflow states and role assignments retained |
+| `37-ada-read-only-task-contract-sanitized.png` | Read-only Ada analytical task contract | personal paths and private notification target covered with opaque masks |
+| `38-scheduled-loop-run-sanitized.png` | Scheduled closed-loop execution | personal artifact paths covered with opaque masks; run/gate status retained |
 
 Binary images require manual visual review. The repository privacy scanner does not claim OCR coverage.
 

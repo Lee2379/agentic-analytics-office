@@ -65,6 +65,12 @@ Model Context Protocol integrations provide adapters to external data and tools.
 
 This avoids treating configuration alone as proof of successful business execution.
 
+### Supabase data operations
+
+A separate live case uses Supabase/PostgreSQL as the governed data plane. The captured operating model divides collection, staging validation, transactional loading/reconciliation, read-only SQL analysis, narrative production, and publication across explicit specialist roles and Kanban states. The database schema applies typed columns and selected domain constraints; the reconciliation report compares source and database counts; the analytical artifact retains the executed SQL; and the scheduled workflow blocks downstream publication when its validation/approval gate is not satisfied.
+
+The public evidence establishes a scheduled batch workflow at the captured points in time. It does not establish streaming ingestion, continuous availability, complete migration history, backup recovery, or production-scale load testing. Detailed controls and outputs are documented in the [Supabase-backed agent data operations case study](case-studies/supabase-agent-data-operations.md).
+
 ### Google Workspace integration
 
 The configured environment exposed a Google Workspace Gmail command surface with operations for sending, triaging, replying, reading, and watching messages. The command also displayed an optional Model Armor sanitization parameter. These capabilities were grouped with Calendar, Tasks, a custom mail-routing Skill, and daily-brief logic in the reusable `morning-brief` bundle.

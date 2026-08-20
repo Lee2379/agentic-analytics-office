@@ -7,7 +7,7 @@
 ![Docker](https://img.shields.io/badge/Docker-reproducible%20demo-2496ED?logo=docker&logoColor=white)
 ![Privacy](https://img.shields.io/badge/evidence-privacy--sanitized-176B3A)
 
-**Docker上のHermes AgentランタイムとSlackを基盤として、市場調査、データ分析、需要予測、レビュー、経営向けレポーティングを役割別AIエージェントで実行する分析オフィスです。**
+**Docker上の運用モデルにおいて、Hermes／SlackとSupabase／PostgreSQL、Obsidian／OhMyWikiを組み合わせ、調査、統制されたデータ運用、分析、レビュー、経営向け成果物の作成を役割別AIエージェントで実行する分析オフィスです。**
 
 本リポジトリでは、混同されやすい二つの検証対象を明確に分離しています。
 
@@ -28,6 +28,7 @@
 - 公開情報を用いた市場調査結果のSlack配信
 - 調査、分析、プレゼンテーション作成、運用支援を含む役割別タスク
 - source provenance、concept／relation構造、英語・日本語fact-check、source-linked 15ページ報告書を持つObsidianベースの市場調査workflow
+- schema control、役割分離されたingestion、reconciliation、人間によるdata-quality判断、監査可能なSQL分析、定期orchestration、deploy済みBI dashboardを統合したSupabaseベースのdata-operations loop
 
 公開リポジトリには、厳格なデータ検証、時間リークを防ぐholdout予測、artifact contract、QA gate、プライバシースキャン、テスト、オフラインで再現できるhardened containerを実装しています。
 
@@ -37,7 +38,7 @@
 |---|---:|
 | Unit／integration tests | 12 / 12 passed |
 | 決定論的reference artifacts | 6 / 6 matched |
-| Reviewed evidence captures | 25 / 25 hashes verified |
+| Reviewed evidence captures | 36 / 36 hashes verified |
 | 内部documentation links | all local targets resolved |
 | Hardened container smoke test | network disabled・read-only rootでpassed |
 
@@ -64,7 +65,7 @@ benchmark、test範囲、統計上の制約、release historyは[`docs/evaluatio
 | Runtime | 制約付きDocker環境上のHermes Agent | Python 3.11+ package、hardened offline container |
 | Entry point | profile gatewayへroutingされるSlack mention | `agentic-office run` CLI |
 | 専門化 | identity、policy、Skills、Slack設定を分離した7 profiles | [`config/agents.json`](config/agents.json)の7つのmachine-readable contract |
-| Data access | 承認済みprofile toolsと任意のMCP integration | 合成CSV、network・外部credentialなし |
+| Data access | 承認済みprofile tools、Supabase Skill／MCP、任意の公開情報integration | 合成CSV、network・外部credentialなし |
 | Coordination | 実運用では専門家へ直接routing | 評価用の決定論的7-stage artifact pipeline |
 | Outputs | Slack調査レポートと業務成果物 | JSON metrics／trace、SVG chart、Slack payload preview、executive report |
 | Verification | digest登録済みのprivacy-sanitized evidence | unit/integration tests、CI再生成、privacy scan、Docker build |
@@ -199,7 +200,40 @@ Oliverは公開情報を用いた市場調査、Miaはrole-specific Skillsとtoo
 
 workflow、画像別supported claim、検証境界の詳細: [Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md)。
 
-詳細な証跡とclaim boundary: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md)、[`SOUL.md` policy files](docs/evidence/soul-policy-files.md)、[Skills supply chain](docs/evidence/skills-supply-chain.md)、[MCP integration](docs/evidence/mcp-integration.md)、[Google Workspace integration](docs/evidence/google-workspace-integration.md)、[multi-agent Slack](docs/evidence/multi-agent-slack.md)、[retail analysis charter](docs/evidence/retail-analysis-charter.md)、[design-system presentation](docs/evidence/design-system-presentation.md)、[Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md)、[runtime metadata](docs/evidence/runtime-evidence.md)、[live workload](docs/evidence/live-workload.md)。
+### Supabaseを基盤とするエージェント型データ運用
+
+本ケースでは、分析オフィスをgoverned database workflowへ拡張しました。Oliverが承認済みsourceからデータを収集し、EthanがCSV contractを検証してstagingへ格納し、Samが制御されたloadとreconciliationを実行します。AdaはSupabase MCPを介してread-onlyの品質検査とSQL分析を行います。別の定期reporting loopでは、分析、report draft、公開を別々のKanban cardへ割り当て、未検証の結果を公開せずapproval gateで停止します。
+
+<table>
+  <tr>
+    <td width="50%"><img src="assets/evidence/28-ada-supabase-schema-review.png" alt="設定済みSupabase capabilityを用いてsnapshot schemaを確認するAda" /></td>
+    <td width="50%"><img src="assets/evidence/31-supabase-loaded-records-sanitized.png" alt="product snapshot recordが格納されたSupabase tableの匿名化capture" /></td>
+  </tr>
+  <tr>
+    <td><strong>Schema-aware agent access.</strong> Adaが設定済みSupabase capabilityを通じてsnapshotの粒度とappend-only ruleを解釈します。</td>
+    <td><strong>Materialized data.</strong> run ID、source identifier、URL、product attribute、provenanceをdatabaseに保持します。</td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="assets/evidence/32-supabase-load-reconciliation-sanitized.png" alt="5 tableのSupabase load reconciliation" /></td>
+    <td width="50%"><img src="assets/evidence/34-agent-sql-analysis.png" alt="実行SQLを保持したAdaのSQL分析" /></td>
+  </tr>
+  <tr>
+    <td><strong>Load verification.</strong> 5つのstaging tableについて、54,690行・113 batchの件数がすべて一致しました。曖昧なduplicate candidateは自動削除せず、人間へescalateします。</td>
+    <td><strong>Auditable analysis.</strong> channel別指標と、その計算に使用したSQLを同時に返します。</td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="assets/evidence/36-multi-agent-kanban-loop.png" alt="multi-agent quarterly analysis loopのKanban control plane" /></td>
+    <td width="50%"><img src="assets/evidence/35-deployed-bi-dashboard.png" alt="deploy済みbusiness-intelligence dashboard" /></td>
+  </tr>
+  <tr>
+    <td><strong>Closed-loop operations.</strong> 固定artifact contract、順序付きcard、定期実行、failure／approval escalationによってhandoffを可視化します。</td>
+    <td><strong>Shared delivery.</strong> 承認済みaggregateをagent session内に残さず、共同閲覧可能なdashboardとして公開します。</td>
+  </tr>
+</table>
+
+本証跡が示すのは定期batch automationであり、streaming処理ではありません。schema control、件数reconciliation、人間が判断すべきdata-quality issue、SQL結果、task boundary、制約事項は[Supabase-backed agent data operations case study](docs/case-studies/supabase-agent-data-operations.md)に記載しています。
+
+詳細な証跡とclaim boundary: [Docker/Slack isolation](docs/evidence/docker-slack-isolation.md)、[`SOUL.md` policy files](docs/evidence/soul-policy-files.md)、[Skills supply chain](docs/evidence/skills-supply-chain.md)、[MCP integration](docs/evidence/mcp-integration.md)、[Google Workspace integration](docs/evidence/google-workspace-integration.md)、[multi-agent Slack](docs/evidence/multi-agent-slack.md)、[retail analysis charter](docs/evidence/retail-analysis-charter.md)、[design-system presentation](docs/evidence/design-system-presentation.md)、[Obsidian-backed knowledge automation](docs/evidence/obsidian-knowledge-automation.md)、[Supabase-backed agent data operations](docs/case-studies/supabase-agent-data-operations.md)、[runtime metadata](docs/evidence/runtime-evidence.md)、[live workload](docs/evidence/live-workload.md)。
 
 ## アーキテクチャ
 
